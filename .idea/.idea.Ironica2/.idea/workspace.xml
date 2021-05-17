@@ -7,6 +7,9 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/JsonWrapper.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -62,6 +65,7 @@
       <option name="presentableId" value="Default" />
       <updated>1621253432254</updated>
       <workItem from="1621253440542" duration="4832000" />
+      <workItem from="1621259960122" duration="359000" />
     </task>
     <servers />
   </component>
