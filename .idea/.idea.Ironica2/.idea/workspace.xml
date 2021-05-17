@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="858aa871-28ea-4d27-96bd-343542e29efa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Ironica2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Ironica2/.idea/workspace.xml" afterDir="false" />
 <<<<<<< HEAD
@@ -11,6 +12,9 @@
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerJson.cs" afterDir="false" />
 >>>>>>> 6eee928a2dd4c8096fbe0b949f094915685b9a09
     </list>
+=======
+    <list default="true" id="858aa871-28ea-4d27-96bd-343542e29efa" name="Default Changelist" comment="" />
+>>>>>>> d2a5d785904abeef3932d2dae68d1bdb62908722
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,14 +23,16 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/JsonWrapper.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/Assets/JSonData.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/NewBehaviourScript.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/JsonWrapper.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/JSonData.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/PlayerJson.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/JsonData.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/JSonData.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1sfAmDyiTPXGGmsNlLJKESZGovs" />
@@ -35,7 +41,6 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -74,7 +79,6 @@
       <updated>1621253432254</updated>
       <workItem from="1621253440542" duration="4832000" />
       <workItem from="1621259960122" duration="359000" />
-      <workItem from="1621261891759" duration="1454000" />
     </task>
     <servers />
   </component>
