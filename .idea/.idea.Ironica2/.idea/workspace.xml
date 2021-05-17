@@ -3,8 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="858aa871-28ea-4d27-96bd-343542e29efa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Ironica2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Ironica2/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/JsonData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/JsonData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerJson.cs" afterDir="false" />
+>>>>>>> 6eee928a2dd4c8096fbe0b949f094915685b9a09
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +24,9 @@
       <option value="$PROJECT_DIR$/Assets/JSonData.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/NewBehaviourScript.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/JsonWrapper.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/PlayerJson.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/JSonData.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/PlayerJson.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/JsonData.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1sfAmDyiTPXGGmsNlLJKESZGovs" />
@@ -29,6 +35,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -67,6 +74,7 @@
       <updated>1621253432254</updated>
       <workItem from="1621253440542" duration="4832000" />
       <workItem from="1621259960122" duration="359000" />
+      <workItem from="1621261891759" duration="1454000" />
     </task>
     <servers />
   </component>
