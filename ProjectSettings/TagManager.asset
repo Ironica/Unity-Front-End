@@ -41,3 +41,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Elevation
+    uniqueID: 3517198035
+    locked: 0
