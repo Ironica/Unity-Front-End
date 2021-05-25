@@ -24,8 +24,8 @@ public class dataLink : MonoBehaviour
     .text;
   }
   private void compile(){
-    /*
-    if( the frame[] is empty )
+
+    /*if( the frame[] is empty )
     */
 
     dataObj.code = getUserCode();
@@ -51,8 +51,6 @@ public class dataLink : MonoBehaviour
     converter.serializedToObject();
 
     string response  = des.serialization(dataSer);
-    
-
 
   }
 
