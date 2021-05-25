@@ -14,22 +14,13 @@ public class dataLink : MonoBehaviour
   private string currentMap;
 
   // Level 0
-  private string open0 = "Prefabs/PLAIN_OPEN_LEVEL0";
-  private string blocked0 = "Prefabs/PLAIN_HILL_LEVEL0";
-  private string water0 = "Prefabs/PLAIN_WATER";
-  private string tree0 = "Prefabs/PLAIN_TREE_LEVEL0";
-  private string desert0 = "Prefabs/PLAIN_DESERT_LEVEL0";
-  private string home0 = "Prefabs/PLAIN_HOME 1";
-  private string mountain0 = "Prefabs/PLAIN_MOUNTAIN";
-
-
-  // Level 1
-  private string open1 = "Prefabs/PLAIN_OPEN";
-  private string blocked1 = "Prefabs/PLAIN_HILL";
-  private string water1 = "Prefabs/PLAIN_WATER 1";
-  private string tree1 = "Prefabs/PLAIN_TREE";
-  private string desert1 = "Prefabs/PLAIN_DESERT";
-  private string home1 = "Prefabs/PLAIN_HOME";
+  private string open = "Prefabs/PLAIN_OPEN_LEVEL";
+  private string blocked = "Prefabs/PLAIN_HILL_LEVEL";
+  private string water = "Prefabs/PLAIN_WATER_LEVEL";
+  private string tree = "Prefabs/PLAIN_TREE_LEVEL";
+  private string desert = "Prefabs/PLAIN_DESERT_LEVEL";
+  private string home = "Prefabs/PLAIN_HOME_LEVEL";
+  private string mountain = "Prefabs/PLAIN_MOUNTAIN_LEVEL";
 
   // Stairs
   private string stairLeft = "Prefabs/PLAIN_STAIRS_LEFT";
@@ -84,40 +75,33 @@ public class dataLink : MonoBehaviour
 
     //Print the status of the compilation
     Debug.Log("Status: " + answers.status);
-
   }
 
   public void mapInstantiation(Block block, int level, float x, float y, int i, int j){
-    string tile;
-    if(dataObj.levels[j, i] == 1){
-      tile = tileLevel0(block);
-    }
-    else {
-      tile = tileLevel1(block);
-    }
+    string tile = tileLevel(block, i, j);
     GameObject tileObject  = Instantiate(Resources.Load(tile), new Vector3(x,y, 0), Quaternion.identity) as GameObject;
     tileObject.transform.parent = this.transform;
   }
 
-  public string tileLevel0(Block block){
+  public string tileLevel(Block block, int i, int j){
     switch(block){
-      case Block.OPEN: return open0;
+      case Block.OPEN: return open + dataObj.levels[j, i];
       break;
-      case Block.BLOCKED: return blocked0;
+      case Block.BLOCKED: return blocked + dataObj.levels[j, i];
       break;
-      case Block.WATER: return water0;
+      case Block.WATER: return water + dataObj.levels[j, i];
       break;
-      case Block.TREE: return tree0;
+      case Block.TREE: return tree + dataObj.levels[j, i];
       break;
-      case Block.DESERT: return desert0;
+      case Block.DESERT: return desert + dataObj.levels[j, i];
       break;
-      case Block.HOME: return home0;
+      case Block.HOME: return home + dataObj.levels[j, i];
       break;
-      case Block.MOUNTAIN: return mountain0;
+      case Block.MOUNTAIN: return mountain+1;
       break;
-      case Block.STONE: return mountain0;
+      case Block.STONE: return mountain+1;
       break;
-      case Block.LOCK: return home0;
+      case Block.LOCK: return home + dataObj.levels[j, i];
       break;
       default:
       currentStair++;
@@ -126,32 +110,6 @@ public class dataLink : MonoBehaviour
     }
   }
 
-  public string tileLevel1(Block block){
-    switch(block){
-      case Block.OPEN: return open1;
-      break;
-      case Block.BLOCKED: return blocked1;
-      break;
-      case Block.WATER: return water1;
-      break;
-      case Block.TREE: return tree1;
-      break;
-      case Block.DESERT: return desert1;
-      break;
-      case Block.HOME: return home1;
-      break;
-      case Block.MOUNTAIN: return mountain0;
-      break;
-      case Block.STONE: return mountain0;
-      break;
-      case Block.LOCK: return home1;
-      break;
-      default:
-      currentStair++;
-      return stairDirection(dataObj.stairs[currentStair].dir);
-      break;
-    }
-  }
 
   private string stairDirection(Direction dir){
     switch(dir){
@@ -168,14 +126,6 @@ public class dataLink : MonoBehaviour
   private void instantiation(){
     float length = dataObj.grid.GetLength(1)*0.5f;
     float heigth = dataObj.grid.GetLength(0)*0.25f;
-    GameObject tileObject1  = Instantiate(Resources.Load(player1), new Vector3(0-length,0-heigth, 0), Quaternion.identity) as GameObject;
-    tileObject1.transform.parent = this.transform;
-    GameObject tileObject2  = Instantiate(Resources.Load(player1), new Vector3(0+length,0-heigth, 0), Quaternion.identity) as GameObject;
-    tileObject2.transform.parent = this.transform;
-    GameObject tileObject3  = Instantiate(Resources.Load(player1), new Vector3(0-length,0+heigth, 0), Quaternion.identity) as GameObject;
-    tileObject3.transform.parent = this.transform;
-    GameObject tileObject4  = Instantiate(Resources.Load(player1), new Vector3(0+length,0+heigth, 0), Quaternion.identity) as GameObject;
-    tileObject4.transform.parent = this.transform;
     float x=0f;
     float y =0f;
     for(int i =0; i<dataObj.grid.GetLength(1); i++){
@@ -196,6 +146,7 @@ public class dataLink : MonoBehaviour
     currentMap = "map2.json";
 
     dataSer = des.deserialization(pathStarterMap + currentMap);
+
     dataObj = new Data();
 
     converter = new JsonBridge.DataConvert(dataSer, dataObj);

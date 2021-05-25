@@ -44,7 +44,6 @@ namespace JsonBridge{
     public DataSerialized deserialization(string jsonFilePath){
 
       string mapJson = System.IO.File.ReadAllText(jsonFilePath);
-
       return JsonConvert.DeserializeObject<DataSerialized>(mapJson);
     }
 
