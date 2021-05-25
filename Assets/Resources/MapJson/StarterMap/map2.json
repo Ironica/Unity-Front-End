@@ -1,24 +1,24 @@
 {
   "grid": [
     [
-      "OPEN",
-      "OPEN",
-      "OPEN"
+      "MOUNTAIN",
+      "MOUNTAIN",
+      "MOUNTAIN"
     ],
     [
-      "OPEN",
-      "STAIR",
-      "OPEN"
+      "TREE",
+      "HOME",
+      "TREE"
     ],
     [
-      "OPEN",
+      "WATER",
       "STAIR",
-      "STAIR"
+      "WATER"
     ],
     [
-      "STAIR",
+      "TREE",
       "OPEN",
-      "STAIR"
+      "BLOCKED"
     ]
   ],
   "layout": [
@@ -72,19 +72,19 @@
       1
     ],
     [
-      1,
       2,
-      1
-    ],
-    [
-      1,
       2,
       2
     ],
     [
-      2,
       1,
-      3
+      1,
+      1
+    ],
+    [
+      1,
+      1,
+      1
     ]
   ],
   "portals": [],
@@ -151,7 +151,7 @@
         "x": 2,
         "y": 3
       },
-      "dir": "UP"
+      "dir": "RIGHT"
     }
   ]
 }
