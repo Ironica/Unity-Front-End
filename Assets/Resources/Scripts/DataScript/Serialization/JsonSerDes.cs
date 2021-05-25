@@ -17,10 +17,10 @@ namespace JsonBridge{
       this.url = url;
     }
 
-    public string serialization(DataSerialized data){
+    public string serialization(DataSerialized data, string map){
 
       string json = JsonConvert.SerializeObject(data, Formatting.Indented);
-      File.WriteAllText("Assets/Resources/MapJson/StarterMap/data.json",json);
+      File.WriteAllText(map,json);
       Debug.Log("Serialization done");
 
       string resp = new JsonRequestHandler(url)
@@ -31,25 +31,13 @@ namespace JsonBridge{
       return resp;
     }
 
-    public void webDeserialization(string resp){
+    public ResponseModel webDeserialization(string resp){
 
       ResponseModel answers = JsonConvert.DeserializeObject<ResponseModel>(resp);
-      try
-      {
-        Debug.Log("Compilation: " + answers.status);
-
-        foreach (var pm in answers.payload)
-        {
-          pm.PrintFrame();
-        }
-      }
-      catch (Exception e)
-      {
-        Console.WriteLine(e);
-        throw;
-      }
 
       Debug.Log("Deserialization done");
+
+      return answers;
 
     }
 
