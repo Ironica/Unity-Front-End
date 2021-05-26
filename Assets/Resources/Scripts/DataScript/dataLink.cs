@@ -31,7 +31,10 @@ public class dataLink : MonoBehaviour
   private int     currentStair  = -1;
 
   //Players skin
-  private string playerPrefab = "Prefabs/ITEM/CHARACTER_FRONT";
+  private string playerFront = "Prefabs/ITEM/CHARACTER_FRONT";
+  private string playerBack = "Prefabs/ITEM/CHARACTER_BACK";
+  private string playerLeft = "Prefabs/ITEM/CHARACTER_LEFT";
+  private string playerRight = "Prefabs/ITEM/CHARACTER_RIGHT";
 
 
   public const string url = "http://127.0.0.1:8080/paidiki-xara";
@@ -93,6 +96,15 @@ public class dataLink : MonoBehaviour
     }
   }
 
+  private string playerDirection(Direction dir){
+    switch(dir){
+      case Direction.UP: return playerFront;
+      case Direction.DOWN: return playerBack;
+      case Direction.LEFT: return playerLeft;
+      default: return playerRight;
+    }
+  }
+
   public string tileLevel(Block block, int i, int j){
     switch(block){
       case Block.OPEN:return open + dataObj.levels[j, i];
@@ -110,34 +122,71 @@ public class dataLink : MonoBehaviour
     }
   }
 
-  private void mapInstantiation(Block block, int level, int x, int y, int i, int j){
+  private GameObject mapInstantiation(GameObject obj, Block block, int level, int x, int y, int i, int j){
     string tile = tileLevel(block, i, j);
     Vector2 coo = setCoordinates(new Vector2(j-x, i-y));
-    GameObject tileObject  = Instantiate(Resources.Load(tile), new Vector3(coo.x,coo.y, 0), Quaternion.identity) as GameObject;
-    tileObject.transform.parent = this.transform;
-    Debug.Log("x: " + coo.x + " y: " + coo.y);
+    obj  = Instantiate(Resources.Load(tile), new Vector3(coo.x,coo.y, 0), Quaternion.identity) as GameObject;
+    obj.transform.parent = this.transform;
+    return obj;
   }
 
-  private void playerInstantiation(Player player, int x, int y){
-    Vector2 coo = setCoordinates(new Vector2(player.x-x, player.y-y));
+  /*private void playerInstantiation(GameObject tile, Player player, int x, int y){
+    string playerPrefab = playerDirection(player.dir);
+    Vector2 coo = setCoordinates(new Vector2(player.y-x, player.x-y));
+    coo.y+=0.25f;
+    if(dataObj.levels[player.y,player.x]>1){
+      coo.y+=0.4f;
+    }
     GameObject tileObject  = Instantiate(Resources.Load(playerPrefab), new Vector3(coo.x,coo.y, 0), Quaternion.identity) as GameObject;
+    Debug.Log((coo.x) + " "+ (coo.y));
+  }*/
+
+  private void playerInstantiation(GameObject tile, Player player){
+    float playerLevel = 0.25f;
+    string playerPrefab = playerDirection(player.dir);
+    Debug.Log(playerPrefab);
+
+    int level = dataObj.levels[player.y,player.x];
+    playerLevel += (level-1)*0.4f;
+    Debug.Log(tile.transform.position.x);
+    Debug.Log(tile.transform.position.y+playerLevel);
+    Vector3 coo = new Vector3(tile.transform.position.x, tile.transform.position.y+playerLevel, 0);
+
+    GameObject playerObject  = Instantiate(Resources.Load(playerPrefab), coo, Quaternion.identity) as GameObject;
+    playerObject.transform.parent = this.transform;
   }
 
   private void instantiation(){
     int x = dataObj.grid.GetLength(1)/2;
     int y =dataObj.grid.GetLength(0)/2;
-    Debug.Log("x: " + x + "; y: " + y);
     for(int i =0; i<dataObj.grid.GetLength(1); i++){
       for(int j = 0; j<dataObj.grid.GetLength(0); j++){
-        mapInstantiation(dataObj.grid[j,i], dataObj.levels[j,i], x, y, i, j);
-        if(dataObj.grid[j, i] == Block.HOME){
-          Debug.Log("j: " + j + ", i: " + i);
-        }
+        //mapInstantiation(dataObj.grid[j,i], dataObj.levels[j,i], x, y, i, j);
       }
     }
     for(int i=0; i<dataObj.players.Length; i++){
-      playerInstantiation(dataObj.players[i], x, y);
+      //playerInstantiation(dataObj.players[i], x, y);
     }
+  }
+
+  private void instantiation2(){
+    GameObject[,] gridObject = new GameObject[dataObj.grid.GetLength(0), dataObj.grid.GetLength(1)];
+
+    int x = dataObj.grid.GetLength(1)/2;
+    int y =dataObj.grid.GetLength(0)/2;
+
+    for(int i =0; i<dataObj.grid.GetLength(1); i++){
+      for(int j = 0; j<dataObj.grid.GetLength(0); j++){
+        gridObject[j,i] = mapInstantiation(gridObject[j,i], dataObj.grid[j,i], dataObj.levels[j,i], x, y, i, j);
+
+      }
+    }
+    for(int i=0; i<dataObj.players.Length; i++){
+      Player player = dataObj.players[i];
+
+      playerInstantiation(gridObject[player.y, player.x], player);
+    }
+
   }
 
   // Start is called before the first frame update
@@ -155,7 +204,7 @@ public class dataLink : MonoBehaviour
 
     string response  = des.serialization(dataSer, pathStarterMap + currentMap);
 
-    instantiation();
+    instantiation2();
 
   }
 

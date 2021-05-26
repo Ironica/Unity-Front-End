@@ -12,7 +12,7 @@
     ],
     [
       "WATER",
-      "STAIR",
+      "WATER",
       "WATER"
     ]
   ],
@@ -52,14 +52,14 @@
   ],
   "levels": [
     [
-      2,
+      1,
       1,
       1
     ],
     [
+      1,
       2,
-      2,
-      2
+      1
     ],
     [
       1,
@@ -80,18 +80,10 @@
     {
       "id": 2,
       "x": 1,
-      "y": 0,
-      "dir": "DOWN",
-      "role": "SPECIALIST",
-      "stamina": 120
-    },
-    {
-      "id": 3,
-      "x": 2,
-      "y": 0,
+      "y": 2,
       "dir": "DOWN",
       "role": "PLAYER",
-      "stamina": 100
+      "stamina": 90
     }
   ],
   "type": "colorfulmountainous",
