@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Threading;
 
 public class dataLink : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class dataLink : MonoBehaviour
   private JsonBridge.JsonSerDes des = new JsonBridge.JsonSerDes(url);
   private JsonBridge.DataSerialized[] payload;
   private string currentMap;
+  GameObject[,] gridObject;
+  GameObject playerObject;
 
   //Ground
   private string open       = "Prefabs/PLAIN_OPEN_LEVEL";
@@ -53,13 +56,13 @@ public class dataLink : MonoBehaviour
   /*
   **  Method called when the user compiles his code
   */
-  private void compile(){
+  public void compile(){
 
     /*if( the frame[] is empty )
     */
 
     // Get the user code in the InputField
-    dataObj.code = getUserCode();
+    //dataObj.code = getUserCode();
 
     //Convert the data object to data serializable
     converter.objectToSerialized();
@@ -76,6 +79,17 @@ public class dataLink : MonoBehaviour
 
     //Get the frame array for the animation
     payload = answers.payload;
+    for(int i = 0; i< payload.Length; i++){
+      converter = new JsonBridge.DataConvert(payload[i], dataObj);
+      converter.serializedToObject();
+
+      foreach (Transform child in this.transform) {
+        Destroy(child.gameObject);
+      }
+      instantiation();
+      //Sleep for 1 seconds
+      Thread.Sleep(1000);
+    }
 
     //Print the status of the compilation
     Debug.Log("Status: " + answers.status);
@@ -130,47 +144,24 @@ public class dataLink : MonoBehaviour
     return obj;
   }
 
-  /*private void playerInstantiation(GameObject tile, Player player, int x, int y){
-    string playerPrefab = playerDirection(player.dir);
-    Vector2 coo = setCoordinates(new Vector2(player.y-x, player.x-y));
-    coo.y+=0.25f;
-    if(dataObj.levels[player.y,player.x]>1){
-      coo.y+=0.4f;
-    }
-    GameObject tileObject  = Instantiate(Resources.Load(playerPrefab), new Vector3(coo.x,coo.y, 0), Quaternion.identity) as GameObject;
-    Debug.Log((coo.x) + " "+ (coo.y));
-  }*/
 
   private void playerInstantiation(GameObject tile, Player player){
     float playerLevel = 0.25f;
     string playerPrefab = playerDirection(player.dir);
-    Debug.Log(playerPrefab);
 
     int level = dataObj.levels[player.y,player.x];
     playerLevel += (level-1)*0.4f;
-    Debug.Log(tile.transform.position.x);
-    Debug.Log(tile.transform.position.y+playerLevel);
     Vector3 coo = new Vector3(tile.transform.position.x, tile.transform.position.y+playerLevel, 0);
 
-    GameObject playerObject  = Instantiate(Resources.Load(playerPrefab), coo, Quaternion.identity) as GameObject;
+    playerObject = Instantiate(Resources.Load(playerPrefab), coo, Quaternion.identity) as GameObject;
     playerObject.transform.parent = this.transform;
+    playerObject.GetComponent<SpriteRenderer>().sortingOrder = level;
+    Debug.Log(level);
+
   }
 
   private void instantiation(){
-    int x = dataObj.grid.GetLength(1)/2;
-    int y =dataObj.grid.GetLength(0)/2;
-    for(int i =0; i<dataObj.grid.GetLength(1); i++){
-      for(int j = 0; j<dataObj.grid.GetLength(0); j++){
-        //mapInstantiation(dataObj.grid[j,i], dataObj.levels[j,i], x, y, i, j);
-      }
-    }
-    for(int i=0; i<dataObj.players.Length; i++){
-      //playerInstantiation(dataObj.players[i], x, y);
-    }
-  }
-
-  private void instantiation2(){
-    GameObject[,] gridObject = new GameObject[dataObj.grid.GetLength(0), dataObj.grid.GetLength(1)];
+    gridObject = new GameObject[dataObj.grid.GetLength(0), dataObj.grid.GetLength(1)];
 
     int x = dataObj.grid.GetLength(1)/2;
     int y =dataObj.grid.GetLength(0)/2;
@@ -186,14 +177,13 @@ public class dataLink : MonoBehaviour
 
       playerInstantiation(gridObject[player.y, player.x], player);
     }
-
   }
 
   // Start is called before the first frame update
   void Start()
   {
 
-    currentMap = "map2.json";
+    currentMap = "map1.json";
 
     dataSer = des.deserialization(pathStarterMap + currentMap);
 
@@ -202,9 +192,9 @@ public class dataLink : MonoBehaviour
     converter = new JsonBridge.DataConvert(dataSer, dataObj);
     converter.serializedToObject();
 
-    string response  = des.serialization(dataSer, pathStarterMap + currentMap);
+    //string response  = des.serialization(dataSer, pathStarterMap + currentMap);
 
-    instantiation2();
+    instantiation();
 
   }
 

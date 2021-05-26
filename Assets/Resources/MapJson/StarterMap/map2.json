@@ -87,7 +87,7 @@
     }
   ],
   "type": "colorfulmountainous",
-  "code": "cst a = Player()\ncst b = Player()\ncst c = Specialist()\nfor _ in 1 ... 3 {\n    a.changeColor(\"RED\")\n    a.moveForward()\n    b.changeColor(\"BLACK\")\n    b.moveForward()\n    c.changeColor(\"GREEN\")\n    c.moveForward()\n}\n",
+  "code": "",
   "locks": [],
   "stairs": [
     {
