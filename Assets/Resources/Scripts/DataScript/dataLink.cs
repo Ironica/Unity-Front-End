@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Threading;
+using System.IO;
 
 public class dataLink : MonoBehaviour
 {
@@ -73,6 +74,8 @@ public class dataLink : MonoBehaviour
     //Send the json file to the servor
     //Get the response from the servor
     string  resp = des.serialization(dataSer, pathCurrentMap + currentMap);
+    File.WriteAllText(pathCurrentMap + currentMap ,resp);
+
 
     //Deserialization of the response
     JsonBridge.ResponseModel answers = des.webDeserialization(resp);
@@ -80,15 +83,16 @@ public class dataLink : MonoBehaviour
     //Get the frame array for the animation
     payload = answers.payload;
     for(int i = 0; i< payload.Length; i++){
-      converter = new JsonBridge.DataConvert(payload[i], dataObj);
+      converter.dataSer = payload[i];
       converter.serializedToObject();
 
-      foreach (Transform child in this.transform) {
+      foreach (Transform child in this.gameObject.transform.GetChild(3).GetChild(0)) {
         Destroy(child.gameObject);
       }
       instantiation();
       //Sleep for 1 seconds
-      Thread.Sleep(1000);
+      //Thread.Sleep(1000);
+      Debug.Log("Frame " + i);
     }
 
     //Print the status of the compilation
@@ -140,7 +144,7 @@ public class dataLink : MonoBehaviour
     string tile = tileLevel(block, i, j);
     Vector2 coo = setCoordinates(new Vector2(j-x, i-y));
     obj  = Instantiate(Resources.Load(tile), new Vector3(coo.x,coo.y, 0), Quaternion.identity) as GameObject;
-    obj.transform.parent = this.transform;
+    obj.transform.parent = this.gameObject.transform.GetChild(3).GetChild(0);
     return obj;
   }
 
@@ -148,15 +152,14 @@ public class dataLink : MonoBehaviour
   private void playerInstantiation(GameObject tile, Player player){
     float playerLevel = 0.25f;
     string playerPrefab = playerDirection(player.dir);
-
+    Debug.Log(playerPrefab);
     int level = dataObj.levels[player.y,player.x];
     playerLevel += (level-1)*0.4f;
     Vector3 coo = new Vector3(tile.transform.position.x, tile.transform.position.y+playerLevel, 0);
 
     playerObject = Instantiate(Resources.Load(playerPrefab), coo, Quaternion.identity) as GameObject;
-    playerObject.transform.parent = this.transform;
+    playerObject.transform.parent = this.gameObject.transform.GetChild(3).GetChild(0);
     playerObject.GetComponent<SpriteRenderer>().sortingOrder = level;
-    Debug.Log(level);
 
   }
 
@@ -183,7 +186,7 @@ public class dataLink : MonoBehaviour
   void Start()
   {
 
-    currentMap = "map1.json";
+    currentMap = "map2.json";
 
     dataSer = des.deserialization(pathStarterMap + currentMap);
 

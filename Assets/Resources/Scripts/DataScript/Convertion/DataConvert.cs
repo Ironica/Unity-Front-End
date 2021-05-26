@@ -27,19 +27,19 @@ namespace JsonBridge {
 
       //Initialisation of the attributes of the DataSerialized
       dataSer.grid = new string[length,depth];
-      dataSer.layout = new string[length,depth];
-      dataSer.colors = new string[length,depth];
+      //dataSer.layout = new string[length,depth];
+      //dataSer.colors = new string[length,depth];
 
       dataSer.levels = new int[length,depth];
 
-      dataSer.portals = new Portal[dataObj.portals.Length];
+      //dataSer.portals = new Portal[dataObj.portals.Length];
 
       dataSer.players = new PlayerSerialized[dataObj.players.Length];
 
       dataSer.type = dataObj.type;
       dataSer.code = dataObj.code;
 
-      dataSer.locks = new Lock[dataObj.locks.Length];
+      //dataSer.locks = new Lock[dataObj.locks.Length];
       dataSer.stairs = new StairSerialized[dataObj.stairs.Length];
 
 
@@ -47,16 +47,16 @@ namespace JsonBridge {
       for(int i = 0; i<length; i++){
         for(int j = 0; j<depth; j++){
           dataSer.grid[i,j] = blockToString(dataObj.grid[i,j]);
-          dataSer.layout[i,j] = itemToString(dataObj.layout[i,j]);
-          dataSer.colors[i,j] = colorToString(dataObj.colors[i,j]);
+          //dataSer.layout[i,j] = itemToString(dataObj.layout[i,j]);
+          //dataSer.colors[i,j] = colorToString(dataObj.colors[i,j]);
 
           dataSer.levels[i,j] = dataObj.levels[i,j];
 
         }
       }
-      for(int i = 0; i<dataSer.portals.Length; i++){
+      /*for(int i = 0; i<dataSer.portals.Length; i++){
         dataSer.portals[i] = dataObj.portals[i];
-      }
+      }*/
       for(int i = 0; i<dataSer.players.Length; i++){
         int id = dataObj.players[i].id;
         int x = dataObj.players[i].x;
@@ -66,9 +66,9 @@ namespace JsonBridge {
         int stamina = dataObj.players[i].stamina;
         dataSer.players[i] = new PlayerSerialized(id, x, y, dir, role, stamina);
       }
-      for(int i = 0; i<dataSer.locks.Length; i++){
+      /*for(int i = 0; i<dataSer.locks.Length; i++){
         dataSer.locks[i] = dataObj.locks[i];
-      }
+      }*/
       for(int i = 0; i<dataSer.stairs.Length; i++){
         int x = dataObj.stairs[i].coo.x;
         int y = dataObj.stairs[i].coo.y;
@@ -84,42 +84,44 @@ namespace JsonBridge {
     ** Update the dataSer with the dataObj's values
     */
     public void serializedToObject(){
+
       //Length and depth of the map
       int length = dataSer.grid.GetLength(0);
       int depth =  dataSer.grid.GetLength(1);
 
       //Initialisation of the attributes of the DataSerialized
       dataObj.grid = new Block[length,depth];
-      dataObj.layout = new Item[length,depth];
-      dataObj.colors = new Color[length,depth];
+      //dataObj.layout = new Item[length,depth];
+      //dataObj.colors = new Color[length,depth];
 
       dataObj.levels = new int[length,depth];
 
-      dataObj.portals = new Portal[dataSer.portals.Length];
-
+      //dataObj.portals = new Portal[dataSer.portals.Length];
       dataObj.players = new Player[dataSer.players.Length];
 
       dataObj.type = dataSer.type;
       dataObj.code = dataSer.code;
-
-      dataObj.locks = new Lock[dataSer.locks.Length];
-      dataObj.stairs = new Stair[dataSer.stairs.Length];
+      /*if(dataSer.locks != null){
+        dataObj.locks = new Lock[dataSer.locks.Length];
+      }*/
+      if(dataSer.stairs != null){
+        dataObj.stairs = new Stair[dataSer.stairs.Length];
+      }
 
 
       //Start conversion
       for(int i = 0; i<length; i++){
+
         for(int j = 0; j<depth; j++){
           dataObj.grid[i,j] = stringToBlock(dataSer.grid[i,j]);
-          dataObj.layout[i,j] = stringToItem(dataSer.layout[i,j]);
-          dataObj.colors[i,j] = stringToColor(dataSer.colors[i,j]);
-
+          //dataObj.layout[i,j] = stringToItem(dataSer.layout[i,j]);
+          //dataObj.colors[i,j] = stringToColor(dataSer.colors[i,j]);
           dataObj.levels[i,j] = dataSer.levels[i,j];
-
         }
       }
-      for(int i = 0; i<dataObj.portals.Length; i++){
+      /*for(int i = 0; i<dataObj.portals.Length; i++){
         dataObj.portals[i] = dataSer.portals[i];
-      }
+      }*/
       for(int i = 0; i<dataObj.players.Length; i++){
         int id = dataSer.players[i].id;
         int x = dataSer.players[i].x;
@@ -129,14 +131,18 @@ namespace JsonBridge {
         int stamina = dataSer.players[i].stamina;
         dataObj.players[i] = new Player(id, x, y, dir, role, stamina);
       }
-      for(int i = 0; i<dataObj.locks.Length; i++){
-        dataObj.locks[i] = dataSer.locks[i];
-      }
-      for(int i = 0; i<dataObj.stairs.Length; i++){
-        int x = dataSer.stairs[i].coo.x;
-        int y = dataSer.stairs[i].coo.y;
-        Direction dir = stringToDirection(dataSer.stairs[i].dir);
-        dataObj.stairs[i] = new Stair(x, y, dir);
+      /*if(dataSer.locks != null){
+        for(int i = 0; i<dataObj.locks.Length; i++){
+          dataObj.locks[i] = dataSer.locks[i];
+        }
+      }*/
+      if(dataSer.stairs != null){
+        for(int i = 0; i<dataObj.stairs.Length; i++){
+          int x = dataSer.stairs[i].coo.x;
+          int y = dataSer.stairs[i].coo.y;
+          Direction dir = stringToDirection(dataSer.stairs[i].dir);
+          dataObj.stairs[i] = new Stair(x, y, dir);
+        }
       }
 
     }
