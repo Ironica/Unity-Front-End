@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class dataLink : MonoBehaviour
 {
@@ -13,24 +14,24 @@ public class dataLink : MonoBehaviour
   private JsonBridge.DataSerialized[] payload;
   private string currentMap;
 
-  // Level 0
-  private string open = "Prefabs/PLAIN_OPEN_LEVEL";
-  private string blocked = "Prefabs/PLAIN_HILL_LEVEL";
-  private string water = "Prefabs/PLAIN_WATER_LEVEL";
-  private string tree = "Prefabs/PLAIN_TREE_LEVEL";
-  private string desert = "Prefabs/PLAIN_DESERT_LEVEL";
-  private string home = "Prefabs/PLAIN_HOME_LEVEL";
-  private string mountain = "Prefabs/PLAIN_MOUNTAIN_LEVEL";
+  //Ground
+  private string open       = "Prefabs/PLAIN_OPEN_LEVEL";
+  private string blocked    = "Prefabs/PLAIN_HILL_LEVEL";
+  private string water      = "Prefabs/PLAIN_WATER_LEVEL";
+  private string tree       = "Prefabs/PLAIN_TREE_LEVEL";
+  private string desert     = "Prefabs/PLAIN_DESERT_LEVEL";
+  private string home       = "Prefabs/PLAIN_HOME_LEVEL";
+  private string mountain   = "Prefabs/PLAIN_MOUNTAIN_LEVEL";
 
   // Stairs
-  private string stairLeft = "Prefabs/PLAIN_STAIRS_LEFT";
-  private string stairRight = "Prefabs/PLAIN_STAIRS_RIGHT";
-  private string stairBack = "Prefabs/PLAIN_STAIRS_BACK";
-  private string stairFront = "Prefabs/PLAIN_STAIRS_FRON";
-  private int currentStair = -1;
+  private string  stairLeft     = "Prefabs/PLAIN_STAIRS_LEFT";
+  private string  stairRight    = "Prefabs/PLAIN_STAIRS_RIGHT";
+  private string  stairBack     = "Prefabs/PLAIN_STAIRS_BACK";
+  private string  stairFront    = "Prefabs/PLAIN_STAIRS_FRON";
+  private int     currentStair  = -1;
 
   //Players skin
-  private string player1 = "Prefabs/ITEM/CHARACTER";
+  private string playerPrefab = "Prefabs/ITEM/CHARACTER_FRONT";
 
 
   public const string url = "http://127.0.0.1:8080/paidiki-xara";
@@ -77,65 +78,65 @@ public class dataLink : MonoBehaviour
     Debug.Log("Status: " + answers.status);
   }
 
-  public void mapInstantiation(Block block, int level, float x, float y, int i, int j){
-    string tile = tileLevel(block, i, j);
-    GameObject tileObject  = Instantiate(Resources.Load(tile), new Vector3(x,y, 0), Quaternion.identity) as GameObject;
-    tileObject.transform.parent = this.transform;
+  private Vector2 setCoordinates(Vector2 vector){
+    Vector2 i = new Vector2(-0.5f, -0.25f);
+    Vector2 j = new Vector2(0.5f, -0.25f);
+    return vector.x*i + vector.y*j;
   }
-
-  public string tileLevel(Block block, int i, int j){
-    switch(block){
-      case Block.OPEN: return open + dataObj.levels[j, i];
-      break;
-      case Block.BLOCKED: return blocked + dataObj.levels[j, i];
-      break;
-      case Block.WATER: return water + dataObj.levels[j, i];
-      break;
-      case Block.TREE: return tree + dataObj.levels[j, i];
-      break;
-      case Block.DESERT: return desert + dataObj.levels[j, i];
-      break;
-      case Block.HOME: return home + dataObj.levels[j, i];
-      break;
-      case Block.MOUNTAIN: return mountain+1;
-      break;
-      case Block.STONE: return mountain+1;
-      break;
-      case Block.LOCK: return home + dataObj.levels[j, i];
-      break;
-      default:
-      currentStair++;
-      return stairDirection(dataObj.stairs[currentStair].dir);
-      break;
-    }
-  }
-
 
   private string stairDirection(Direction dir){
     switch(dir){
       case Direction.UP: return stairFront;
-      break;
       case Direction.DOWN: return stairBack;
-      break;
       case Direction.LEFT: return stairLeft;
-      break;
       default: return stairRight;
-      break;
     }
   }
+
+  public string tileLevel(Block block, int i, int j){
+    switch(block){
+      case Block.OPEN:return open + dataObj.levels[j, i];
+      case Block.BLOCKED: return blocked + dataObj.levels[j, i];
+      case Block.WATER: return water + dataObj.levels[j, i];
+      case Block.TREE: return tree + dataObj.levels[j, i];
+      case Block.DESERT: return desert + dataObj.levels[j, i];
+      case Block.HOME: return home + dataObj.levels[j, i];
+      case Block.MOUNTAIN: return mountain+1;
+      case Block.STONE: return mountain+1;
+      case Block.LOCK: return home + dataObj.levels[j, i];
+      default:
+      currentStair++;
+      return stairDirection(dataObj.stairs[currentStair].dir);
+    }
+  }
+
+  private void mapInstantiation(Block block, int level, int x, int y, int i, int j){
+    string tile = tileLevel(block, i, j);
+    Vector2 coo = setCoordinates(new Vector2(j-x, i-y));
+    GameObject tileObject  = Instantiate(Resources.Load(tile), new Vector3(coo.x,coo.y, 0), Quaternion.identity) as GameObject;
+    tileObject.transform.parent = this.transform;
+    Debug.Log("x: " + coo.x + " y: " + coo.y);
+  }
+
+  private void playerInstantiation(Player player, int x, int y){
+    Vector2 coo = setCoordinates(new Vector2(player.x-x, player.y-y));
+    GameObject tileObject  = Instantiate(Resources.Load(playerPrefab), new Vector3(coo.x,coo.y, 0), Quaternion.identity) as GameObject;
+  }
+
   private void instantiation(){
-    float length = dataObj.grid.GetLength(1)*0.5f;
-    float heigth = dataObj.grid.GetLength(0)*0.25f;
-    float x=0f;
-    float y =0f;
+    int x = dataObj.grid.GetLength(1)/2;
+    int y =dataObj.grid.GetLength(0)/2;
+    Debug.Log("x: " + x + "; y: " + y);
     for(int i =0; i<dataObj.grid.GetLength(1); i++){
-      x = i*0.5f;
-      y = i*0.25f*-1f;
       for(int j = 0; j<dataObj.grid.GetLength(0); j++){
         mapInstantiation(dataObj.grid[j,i], dataObj.levels[j,i], x, y, i, j);
-        x -=0.5f;
-        y -= 0.25f;
+        if(dataObj.grid[j, i] == Block.HOME){
+          Debug.Log("j: " + j + ", i: " + i);
+        }
       }
+    }
+    for(int i=0; i<dataObj.players.Length; i++){
+      playerInstantiation(dataObj.players[i], x, y);
     }
   }
 
