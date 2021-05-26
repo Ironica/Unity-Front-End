@@ -14,11 +14,6 @@
       "WATER",
       "STAIR",
       "WATER"
-    ],
-    [
-      "TREE",
-      "OPEN",
-      "BLOCKED"
     ]
   ],
   "layout": [
@@ -26,11 +21,6 @@
       "NONE",
       "NONE",
       "GEM"
-    ],
-    [
-      "NONE",
-      "NONE",
-      "NONE"
     ],
     [
       "NONE",
@@ -58,11 +48,6 @@
       "WHITE",
       "WHITE",
       "WHITE"
-    ],
-    [
-      "WHITE",
-      "WHITE",
-      "WHITE"
     ]
   ],
   "levels": [
@@ -75,11 +60,6 @@
       2,
       2,
       2
-    ],
-    [
-      1,
-      1,
-      1
     ],
     [
       1,
@@ -124,34 +104,6 @@
         "y": 3
       },
       "dir": "UP"
-    },
-    {
-      "coo": {
-        "x": 1,
-        "y": 1
-      },
-      "dir": "UP"
-    },
-    {
-      "coo": {
-        "x": 1,
-        "y": 2
-      },
-      "dir": "DOWN"
-    },
-    {
-      "coo": {
-        "x": 2,
-        "y": 2
-      },
-      "dir": "UP"
-    },
-    {
-      "coo": {
-        "x": 2,
-        "y": 3
-      },
-      "dir": "RIGHT"
     }
   ]
 }
