@@ -8,14 +8,13 @@ public class MovePlayer : MonoBehaviour
     public Rigidbody2D rb;
 
     private bool isJumping;
-    private bool isGrounded;
     private Vector3 velocity = Vector3.zero;
 
     void FixedUpdate()
     {
         float horizontalmv = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         
-        if(Input.GetButtonDown("Jump") && isGrounded)
+        if(Input.GetButtonDown("Jump"))
         {
             isJumping = true;
         }
