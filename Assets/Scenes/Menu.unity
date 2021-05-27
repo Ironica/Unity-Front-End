@@ -964,7 +964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e13c18a717c854244a5482234bd5478c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: Interface
+  levelToLoad: Level01
   settingsWindow: {fileID: 1348140686}
 --- !u!1 &753005409
 GameObject:

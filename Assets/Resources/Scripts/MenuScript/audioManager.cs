@@ -4,7 +4,7 @@ using Random = System.Random;
 public class AudioManager : MonoBehaviour
 {
     public AudioClip[] playlist;
-    public AudioSource audio; 
+    public new AudioSource audio; 
     private Random rand = new Random();
     private int musicIndex;
     
