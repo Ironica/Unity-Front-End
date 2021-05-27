@@ -1,6 +1,8 @@
-using UnityEngine;
+/*using UnityEngine;
 
-public AudioClip[]
+public AudioClip[] playlist;
+public AudioSource audio;
+
 public class audioManager : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -15,3 +17,4 @@ public class audioManager : MonoBehaviour
         
     }
 }
+*/
