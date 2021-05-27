@@ -71,10 +71,10 @@
     {
       "id": 1,
       "x": 0,
-      "y": 3,
+      "y": 1,
       "dir": "DOWN",
       "role": "PLAYER",
-      "stamina": 87
+      "stamina": 89
     }
   ],
   "type": null,
