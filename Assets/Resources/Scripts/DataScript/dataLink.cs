@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using System.Threading;
+//using System.Threading;
+using System.Threading.Tasks;
 using System.IO;
 
 public class dataLink : MonoBehaviour
@@ -57,7 +58,7 @@ public class dataLink : MonoBehaviour
   /*
   **  Method called when the user compiles his code
   */
-  public void compile(){
+  public async void compile(){
 
     /*if( the frame[] is empty )
     */
@@ -91,8 +92,8 @@ public class dataLink : MonoBehaviour
       }
       instantiation();
       //Sleep for 1 seconds
-      //Thread.Sleep(1000);
-      Debug.Log("Frame " + i);
+      await Task.Delay(1000);
+      //Debug.Log("Frame " + i);
     }
 
     //Print the status of the compilation
@@ -152,7 +153,6 @@ public class dataLink : MonoBehaviour
   private void playerInstantiation(GameObject tile, Player player){
     float playerLevel = 0.25f;
     string playerPrefab = playerDirection(player.dir);
-    Debug.Log(playerPrefab);
     int level = dataObj.levels[player.y,player.x];
     playerLevel += (level-1)*0.4f;
     Vector3 coo = new Vector3(tile.transform.position.x, tile.transform.position.y+playerLevel, 0);
@@ -186,7 +186,7 @@ public class dataLink : MonoBehaviour
   void Start()
   {
 
-    currentMap = "map2.json";
+    currentMap = "map4.json";
 
     dataSer = des.deserialization(pathStarterMap + currentMap);
 
