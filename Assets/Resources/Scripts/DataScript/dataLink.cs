@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using System.Threading;
+using System.Threading.Tasks;
 using System.IO;
+using Newtonsoft.Json;
 
 public class dataLink : MonoBehaviour
 {
@@ -44,7 +45,7 @@ public class dataLink : MonoBehaviour
   public const string url = "http://127.0.0.1:8080/paidiki-xara";
 
   private const string pathStarterMap = "Assets/Resources/MapJson/StarterMap/";
-  private const string pathCurrentMap = "Assets/Resources/MapJson/CurrentMap";
+  private const string pathCurrentMap = "Assets/Resources/MapJson/CurrentMap/";
 
   public string mapName;
 
@@ -57,13 +58,14 @@ public class dataLink : MonoBehaviour
   /*
   **  Method called when the user compiles his code
   */
-  public void compile(){
+  public async void compile(){
 
     /*if( the frame[] is empty )
     */
 
     // Get the user code in the InputField
-    //dataObj.code = getUserCode();
+    dataObj.code = getUserCode();
+    Debug.Log(dataObj.code);
 
     //Convert the data object to data serializable
     converter.objectToSerialized();
@@ -74,7 +76,7 @@ public class dataLink : MonoBehaviour
     //Send the json file to the servor
     //Get the response from the servor
     string  resp = des.serialization(dataSer, pathCurrentMap + currentMap);
-    File.WriteAllText(pathCurrentMap + currentMap ,resp);
+
 
 
     //Deserialization of the response
@@ -82,8 +84,11 @@ public class dataLink : MonoBehaviour
 
     //Get the frame array for the animation
     payload = answers.payload;
+    Debug.Log("Number frame " + payload.Length);
     for(int i = 0; i< payload.Length; i++){
       converter.dataSer = payload[i];
+      string json = JsonConvert.SerializeObject(converter.dataSer, Formatting.Indented);
+      File.WriteAllText(pathCurrentMap + currentMap ,json);
       converter.serializedToObject();
 
       foreach (Transform child in this.gameObject.transform.GetChild(3).GetChild(0)) {
@@ -91,8 +96,8 @@ public class dataLink : MonoBehaviour
       }
       instantiation();
       //Sleep for 1 seconds
-      //Thread.Sleep(1000);
-      Debug.Log("Frame " + i);
+      await Task.Delay(1000);
+      //Debug.Log("Frame " + i);
     }
 
     //Print the status of the compilation
@@ -152,7 +157,6 @@ public class dataLink : MonoBehaviour
   private void playerInstantiation(GameObject tile, Player player){
     float playerLevel = 0.25f;
     string playerPrefab = playerDirection(player.dir);
-    Debug.Log(playerPrefab);
     int level = dataObj.levels[player.y,player.x];
     playerLevel += (level-1)*0.4f;
     Vector3 coo = new Vector3(tile.transform.position.x, tile.transform.position.y+playerLevel, 0);
@@ -186,7 +190,7 @@ public class dataLink : MonoBehaviour
   void Start()
   {
 
-    currentMap = "map2.json";
+    currentMap = "map4.json";
 
     dataSer = des.deserialization(pathStarterMap + currentMap);
 

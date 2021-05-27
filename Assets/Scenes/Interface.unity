@@ -5731,7 +5731,7 @@ GameObject:
   - component: {fileID: 664681514}
   - component: {fileID: 664681517}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: UserCode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6529,7 +6529,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 808a787324988ac4cb7bdda8e410602e, type: 3}
+    m_Font: {fileID: 12800000, guid: 9a6ca0490e6289f4a8ef6491676d93f9, type: 3}
     m_FontSize: 20
     m_FontStyle: 1
     m_BestFit: 0
@@ -7180,7 +7180,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 808a787324988ac4cb7bdda8e410602e, type: 3}
+    m_Font: {fileID: 12800000, guid: 9a6ca0490e6289f4a8ef6491676d93f9, type: 3}
     m_FontSize: 14
     m_FontStyle: 2
     m_BestFit: 0
@@ -7520,13 +7520,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 808a787324988ac4cb7bdda8e410602e, type: 3}
-    m_FontSize: 20
+    m_Font: {fileID: 12800000, guid: 9a6ca0490e6289f4a8ef6491676d93f9, type: 3}
+    m_FontSize: 17
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 40
-    m_Alignment: 1
+    m_MinSize: 1
+    m_MaxSize: 175
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0

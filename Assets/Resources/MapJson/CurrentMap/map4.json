@@ -1,0 +1,84 @@
+{
+  "grid": [
+    [
+      "OPEN",
+      "OPEN",
+      "OPEN"
+    ],
+    [
+      "OPEN",
+      "OPEN",
+      "OPEN"
+    ],
+    [
+      "OPEN",
+      "OPEN",
+      "OPEN"
+    ],
+    [
+      "OPEN",
+      "OPEN",
+      "OPEN"
+    ]
+  ],
+  "layout": null,
+  "colors": [
+    [
+      "WHITE",
+      "WHITE",
+      "WHITE"
+    ],
+    [
+      "WHITE",
+      "WHITE",
+      "WHITE"
+    ],
+    [
+      "WHITE",
+      "WHITE",
+      "WHITE"
+    ],
+    [
+      "WHITE",
+      "WHITE",
+      "WHITE"
+    ]
+  ],
+  "levels": [
+    [
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      1,
+      1
+    ]
+  ],
+  "portals": [],
+  "players": [
+    {
+      "id": 1,
+      "x": 0,
+      "y": 3,
+      "dir": "DOWN",
+      "role": "PLAYER",
+      "stamina": 87
+    }
+  ],
+  "type": null,
+  "code": null,
+  "locks": null,
+  "stairs": null
+}
