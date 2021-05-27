@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-//using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
+using Newtonsoft.Json;
 
 public class dataLink : MonoBehaviour
 {
@@ -45,7 +45,7 @@ public class dataLink : MonoBehaviour
   public const string url = "http://127.0.0.1:8080/paidiki-xara";
 
   private const string pathStarterMap = "Assets/Resources/MapJson/StarterMap/";
-  private const string pathCurrentMap = "Assets/Resources/MapJson/CurrentMap";
+  private const string pathCurrentMap = "Assets/Resources/MapJson/CurrentMap/";
 
   public string mapName;
 
@@ -76,7 +76,7 @@ public class dataLink : MonoBehaviour
     //Send the json file to the servor
     //Get the response from the servor
     string  resp = des.serialization(dataSer, pathCurrentMap + currentMap);
-    File.WriteAllText(pathCurrentMap + currentMap ,resp);
+
 
 
     //Deserialization of the response
@@ -84,8 +84,11 @@ public class dataLink : MonoBehaviour
 
     //Get the frame array for the animation
     payload = answers.payload;
+    Debug.Log("Number frame " + payload.Length);
     for(int i = 0; i< payload.Length; i++){
       converter.dataSer = payload[i];
+      string json = JsonConvert.SerializeObject(converter.dataSer, Formatting.Indented);
+      File.WriteAllText(pathCurrentMap + currentMap ,json);
       converter.serializedToObject();
 
       foreach (Transform child in this.gameObject.transform.GetChild(3).GetChild(0)) {
