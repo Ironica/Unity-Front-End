@@ -148,7 +148,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59766299}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -157,8 +157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.96315277}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0005187988, y: -0.21749878}
-  m_SizeDelta: {x: 1.12, y: 0.435}
+  m_AnchoredPosition: {x: -279.01474, y: 3396.2673}
+  m_SizeDelta: {x: 1.1199951, y: 0.43499947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!199 &59766301
 ParticleSystemRenderer:
@@ -4984,8 +4984,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0.392}
-  m_RaycastTarget: 1
+  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5008,7 +5008,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123848247}
-  m_CullTransparentMesh: 1
+  m_CullTransparentMesh: 0
 --- !u!1 &197824539
 GameObject:
   m_ObjectHideFlags: 0
@@ -6453,7 +6453,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 896689652}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -135.60999, y: 9.816406, z: -5184}
+  m_LocalPosition: {x: -135.60999, y: 9.816391, z: -5184}
   m_LocalScale: {x: 57.6, y: 57.6, z: 57.6}
   m_Children: []
   m_Father: {fileID: 123848248}
@@ -6668,8 +6668,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -24.830002, y: -71.91001}
-  m_SizeDelta: {x: 49.65, y: 143.82}
+  m_AnchoredPosition: {x: -24.830002, y: -73.64}
+  m_SizeDelta: {x: 49.65, y: 147.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1135465014
 MonoBehaviour:

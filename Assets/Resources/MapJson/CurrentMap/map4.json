@@ -21,28 +21,7 @@
       "OPEN"
     ]
   ],
-  "layout": [
-    [
-      "NONE",
-      "NONE",
-      "NONE"
-    ],
-    [
-      "NONE",
-      "NONE",
-      "NONE"
-    ],
-    [
-      "NONE",
-      "NONE",
-      "NONE"
-    ],
-    [
-      "NONE",
-      "NONE",
-      "GEM"
-    ]
-  ],
+  "layout": null,
   "colors": [
     [
       "WHITE",
@@ -92,14 +71,14 @@
     {
       "id": 1,
       "x": 0,
-      "y": 0,
+      "y": 3,
       "dir": "DOWN",
       "role": "PLAYER",
-      "stamina": 90
+      "stamina": 87
     }
   ],
-  "type": "mountainous",
-  "code": "This is a good v0\n",
-  "locks": [],
-  "stairs": []
+  "type": null,
+  "code": null,
+  "locks": null,
+  "stairs": null
 }
