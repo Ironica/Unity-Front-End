@@ -1,17 +1,17 @@
 {
 "type": "mountainous",
-"code": "cst totalGem = 7\nvar collected = 0\n\nfunc turnRight() {\n turnLeft()\n turnLeft()\n turnLeft()\n}\n\nwhile collected < totalGem {\n if isOnGem {\n print(\"Collected gem!\")\n collectGem()\n collected += 1\n }\n if isOnClosedSwitch {\n print(\"Toggled switch!\")\n toggleSwitch()\n }\n if !isBlockedRight {\n turnRight()\n moveForward()\n } else {\n if isBlocked {\n while isBlocked {\n turnLeft()\n }\n }\n moveForward()\n }\n}\n\n",
+"code": "cst totalGem = 7\nvar collected = 0\n\nfunc turnRight() {\n turnLeft()\n turnLeft()\n turnLeft()\n}\n\nwhile collected < totalGem {\n if isOnGem {\n print(\"Collected gem!\")\n collectGem()\n collected += 1\n }\n if isOnClosedSwitch {\n print(\"Toggled switch!\")\n toggleSwitch()\n }\n if !isMOUNTAINRight {\n turnRight()\n moveForward()\n } else {\n if isMOUNTAIN {\n while isMOUNTAIN {\n turnLeft()\n }\n }\n moveForward()\n }\n}\n\n",
 "players": [{
 "id": 1, "x": 0, "y": 0, "dir": "RIGHT", "role": "PLAYER", "stamina": 500
  }],
 "portals": [],
 "locks": [],
 "grid": [
- [ "OPEN", "OPEN", "BLOCKED", "OPEN", "OPEN", "BLOCKED", "BLOCKED", "BLOCKED", "OPEN" ],
- [ "BLOCKED", "OPEN", "OPEN", "OPEN", "OPEN", "OPEN", "OPEN", "OPEN", "OPEN" ],
- [ "OPEN", "OPEN", "BLOCKED", "BLOCKED", "OPEN", "BLOCKED", "OPEN", "BLOCKED", "OPEN"],
- [ "BLOCKED", "OPEN", "OPEN", "BLOCKED", "BLOCKED", "OPEN", "OPEN", "BLOCKED", "BLOCKED"],
- [ "BLOCKED", "OPEN", "BLOCKED", "BLOCKED", "BLOCKED", "BLOCKED", "OPEN", "BLOCKED", "BLOCKED"]
+ [ "OPEN", "OPEN", "WATER", "DESERT", "DESERT", "MOUNTAIN", "BLOCKED", "MOUNTAIN", "OPEN" ],
+ [ "BLOCKED", "OPEN", "OPEN", "HOME", "DESERT", "OPEN", "OPEN", "HOME", "DESERT" ],
+ [ "OPEN", "OPEN", "BLOCKED", "WATER", "DESERT", "BLOCKED", "OPEN", "MOUNTAIN", "OPEN"],
+ [ "BLOCKED", "OPEN", "OPEN", "WATER", "MOUNTAIN", "OPEN", "OPEN", "BLOCKED", "BLOCKED"],
+ [ "MOUNTAIN", "OPEN", "MOUNTAIN", "BLOCKED", "MOUNTAIN", "BLOCKED", "OPEN", "MOUNTAIN", "MOUNTAIN"]
  ],
 "layout": [
  [ "NONE", "NONE", "NONE", "OPENEDSWITCH", "NONE", "NONE", "NONE", "NONE", "NONE" ],

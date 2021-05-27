@@ -172,6 +172,27 @@ namespace JsonBridge {
     ** dataSer contains all data serializable
     ** Update the dataSer with the dataObj's values
     */
+    public void serializedToObject1(){
+
+      setToObj2DArrays();
+
+      if(dataSer.players != null){
+        setToObjPlayers();
+      }
+
+      if(dataSer.stairs != null){
+        setToObjStairs();
+      }
+
+      if(dataSer.portals != null){
+        setToObjPortals();
+      }
+
+      if(dataSer.locks != null){
+        setToObjLocks();
+      }
+    }
+
     public void serializedToObject(){
 
       //Length and depth of the map
@@ -262,19 +283,40 @@ namespace JsonBridge {
   }
 
   private void setToObjPlayers(){
-
+    dataObj.players = new Player[dataSer.players.Length];
+    for(int i = 0; i<dataObj.players.Length; i++){
+      int id = dataSer.players[i].id;
+      int x = dataSer.players[i].x;
+      int y = dataSer.players[i].y;
+      Direction dir = stringToDirection(dataSer.players[i].dir);
+      Role role = stringToRole(dataSer.players[i].role);
+      int stamina = dataSer.players[i].stamina;
+      dataObj.players[i] = new Player(id, x, y, dir, role, stamina);
+    }
   }
 
   private void setToObjStairs(){
-
+    dataObj.stairs = new Stair[dataSer.stairs.Length];
+    for(int i = 0; i<dataObj.stairs.Length; i++){
+      int x = dataSer.stairs[i].coo.x;
+      int y = dataSer.stairs[i].coo.y;
+      Direction dir = stringToDirection(dataSer.stairs[i].dir);
+      dataObj.stairs[i] = new Stair(x, y, dir);
+    }
   }
 
   private void setToObjPortals(){
-
+    dataObj.portals = new Portal[dataSer.portals.Length];
+    for(int i = 0; i<dataObj.portals.Length; i++){
+      dataObj.portals[i] = dataSer.portals[i];
+    }
   }
 
   private void setToObjLocks(){
-    
+    dataObj.locks = new Lock[dataSer.locks.Length];
+    for(int i = 0; i<dataObj.locks.Length; i++){
+      dataObj.locks[i] = dataSer.locks[i];
+    }
   }
 
   public string directionToString(Direction dir){
