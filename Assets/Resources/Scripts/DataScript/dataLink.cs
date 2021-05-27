@@ -82,6 +82,12 @@ public class dataLink : MonoBehaviour
     //Deserialization of the response
     JsonBridge.ResponseModel answers = des.webDeserialization(resp);
 
+    //Print the status of the compilation
+    Debug.Log("Status: " + answers.status);
+    if(answers.status.Equals("ERROR")){
+      return;
+    }
+
     //Get the frame array for the animation
     payload = answers.payload;
     Debug.Log("Number frame " + payload.Length);
@@ -100,8 +106,7 @@ public class dataLink : MonoBehaviour
       //Debug.Log("Frame " + i);
     }
 
-    //Print the status of the compilation
-    Debug.Log("Status: " + answers.status);
+
   }
 
   private Vector2 setCoordinates(Vector2 vector){
