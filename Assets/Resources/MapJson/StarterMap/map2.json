@@ -1,6 +1,6 @@
 {
 "type": "mountainous",
-"code": "cst totalGem = 7\nvar collected = 0\n\nfunc turnRight() {\n turnLeft()\n turnLeft()\n turnLeft()\n}\n\nwhile collected < totalGem {\n if isOnGem {\n print(\"Collected gem!\")\n collectGem()\n collected += 1\n }\n if isOnClosedSwitch {\n print(\"Toggled switch!\")\n toggleSwitch()\n }\n if !isBlockedRight {\n turnRight()\n moveForward()\n } else {\n if isBlocked {\n while isBlocked {\n turnLeft()\n }\n }\n moveForward()\n }\n}\n\n",
+"code": "",
 "players": [{
 "id": 1, "x": 0, "y": 0, "dir": "RIGHT", "role": "PLAYER", "stamina": 500
  }],

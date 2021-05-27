@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace JsonBridge{
   public class ResponseModel
   {
     public string status { get; set; }
-    public DataSerialized[] payload { get; set; }
+    public DataResponseSerialized[] payload { get; set; }
   }
 
   [System.Serializable]
@@ -32,5 +33,27 @@ namespace JsonBridge{
 
     public DataSerialized(){}
 
+  }
+
+  [Serializable]
+  public class DataResponseSerialized
+  {
+    public string[,] grid;
+    public string[,] itemLayout;
+    public string[,] colors;
+
+    public int[,] levels;
+
+    public Portal[] portals;
+    public PlayerSerialized[] players;
+
+    public string type;
+    public string code;
+    public Lock[] locks;
+    public StairSerialized[] stairs;
+
+    public DataResponseSerialized()
+    {
+    }
   }
 }

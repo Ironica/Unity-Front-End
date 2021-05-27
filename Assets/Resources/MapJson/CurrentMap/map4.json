@@ -21,7 +21,28 @@
       "OPEN"
     ]
   ],
-  "layout": null,
+  "layout": [
+    [
+      "NONE",
+      "NONE",
+      "NONE"
+    ],
+    [
+      "NONE",
+      "NONE",
+      "NONE"
+    ],
+    [
+      "NONE",
+      "NONE",
+      "NONE"
+    ],
+    [
+      "NONE",
+      "NONE",
+      "NONE"
+    ]
+  ],
   "colors": [
     [
       "WHITE",
@@ -70,11 +91,11 @@
   "players": [
     {
       "id": 1,
-      "x": 0,
+      "x": 2,
       "y": 3,
-      "dir": "DOWN",
+      "dir": "RIGHT",
       "role": "PLAYER",
-      "stamina": 87
+      "stamina": 84
     }
   ],
   "type": null,

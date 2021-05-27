@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using System;
 using System.Threading.Tasks;
 using System.IO;
+using System.Linq;
+using JsonBridge;
 using Newtonsoft.Json;
 
 public class dataLink : MonoBehaviour
@@ -17,6 +19,7 @@ public class dataLink : MonoBehaviour
   private JsonBridge.DataSerialized[] payload;
   private string currentMap;
   GameObject[,] gridObject;
+  List<GameObject> gemObjects = new List<GameObject>();
   GameObject playerObject;
 
   //Ground
@@ -40,6 +43,9 @@ public class dataLink : MonoBehaviour
   private string playerBack = "Prefabs/ITEM/CHARACTER_BACK";
   private string playerLeft = "Prefabs/ITEM/CHARACTER_LEFT";
   private string playerRight = "Prefabs/ITEM/CHARACTER_RIGHT";
+  
+  // Items
+  private string gem = "Prefabs/ITEM/GEM";
 
 
   public const string url = "http://127.0.0.1:8080/paidiki-xara";
@@ -54,6 +60,21 @@ public class dataLink : MonoBehaviour
     .GetComponent<InputField>()
     .text;
   }
+
+  private DataSerialized[] convertToOriginalArray(DataResponseSerialized[] drs)
+    => drs.Select(e => new DataSerialized()
+    {
+      grid = e.grid,
+      layout = e.itemLayout,
+      colors = e.colors,
+      levels = e.levels,
+      portals = e.portals,
+      players = e.players,
+      type = e.type,
+      code = e.code,
+      locks = e.locks,
+      stairs = e.stairs
+    }).ToArray();
 
   /*
   **  Method called when the user compiles his code
@@ -83,7 +104,7 @@ public class dataLink : MonoBehaviour
     JsonBridge.ResponseModel answers = des.webDeserialization(resp);
 
     //Get the frame array for the animation
-    payload = answers.payload;
+    payload = convertToOriginalArray(answers.payload);
     Debug.Log("Number frame " + payload.Length);
     for(int i = 0; i< payload.Length; i++){
       converter.dataSer = payload[i];
@@ -148,7 +169,7 @@ public class dataLink : MonoBehaviour
   private GameObject mapInstantiation(GameObject obj, Block block, int level, int x, int y, int i, int j){
     string tile = tileLevel(block, i, j);
     Vector2 coo = setCoordinates(new Vector2(j-x, i-y));
-    obj  = Instantiate(Resources.Load(tile), new Vector3(coo.x,coo.y, 0), Quaternion.identity) as GameObject;
+    obj  = Instantiate(UnityEngine.Resources.Load(tile), new Vector3(coo.x,coo.y, 0), Quaternion.identity) as GameObject;
     obj.transform.parent = this.gameObject.transform.GetChild(3).GetChild(0);
     return obj;
   }
@@ -161,10 +182,25 @@ public class dataLink : MonoBehaviour
     playerLevel += (level-1)*0.4f;
     Vector3 coo = new Vector3(tile.transform.position.x, tile.transform.position.y+playerLevel, 0);
 
-    playerObject = Instantiate(Resources.Load(playerPrefab), coo, Quaternion.identity) as GameObject;
+    playerObject = Instantiate(UnityEngine.Resources.Load(playerPrefab), coo, Quaternion.identity) as GameObject;
     playerObject.transform.parent = this.gameObject.transform.GetChild(3).GetChild(0);
     playerObject.GetComponent<SpriteRenderer>().sortingOrder = level;
 
+  }
+
+  private void GemInstantiation(GameObject tile, Gem gemObj)
+  {
+    var gemLevel = 0.25f;
+    var gemPrefab = gem;
+    var level = dataObj.levels[gemObj.X, gemObj.Y];
+    gemLevel += (level - 1) * 0.4f;
+    var tilePos = tile.transform.position;
+    var coo = new Vector3(tilePos.x, tilePos.y + gemLevel, 0);
+
+    var gemObject = Instantiate(UnityEngine.Resources.Load(gemPrefab), coo, Quaternion.identity) as GameObject;
+    gemObject.transform.parent = this.gameObject.transform.GetChild(3).GetChild(0);
+    gemObject.GetComponent<SpriteRenderer>().sortingOrder = level;
+    gemObjects.Add(gemObject);
   }
 
   private void instantiation(){
@@ -176,7 +212,7 @@ public class dataLink : MonoBehaviour
     for(int i =0; i<dataObj.grid.GetLength(1); i++){
       for(int j = 0; j<dataObj.grid.GetLength(0); j++){
         gridObject[j,i] = mapInstantiation(gridObject[j,i], dataObj.grid[j,i], dataObj.levels[j,i], x, y, i, j);
-
+        if (dataObj.layout[j, i] == Item.GEM) { GemInstantiation(gridObject[j, i], new Gem(j, i));}
       }
     }
     for(int i=0; i<dataObj.players.Length; i++){

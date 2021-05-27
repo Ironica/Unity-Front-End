@@ -91,7 +91,7 @@ namespace JsonBridge {
 
       //Initialisation of the attributes of the DataSerialized
       dataObj.grid = new Block[length,depth];
-      //dataObj.layout = new Item[length,depth];
+      dataObj.layout = new Item[length,depth];
       //dataObj.colors = new Color[length,depth];
 
       dataObj.levels = new int[length,depth];
@@ -114,7 +114,8 @@ namespace JsonBridge {
 
         for(int j = 0; j<depth; j++){
           dataObj.grid[i,j] = stringToBlock(dataSer.grid[i,j]);
-          //dataObj.layout[i,j] = stringToItem(dataSer.layout[i,j]);
+          dataObj.layout[i, j] = stringToItem(dataSer.layout[i, j]);
+
           //dataObj.colors[i,j] = stringToColor(dataSer.colors[i,j]);
           dataObj.levels[i,j] = dataSer.levels[i,j];
         }
