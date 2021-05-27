@@ -5039,6 +5039,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4a3e373968c804d90e09064a0df63e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playlist:
+  - {fileID: 8300000, guid: 22f5328aba3577441b4af4c49c2e47a0, type: 3}
+  audio: {fileID: 209750729}
 --- !u!82 &209750729
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5051,7 +5054,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.234
   m_Pitch: 1
   Loop: 0
   Mute: 0

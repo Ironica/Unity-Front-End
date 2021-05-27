@@ -99,7 +99,7 @@
     }
   ],
   "type": "mountainous",
-  "code": "moveForward()\nmoveForward()\nmoveForward()\nturnLeft()\nmoveForward()\nturnLeft()\nmoveForward()\nturnRight()",
+  "code": "moveForward()\nmoveForward()",
   "locks": [],
   "stairs": []
 }
