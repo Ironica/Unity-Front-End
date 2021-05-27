@@ -1,19 +1,27 @@
 using UnityEngine;
+using Random = System.Random;
 
-public class audioManager : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
     public AudioClip[] playlist;
-    public AudioSource audio;
-    // Start is called before the first frame update
+    public AudioSource audio; 
+    private Random rand = new Random();
+    private int musicIndex;
+    
     void Start()
     {
-        audio.clip = playlist[0];
+        musicIndex = rand.Next(3);
+        audio.clip = playlist[musicIndex];
         audio.Play();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        
+        if (!audio.isPlaying)
+        {
+            musicIndex = rand.Next(3);
+            audio.clip = playlist[musicIndex];
+            audio.Play();
+        }
     }
 }

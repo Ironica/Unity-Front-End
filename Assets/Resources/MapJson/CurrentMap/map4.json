@@ -99,7 +99,7 @@
     }
   ],
   "type": "mountainous",
-  "code": "moveForward()\nmoveForward()",
+  "code": "for _ in 1 ... 3 {\nmoveForward()\n}\nturnLeft()\nmoveForward()",
   "locks": [],
   "stairs": []
 }
