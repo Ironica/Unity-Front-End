@@ -89,6 +89,7 @@ public class dataLink : MonoBehaviour
     Debug.Log(dataObj.code);
 
     //Convert the data object to data serializable
+    converter.dataObj = this.dataObj;
     converter.objectToSerialized();
 
     Debug.Log("Data conversion done");
@@ -102,6 +103,12 @@ public class dataLink : MonoBehaviour
 
     //Deserialization of the response
     JsonBridge.ResponseModel answers = des.webDeserialization(resp);
+
+    //Print the status of the compilation
+    Debug.Log("Status: " + answers.status);
+    if(answers.status.Equals("ERROR")){
+      return;
+    }
 
     //Get the frame array for the animation
     payload = convertToOriginalArray(answers.payload);
@@ -121,8 +128,7 @@ public class dataLink : MonoBehaviour
       //Debug.Log("Frame " + i);
     }
 
-    //Print the status of the compilation
-    Debug.Log("Status: " + answers.status);
+
   }
 
   private Vector2 setCoordinates(Vector2 vector){
@@ -226,7 +232,7 @@ public class dataLink : MonoBehaviour
   void Start()
   {
 
-    currentMap = "map4.json";
+    currentMap = "map2.json";
 
     dataSer = des.deserialization(pathStarterMap + currentMap);
 

@@ -40,7 +40,7 @@
     [
       "NONE",
       "NONE",
-      "NONE"
+      "GEM"
     ]
   ],
   "colors": [
@@ -91,15 +91,15 @@
   "players": [
     {
       "id": 1,
-      "x": 2,
-      "y": 3,
-      "dir": "RIGHT",
+      "x": 0,
+      "y": 0,
+      "dir": "DOWN",
       "role": "PLAYER",
-      "stamina": 84
+      "stamina": 90
     }
   ],
-  "type": null,
-  "code": null,
-  "locks": null,
-  "stairs": null
+  "type": "mountainous",
+  "code": "for _ in 1 ... 3 {\nmoveForward()\n}\nturnLeft()\nmoveForward()",
+  "locks": [],
+  "stairs": []
 }
