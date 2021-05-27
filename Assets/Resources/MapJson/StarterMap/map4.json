@@ -1,6 +1,6 @@
 {
    "type": "mountainous",
-   "code": "cst a = Player()\nfor _ in 1 ..< 4 {\n    a.moveForward()\n}\n",
+   "code": "",
    "grid": [
      ["OPEN", "OPEN", "OPEN"],
      ["OPEN", "OPEN", "OPEN"],

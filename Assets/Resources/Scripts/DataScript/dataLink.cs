@@ -64,7 +64,8 @@ public class dataLink : MonoBehaviour
     */
 
     // Get the user code in the InputField
-    //dataObj.code = getUserCode();
+    dataObj.code = getUserCode();
+    Debug.Log(dataObj.code);
 
     //Convert the data object to data serializable
     converter.objectToSerialized();
