@@ -68,6 +68,7 @@ public class dataLink : MonoBehaviour
     Debug.Log(dataObj.code);
 
     //Convert the data object to data serializable
+    converter.dataObj = this.dataObj;
     converter.objectToSerialized();
 
     Debug.Log("Data conversion done");
