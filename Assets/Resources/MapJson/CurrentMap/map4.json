@@ -71,10 +71,17 @@
     {
       "id": 1,
       "x": 0,
+<<<<<<< HEAD
       "y": 1,
       "dir": "DOWN",
       "role": "PLAYER",
       "stamina": 89
+=======
+      "y": 2,
+      "dir": "DOWN",
+      "role": "PLAYER",
+      "stamina": 88
+>>>>>>> dc9fabe831fa88857e1c5f73764007cff27a4ba0
     }
   ],
   "type": null,
