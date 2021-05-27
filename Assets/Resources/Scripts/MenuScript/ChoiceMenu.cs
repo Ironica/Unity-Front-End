@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class ChoiceMenu : MonoBehaviour
 {
     public GameObject ChoiceWindow;
     private bool isActiveChoice = false;
+    public AudioMixer audioMix;
 
     public void Update()
     {
@@ -45,6 +47,10 @@ public class ChoiceMenu : MonoBehaviour
     {
         
     }
-
+    
+    public void SetVolume(float volume)
+    {
+        audioMix.SetFloat("Volume", volume);
+    }
   
 }
