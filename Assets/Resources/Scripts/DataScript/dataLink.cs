@@ -196,7 +196,7 @@ public class dataLink : MonoBehaviour
 
   private void GemInstantiation(GameObject tile, Gem gemObj)
   {
-    var gemLevel = 0.25f;
+    var gemLevel = -0.35f;
     var gemPrefab = gem;
     var level = dataObj.levels[gemObj.X, gemObj.Y];
     gemLevel += (level - 1) * 0.4f;

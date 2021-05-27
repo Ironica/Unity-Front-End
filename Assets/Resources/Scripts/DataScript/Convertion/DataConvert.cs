@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Security.Cryptography;
 
 namespace JsonBridge {
 
@@ -320,254 +321,144 @@ namespace JsonBridge {
     }
   }
 
-  public string directionToString(Direction dir){
-    string res = "directionToString error";
+  public string directionToString(Direction dir)
+    => dir switch
+    {
+      Direction.UP => "UP",
+      Direction.DOWN => "DOWN",
+      Direction.LEFT => "LEFT",
+      Direction.RIGHT => "RIGHT",
+      _ => throw new Exception("directionToString error")
+    };
 
-    switch(dir){
-      case Direction.UP: res = "UP";
-      break;
-      case Direction.DOWN: res = "DOWN";
-      break;
-      case Direction.LEFT: res = "LEFT";
-      break;
-      case Direction.RIGHT: res = "RIGHT";
-      break;
-      default:  Debug.Log("Unknown Direction");
-      break;
-    }
-    return res;
+  public Direction stringToDirection(string dir)
+    => dir switch
+    {
+      "UP" => Direction.UP,
+      "DOWN" => Direction.DOWN,
+      "LEFT" => Direction.LEFT,
+      "RIGHT" => Direction.RIGHT,
+      _ => throw new Exception("Unknown direction")
+    };
+
+  public string roleToString(Role role)
+    => role switch
+    {
+      Role.PLAYER => "PLAYER",
+      Role.SPECIALIST => "SPECIALIST",
+      _ => throw new Exception("Unknown role [1]")
+    };
+
+  public Role stringToRole(string role)
+    => role switch
+    {
+      "PLAYER" => Role.PLAYER,
+      "SPECIALIST" => Role.SPECIALIST,
+      _ => throw new Exception("Unknown role [2]")
+    };
+
+  public string blockToString(Block block)
+    => block switch
+    {
+      Block.OPEN => "OPEN",
+      Block.BLOCKED => "BLOCKED",
+      Block.WATER => "WATER",
+      Block.TREE => "TREE",
+      Block.DESERT => "DESERT",
+      Block.HOME => "HOME",
+      Block.MOUNTAIN => "MOUNTAIN",
+      Block.STONE => "STONE",
+      Block.LOCK => "LOCK",
+      Block.STAIR => "STAIR",
+      _ => throw new Exception("Unknown block [1]")
+    };
+
+  public Block stringToBlock(string block)
+    => block switch
+    {
+      "OPEN" => Block.OPEN,
+      "BLOCKED" => Block.BLOCKED,
+      "WATER" => Block.WATER,
+      "TREE" => Block.TREE,
+      "DESERT" => Block.DESERT,
+      "HOME" => Block.HOME,
+      "MOUNTAIN" => Block.MOUNTAIN,
+      "STONE" => Block.STONE,
+      "LOCK" => Block.LOCK,
+      "STAIR" => Block.STAIR,
+      _ => throw new Exception("Unknown block [2]")
+    };
+
+  public string itemToString(Item item)
+    => item switch
+    {
+      Item.NONE => "NONE",
+      Item.GEM => "GEM",
+      Item.CLOSEDSWITCH => "CLOSEDSWITCH",
+      Item.OPENEDSWITCH => "OPENEDSWITCH",
+      Item.BEEPER => "BEEPER",
+      Item.PORTAL => "PORTAL",
+      Item.PLATFORM => "PLATFORM",
+      _ => throw new Exception("Unknown item [1]")
+    };
+
+  public Item stringToItem(string item)
+    => item switch
+    {
+      "NONE" => Item.NONE,
+      "GEM" => Item.GEM,
+      "CLOSEDSWITCH" => Item.CLOSEDSWITCH,
+      "OPENEDSWITCH" => Item.OPENEDSWITCH,
+      "BEEPER" => Item.BEEPER,
+      "PORTAL" => Item.PORTAL,
+      "PLATFORM" => Item.PLATFORM,
+      _ => throw new Exception("Unknown item [2]")
+    };
+
+  public string colorToString(Color color)
+    => color switch
+    {
+      Color.BLACK => "BLACK",
+      Color.SILVER => "SILVER",
+      Color.GREY => "GREY",
+      Color.WHITE => "WHITE",
+      Color.RED => "RED",
+      Color.ORANGE => "ORANGE",
+      Color.GOLD => "GOLD",
+      Color.PINK => "PINK",
+      Color.YELLOW => "YELLOW",
+      Color.BEIGE => "BEIGE",
+      Color.BROWN => "BROWN",
+      Color.GREEN => "GREEN",
+      Color.AZURE => "AZURE",
+      Color.CYAN => "CYAN",
+      Color.ALICEBLUE => "ALICEBLUE",
+      Color.PURPLE => "PURPLE",
+      _ => throw new Exception("Unknown color [1]")
+    };
+
+  public Color stringToColor(string color)
+    => color switch
+    {
+      "BLACK" => Color.BLACK,
+      "SILVER" => Color.SILVER,
+      "GREY" => Color.GREY,
+      "WHITE" => Color.WHITE,
+      "RED" => Color.RED,
+      "ORANGE" => Color.ORANGE,
+      "GOLD" => Color.GOLD,
+      "PINK" => Color.PINK,
+      "YELLOW" => Color.YELLOW,
+      "BEIGE" => Color.BEIGE,
+      "BROWN" => Color.BROWN,
+      "GREEN" => Color.GREEN,
+      "AZURE" => Color.AZURE,
+      "CYAN" => Color.CYAN,
+      "ALICEBLUE" => Color.ALICEBLUE,
+      "PURPLE" => Color.PURPLE,
+      _ => throw new Exception("Unknown color [2]")
+    };
+
   }
-
-  public Direction stringToDirection(string dir){
-
-    Direction res;
-
-    switch(dir){
-      case "UP": res = Direction.UP;
-      break;
-      case "DOWN": res = Direction.DOWN;
-      break;
-      case "LEFT": res = Direction.LEFT;
-      break;
-      default:  res = Direction.RIGHT;
-      break;
-    }
-    return res;
-  }
-
-  public string roleToString(Role role){
-    string res = "roleToString error";
-
-    switch(role){
-      case Role.PLAYER: res = "PLAYER";
-      break;
-      case Role.SPECIALIST: res = "SPECIALIST";
-      break;
-      default: Debug.Log("Unknown Role");
-      break;
-    }
-    return res;
-  }
-
-  public Role stringToRole(string role){
-    Role res;
-
-    switch(role){
-      case "PLAYER": res = Role.PLAYER;
-      break;
-      default: res = Role.SPECIALIST;
-      break;
-    }
-    return res;
-  }
-
-  public string blockToString(Block block){
-    string res = "blockToString error";
-
-    switch(block){
-      case Block.OPEN: res = "OPEN";
-      break;
-      case Block.BLOCKED: res = "BLOCKED";
-      break;
-      case Block.WATER: res = "WATER";
-      break;
-      case Block.TREE: res = "TREE";
-      break;
-      case Block.DESERT: res = "DESERT";
-      break;
-      case Block.HOME: res = "HOME";
-      break;
-      case Block.MOUNTAIN: res = "MOUNTAIN";
-      break;
-      case Block.STONE: res = "STONE";
-      break;
-      case Block.LOCK: res = "LOCK";
-      break;
-      case Block.STAIR: res = "STAIR";
-      break;
-      default: Debug.Log("Unknown Block");
-      break;
-    }
-    return res;
-  }
-
-  public Block stringToBlock(string block){
-
-    Block res;
-
-    switch(block){
-      case "OPEN": res = Block.OPEN;
-      break;
-      case "BLOCKED": res = Block.BLOCKED;
-      break;
-      case "WATER": res = Block.WATER;
-      break;
-      case "TREE": res = Block.TREE;
-      break;
-      case "DESERT": res = Block.DESERT;
-      break;
-      case "HOME": res = Block.HOME;
-      break;
-      case "MOUNTAIN": res = Block.MOUNTAIN;
-      break;
-      case "STONE": res = Block.STONE;
-      break;
-      case "LOCK": res = Block.LOCK;
-      break;
-      default: res = Block.STAIR;
-      break;
-    }
-    return res;
-  }
-
-  public string itemToString(Item item){
-    string res = "itemToString error";
-
-    switch(item){
-      case Item.NONE: res = "NONE";
-      break;
-      case Item.GEM: res = "GEM";
-      break;
-      case Item.CLOSEDSWITCH: res = "CLOSEDSWITCH";
-      break;
-      case Item.OPENEDSWITCH: res = "OPENEDSWITCH";
-      break;
-      case Item.BEEPER: res = "BEEPER";
-      break;
-      case Item.PORTAL: res = "PORTAL";
-      break;
-      case Item.PLATFORM: res = "PLATFORM";
-      break;
-      default: Debug.Log("Unknown Item");
-      break;
-    }
-    return res;
-  }
-
-  public Item stringToItem(string item){
-    Item res;
-
-    switch(item){
-      case "NONE": res = Item.NONE;
-      break;
-      case "GEM": res = Item.GEM;
-      break;
-      case "CLOSEDSWITCH": res = Item.CLOSEDSWITCH;
-      break;
-      case "OPENEDSWITCH": res = Item.OPENEDSWITCH;
-      break;
-      case "BEEPER": res = Item.BEEPER;
-      break;
-      case "PORTAL": res = Item.PORTAL;
-      break;
-      default: res = Item.PLATFORM;
-      break;
-    }
-    return res;
-  }
-
-  public string colorToString(Color color){
-    string res = "colorToString error";
-
-    switch(color){
-      case Color.BLACK: res = "BLACK";
-      break;
-      case Color.SILVER: res = "SILVER";
-      break;
-      case Color.GREY: res = "GREY";
-      break;
-      case Color.WHITE: res = "WHITE";
-      break;
-      case Color.RED: res = "RED";
-      break;
-      case Color.ORANGE: res = "ORANGE";
-      break;
-      case Color.GOLD: res = "GOLD";
-      break;
-      case Color.PINK: res = "PINK";
-      break;
-      case Color.YELLOW: res = "YELLOW";
-      break;
-      case Color.BEIGE: res = "BEIGE";
-      break;
-      case Color.BROWN: res = "BROWN";
-      break;
-      case Color.GREEN: res = "GREEN";
-      break;
-      case Color.AZURE: res = "AZURE";
-      break;
-      case Color.CYAN: res = "CYAN";
-      break;
-      case Color.ALICEBLUE: res = "ALICEBLUE";
-      break;
-      case Color.PURPLE: res = "PURPLE";
-      break;
-      default: Debug.Log("Unknown Color");
-      break;
-    }
-    return res;
-  }
-
-  public Color stringToColor(string color){
-    Color res;
-
-    switch(color){
-      case "BLACK": res = Color.BLACK;
-      break;
-      case "SILVER": res = Color.SILVER;
-      break;
-      case "GREY": res = Color.GREY;
-      break;
-      case "WHITE": res = Color.WHITE;
-      break;
-      case "RED": res = Color.RED;
-      break;
-      case "ORANGE": res = Color.ORANGE;
-      break;
-      case "GOLD": res = Color.GOLD;
-      break;
-      case "PINK": res = Color.PINK;
-      break;
-      case "YELLOW": res = Color.YELLOW;
-      break;
-      case "BEIGE": res = Color.BEIGE;
-      break;
-      case "BROWN": res = Color.BROWN;
-      break;
-      case "GREEN": res = Color.GREEN;
-      break;
-      case "AZURE": res = Color.AZURE;
-      break;
-      case "CYAN": res = Color.CYAN;
-      break;
-      case "ALICEBLUE": res = Color.ALICEBLUE;
-      break;
-      default: res = Color.PURPLE;
-      break;
-    }
-    return res;
-  }
-
-}
 
 }
