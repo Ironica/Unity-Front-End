@@ -1,6 +1,6 @@
 {
    "type": "mountainous",
-   "code": "cst a = Player()\ncst b = Player()\ncst c = Specialist()\nfor _ in 1 ... 3 {\na.moveForward()\nb.moveForward()\nc.moveForward()",
+   "code": "cst a = Player()\nfor _ in 1 ..< 4 {\n    a.moveForward()\n}\n",
    "grid": [
      ["OPEN", "OPEN", "OPEN"],
      ["OPEN", "OPEN", "OPEN"],
@@ -29,8 +29,6 @@
    "locks": [],
    "stairs": [],
    "players": [
-     {"id": 1, "x": 0, "y": 0, "dir": "DOWN", "role": "PLAYER", "stamina": 90 },
-     {"id": 2, "x": 1, "y": 0, "dir": "DOWN", "role": "SPECIALIST", "stamina": 120 },
-     {"id": 3, "x": 2, "y": 0, "dir": "DOWN", "role": "PLAYER", "stamina": 100 }
+     {"id": 1, "x": 0, "y": 0, "dir": "DOWN", "role": "PLAYER", "stamina": 90 }
    ]
  }
