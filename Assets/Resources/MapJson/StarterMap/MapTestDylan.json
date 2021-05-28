@@ -1,0 +1,47 @@
+{
+  "type": "mountainous",
+  "code": "cst totalGem = 7\nvar collected = 0\n\nfunc turnRight() {\n turnLeft()\n turnLeft()\n turnLeft()\n}\n\nwhile collected < totalGem {\n if isOnGem {\n print(\"Collected gem!\")\n collectGem()\n collected += 1\n }\n if isOnClosedSwitch {\n print(\"Toggled switch!\")\n toggleSwitch()\n }\n if !isMOUNTAINRight {\n turnRight()\n moveForward()\n } else {\n if isMOUNTAIN {\n while isMOUNTAIN {\n turnLeft()\n }\n }\n moveForward()\n }\n}\n\n",
+  "players": [{
+    "id": 1, "x": 0, "y": 0, "dir": "RIGHT", "role": "PLAYER", "stamina": 500
+  }],
+  "portals": [],
+  "locks": [],
+  "grid": [
+    [ "TREE", "TREE", "TREE", "HILL", "HILL", "HILL", "HILL", "HILL", "HILL" , "HILL"],
+    [ "TREE", "TREE", "TREE", "HILL", "TREE", "HILL", "TREE", "TREE", "HILL" , "TREE"],
+    [ "HILL", "HILL", "HILL", "HILL", "MOUNTAIN", "MOUNTAIN", "HILL", "HILL", "HILL" , "TREE"],
+    [ "HILL", "TREE", "TREE", "HILL", "HILL", "HILL", "TREE", "TREE", "HILL" , "TREE"],
+    [ "HILL", "HILL", "TREE", "TREE", "HILL", "HILL", "TREE", "TREE", "HILL" , "TREE"],
+    [ "HILL", "HILL", "MOUNTAIN", "TREE", "HILL", "HILL", "TREE", "TREE", "HILL" , "HILL"],
+    [ "HILL", "HILL", "HILL", "TREE", "HILL", "HILL", "TREE", "TREE", "HILL" , "HILL"],
+    [ "TREE", "HILL", "TREE", "TREE", "HILL", "HILL", "TREE", "TREE", "HILL" , "HILL"],
+    [ "TREE", "HILL", "TREE", "HILL", "HILL", "HILL", "TREE", "TREE", "MOUNTAIN" , "HILL"],
+    [ "TREE", "HILL", "HILL", "HILL", "HILL", "HILL", "HILL", "HILL", "HILL" , "HOME"]
+  ],
+  "layout": [
+    [ "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE" , "NONE" ],
+    [ "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE" , "NONE" ],
+    [ "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE" , "NONE" ],
+    [ "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE" , "NONE" ],
+    [ "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE" , "NONE" ],
+    [ "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE" , "NONE" ],
+    [ "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE" , "NONE" ],
+    [ "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE" , "NONE" ],
+    [ "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE" , "NONE" ],
+    [ "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE", "NONE" , "NONE" ]
+  ],
+  "colors": [],
+  "levels": [
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1]
+  ],
+  "stairs": []
+}
