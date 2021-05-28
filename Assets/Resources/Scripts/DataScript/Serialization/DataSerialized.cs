@@ -5,10 +5,38 @@ using UnityEngine;
 
 namespace JsonBridge{
 
-  public class ResponseModel
+  public interface IModel
   {
-    public string status { get; set; }
-    public DataResponseSerialized[] payload { get; set; }
+    public string status { get; }
+  }
+
+  public class BareResponseModel: IModel
+  {
+    public string status { get; }
+  }
+
+  public class ResponseModel: IModel
+  {
+    public ResponseModel(string status, DataResponseSerialized[] payload)
+    {
+      this.status = status;
+      this.payload = payload;
+    }
+
+    public string status { get; }
+    public DataResponseSerialized[] payload { get; }
+  }
+
+  public class ErrorMessageModel: IModel
+  {
+    public string status { get; }
+    public string msg { get; }
+
+    public ErrorMessageModel(string status, string msg)
+    {
+      this.status = status;
+      this.msg = msg;
+    }
   }
 
   [System.Serializable]

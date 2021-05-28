@@ -16,7 +16,7 @@ public class dataLink : MonoBehaviour
   public Data dataObj;
   public JsonBridge.DataConvert converter;
   private JsonBridge.JsonSerDes des = new JsonBridge.JsonSerDes(url);
-  private JsonBridge.DataSerialized[] payload;
+  private JsonBridge.DataSerialized[] payloads;
   private string currentMap;
   GameObject[,] gridObject;
   List<GameObject> gemObjects = new List<GameObject>();
@@ -85,12 +85,14 @@ public class dataLink : MonoBehaviour
     */
 
     // Get the user code in the InputField
-    dataObj.code = getUserCode();
+    dataSer.code = getUserCode(); // Since this.dataSer doesn't change i.e the map doesn't change, we could use it.
+    // Should we remove the following lines of code before "Data conversion done"?
+    // dataObj.code = getUserCode();
     Debug.Log(dataObj.code);
 
     //Convert the data object to data serializable
-    converter.dataObj = this.dataObj;
-    converter.objectToSerialized();
+    // converter.dataObj = this.dataObj;
+    // converter.objectToSerialized();
 
     Debug.Log("Data conversion done");
 
@@ -102,33 +104,50 @@ public class dataLink : MonoBehaviour
 
 
     //Deserialization of the response
-    JsonBridge.ResponseModel answers = des.webDeserialization(resp);
+    var answers = des.webDeserialization(resp);
 
     //Print the status of the compilation
     Debug.Log("Status: " + answers.status);
-    if(answers.status.Equals("ERROR")){
-      return;
-    }
-
-    //Get the frame array for the animation
-    payload = convertToOriginalArray(answers.payload);
-    Debug.Log("Number frame " + payload.Length);
-    for(int i = 0; i< payload.Length; i++){
-      converter.dataSer = payload[i];
-      string json = JsonConvert.SerializeObject(converter.dataSer, Formatting.Indented);
-      File.WriteAllText(pathCurrentMap + currentMap ,json);
-      converter.serializedToObject();
-
-      foreach (Transform child in this.gameObject.transform.GetChild(3).GetChild(0)) {
-        Destroy(child.gameObject);
+    
+    // Switch with the type of response
+    switch (answers)
+    {
+      
+      // In case of error, dump error info and return
+      case ErrorMessageModel errAns:
+      {
+        Debug.LogError("Encountered an error in the back-end\n" + errAns.msg);
+        return;
       }
-      instantiation();
-      //Sleep for 1 seconds
-      await Task.Delay(1000);
-      //Debug.Log("Frame " + i);
+      
+      // All is okay, process conversion
+      case ResponseModel rspAns:
+      {
+        //Get the frame array for the animation
+        payloads = convertToOriginalArray(rspAns.payload);
+        Debug.Log("Number frame " + payloads.Length);
+        foreach (var payload in payloads)
+        {
+          converter.dataSer = payload;
+          string json = JsonConvert.SerializeObject(converter.dataSer, Formatting.Indented);
+          File.WriteAllText(pathCurrentMap + currentMap, json);
+          converter.serializedToObject();
+
+          foreach (Transform child in this.gameObject.transform.GetChild(3).GetChild(0))
+          {
+            Destroy(child.gameObject);
+          }
+
+          instantiation();
+          //Sleep for 1 seconds
+          await Task.Delay(1000);
+          //Debug.Log("Frame " + i);
+        }
+
+        return;
+      }
+      default: throw new Exception("This is impossible");
     }
-
-
   }
 
   private Vector2 setCoordinates(Vector2 vector){
