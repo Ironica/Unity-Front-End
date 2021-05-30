@@ -48,7 +48,49 @@ public class dataLink : MonoBehaviour
   private const string pathStarterMap = "Assets/Resources/MapJson/StarterMap/";
   private const string pathCurrentMap = "Assets/Resources/MapJson/CurrentMap/";
 
-  public string mapName;
+  public string mapName; 
+  
+  /**
+ * * * * Data Flow for DataLink Class and Compile() Method * * * *
+ *
+ *                                       User Input
+ *                                         ↓
+ *                                         ↓
+ * ┌──────────────┐                     ┌───────────────────┐                       ╔═════════════════╗
+ * │              │  serializeToObject  │                   │  webDeserialization   ║                 ║
+ * │ this.dataObj │ ←────────────────── │   this.dataSer    │ →→→→→→→→→→→→→→→→→→→→→ ║ Back-end Server ║
+ * │ ──────────── │    (initialize)     │ ───────────────── │ (send request to srv) ║                 ║
+ * │     Data     │                     │ DataOutSerialized │                       ╚═════════════════╝
+ * │              │ ←─┐                 │                   │ 
+ * └──────────────┘   │                 └───────────────────┘                                ↓
+ *                    │                                                                      ↓
+ *  serializeToObject │                                                                      ↓ Receive response as rspAns
+ *                    │                                                                      └→→→→→→→→→→┐
+ *   (for each frame) │                                                                                 ↓
+ *                    │                                                                                 ↓
+ *
+ *       ┌───────────────────┐           ┌─────────────────────┐                              ┌─────────────────────────┐
+ *       │                   │           │                     │                              │                         │
+ *       │      payload      │  forEach  │      payloads       │ appendPayloadToDataOutLayout │     rspAns.payload      │ 
+ *       │ ───────────────── │ ←──────── │ ─────────────────── │ ←─────────────────────────── │ ─────────────────────── │
+ *       │ DataOutSerialized │           │ DataOutSerialized[] │  Array.Select() conversion   │ DataPayloadSerialized[] │ 
+ *       │                   │           │                     │                              │                         │
+ *       └───────────────────┘           └─────────────────────┘                              └─────────────────────────┘ 
+ *
+ * - this.dataObj is the object that connected to the display of playground, it will mutate at each frame
+ * - this.dataSer contains the initial map info, the only change applied to it is at each time the user enters
+ *   a code. In the future we should have the ability to modify this.dataSer in order to change the map.
+ *   But at the moment it shouldn't be modified unless when the user update his code.
+ * 
+ * - the appendPayloadToDataOutLayout() method receives a frame of rspAns.payload, but also the this.dataSer object,
+ *   in order to concatenate a full playground info using both info received from the server and that of this.dataSer
+ *   We use an Array.Select(Callback) method (equiv. Array.stream().map(callback) in Java) to apply this method to 
+ *   every frame of rspAns.
+ * - As you can see, payloads has type DataOutSerialized[] and payload has therefore DataOutSerialized, which correspond
+ *   to this.dataSer. The SerializeToObject() method is therefore applicable to both side of this.dataSer and payload.
+ * - We just need to call SerializeToObject() method in a loop for each payload of the payloads to update the dataObj.
+ * 
+ */
 
   private string getUserCode(){
     return GameObject.Find("UserCode")
@@ -56,7 +98,11 @@ public class dataLink : MonoBehaviour
     .text;
   }
 
-  private DataOutSerialized AppendPayloadInfoToDataOutLayout(DataOutSerialized dos, DataPayloadSerialized dps)
+  /**
+   * This method converts DataPayloadSerialized object to DataOutSerialized object, by appending info from the original
+   * map (dataSer: DataOutSerialized)
+   */
+  private static DataOutSerialized AppendPayloadInfoToDataOutLayout(DataOutSerialized dos, DataPayloadSerialized dps)
    => new DataOutSerialized
     {
       type = dos.type, code = dos.code,
@@ -83,7 +129,7 @@ public class dataLink : MonoBehaviour
     dataSer.code = getUserCode(); // Since this.dataSer doesn't change i.e the map doesn't change, we could use it.
     // Should we remove the following lines of code before "Data conversion done"?
     // dataObj.code = getUserCode();
-    Debug.Log(dataObj.code);
+    Debug.Log(dataObj.code); // useless? since it's always null
 
     //Convert the data object to data serializable
     // converter.dataObj = this.dataObj;
@@ -92,8 +138,8 @@ public class dataLink : MonoBehaviour
     Debug.Log("Data conversion done");
 
     //Convert the data to json format
-    //Send the json file to the servor
-    //Get the response from the servor
+    //Send the json file to the server
+    //Get the response from the server
     string resp = des.serialization(dataSer, pathCurrentMap + currentMap);
 
 
@@ -118,22 +164,24 @@ public class dataLink : MonoBehaviour
       // All is okay, process conversion
       case ResponseModel rspAns:
       {
-        //Get the frame array for the animation
+        //Get the frame array for the animation, convert from DataPayloadSerialized[] to DataOutSerialized[]
         payloads = rspAns.payload.Select(e => AppendPayloadInfoToDataOutLayout(dataSer, e)).ToArray();
         Debug.Log("Number frame " + payloads.Length);
+        
+        // Loop into each payload to extract data and send to dataObj
         foreach (var payload in payloads)
         {
           converter.dataSer = payload;
-          string json = JsonConvert.SerializeObject(converter.dataSer, Formatting.Indented);
-          File.WriteAllText(pathCurrentMap + currentMap, json);
+          var json = JsonConvert.SerializeObject(converter.dataSer, Formatting.Indented);
+          File.WriteAllText(pathCurrentMap + currentMap, json); // is this useful?
           converter.serializedToObject();
 
           foreach (Transform child in this.gameObject.transform.GetChild(3).GetChild(0))
           {
-            Destroy(child.gameObject);
+            Destroy(child.gameObject); // Destroy last frame
           }
 
-          instantiation();
+          instantiation(); // call method on dataObj to update it
           //Sleep for 1 seconds
           await Task.Delay(1000);
           //Debug.Log("Frame " + i);
@@ -222,12 +270,14 @@ public class dataLink : MonoBehaviour
   }
 
   private void instantiation(){
-    
+    // Create Game Object
+    // Note. Can only use array of GameObject[,], if we use GameObject[][] Unity will create lots of GameObject
     gridObject = new GameObject[dataObj.grid.Length, dataObj.grid[0].Length];
 
     var x = dataObj.grid[0].Length / 2;
     var y = dataObj.grid.Length / 2;
 
+    // Since we use GameObject[,], sorry no Linq but only imperative loop
     for (var i = 0; i < gridObject.GetLength(1); i++)
     {
       for (var j = 0; j < gridObject.GetLength(0); j++)
@@ -237,9 +287,8 @@ public class dataLink : MonoBehaviour
       }
     }
     
-    // gridObject = dataObj.grid.Select((l, i) =>
-    //   l.Select((t, j) =>
-    //     mapInstantiation(new GameObject(), t.Block, t.Level, x, y, j, i)).ToArray()).ToArray();
+    // In the future add here the instantiation procedures for beeper, switch, platform, portal, etc.
+    // Normally they should follow the same pattern like gems instantiation.
     
     foreach (var gemCoo in dataObj.gems)
     {
