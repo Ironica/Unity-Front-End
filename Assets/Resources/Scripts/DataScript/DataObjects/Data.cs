@@ -1,22 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Data{
-
-  //Common Part of the Playground's Incoming / Outgoing Data
-  public Block[,] grid;
-  public Item[,] layout;
-  public Color[,] colors;
-  public int[,] levels;
+  public Tile[][] grid;
+  public Coordinates[] gems;
+  public Coordinates[] beepers;
+  public Switch[] switches;
   public Portal[] portals;
-  public Player[] players;
-
-  //The Incoming (from Front-end to Compiler) Data Structure
-  public string type;
-  public string code;
   public Lock[] locks;
   public Stair[] stairs;
+  public Platform[] platforms;
+  public Player[] players;
+
+  public string type;
+  public string code;
+
+  [CanBeNull] public string consoleLog;
+  [CanBeNull] public string special;
 
   public Data(){}
 }

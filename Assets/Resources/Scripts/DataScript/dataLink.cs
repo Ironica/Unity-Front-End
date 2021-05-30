@@ -12,11 +12,11 @@ using Newtonsoft.Json;
 public class dataLink : MonoBehaviour
 {
 
-  public JsonBridge.DataSerialized dataSer;
+  public JsonBridge.DataOutSerialized dataSer;
   public Data dataObj;
   public JsonBridge.DataConvert converter;
   private JsonBridge.JsonSerDes des = new JsonBridge.JsonSerDes(url);
-  private JsonBridge.DataSerialized[] payloads;
+  private JsonBridge.DataOutSerialized[] payloads;
   private string currentMap;
   GameObject[,] gridObject;
   List<GameObject> gemObjects = new List<GameObject>();
@@ -24,10 +24,6 @@ public class dataLink : MonoBehaviour
 
   //Ground
   private string open       = "Prefabs/PLAIN_OPEN_LEVEL";
-  private string blocked    = "Prefabs/PLAIN_HILL_LEVEL";
-  private string water      = "Prefabs/PLAIN_WATER_LEVEL";
-  private string tree       = "Prefabs/PLAIN_TREE_LEVEL";
-  private string desert     = "Prefabs/PLAIN_DESERT_LEVEL";
   private string home       = "Prefabs/PLAIN_HOME_LEVEL";
   private string mountain   = "Prefabs/PLAIN_MOUNTAIN_LEVEL";
 
@@ -36,7 +32,6 @@ public class dataLink : MonoBehaviour
   private string  stairRight    = "Prefabs/PLAIN_STAIRS_RIGHT";
   private string  stairBack     = "Prefabs/PLAIN_STAIRS_BACK";
   private string  stairFront    = "Prefabs/PLAIN_STAIRS_FRON";
-  private int     currentStair  = -1;
 
   //Players skin
   private string playerFront = "Prefabs/ITEM/CHARACTER_FRONT";
@@ -48,7 +43,7 @@ public class dataLink : MonoBehaviour
   private string gem = "Prefabs/ITEM/GEM";
 
 
-  public const string url = "http://127.0.0.1:8080/paidiki-xara";
+  public const string url = "http://127.0.0.1:9370/simulatte";
 
   private const string pathStarterMap = "Assets/Resources/MapJson/StarterMap/";
   private const string pathCurrentMap = "Assets/Resources/MapJson/CurrentMap/";
@@ -61,20 +56,20 @@ public class dataLink : MonoBehaviour
     .text;
   }
 
-  private DataSerialized[] convertToOriginalArray(DataResponseSerialized[] drs)
-    => drs.Select(e => new DataSerialized()
+  private DataOutSerialized AppendPayloadInfoToDataOutLayout(DataOutSerialized dos, DataPayloadSerialized dps)
+   => new DataOutSerialized
     {
-      grid = e.grid,
-      layout = e.itemLayout,
-      colors = e.colors,
-      levels = e.levels,
-      portals = e.portals,
-      players = e.players,
-      type = e.type,
-      code = e.code,
-      locks = e.locks,
-      stairs = e.stairs
-    }).ToArray();
+      type = dos.type, code = dos.code,
+      grid = dps.grid.Select((l, j) =>
+        l.Select((e, i) => 
+          new GridObject(e.block, dos.grid[j][i].biome, e.level)).ToArray()).ToArray(), 
+      gems = dps.gems, beepers = dps.beepers,
+      switches = dos.switches, portals = dps.portals, locks = dps.locks, platforms = dps.platforms,
+      stairs = dos.stairs,
+      players = dps.players,
+      special = dps.special,
+      consoleLog = dps.consoleLog
+    };
 
   /*
   **  Method called when the user compiles his code
@@ -99,7 +94,7 @@ public class dataLink : MonoBehaviour
     //Convert the data to json format
     //Send the json file to the servor
     //Get the response from the servor
-    string  resp = des.serialization(dataSer, pathCurrentMap + currentMap);
+    string resp = des.serialization(dataSer, pathCurrentMap + currentMap);
 
 
 
@@ -124,7 +119,7 @@ public class dataLink : MonoBehaviour
       case ResponseModel rspAns:
       {
         //Get the frame array for the animation
-        payloads = convertToOriginalArray(rspAns.payload);
+        payloads = rspAns.payload.Select(e => AppendPayloadInfoToDataOutLayout(dataSer, e)).ToArray();
         Debug.Log("Number frame " + payloads.Length);
         foreach (var payload in payloads)
         {
@@ -143,6 +138,8 @@ public class dataLink : MonoBehaviour
           await Task.Delay(1000);
           //Debug.Log("Frame " + i);
         }
+        
+        Debug.Log("All frames executed successfully.");
 
         return;
       }
@@ -156,40 +153,36 @@ public class dataLink : MonoBehaviour
     return vector.x*i + vector.y*j;
   }
 
-  private string stairDirection(Direction dir){
-    switch(dir){
-      case Direction.UP: return stairFront;
-      case Direction.DOWN: return stairBack;
-      case Direction.LEFT: return stairLeft;
-      default: return stairRight;
-    }
-  }
+  private string stairDirection(Direction dir)
+  => dir switch
+    {
+      Direction.UP => stairFront,
+      Direction.DOWN => stairBack,
+      Direction.LEFT => stairLeft,
+      Direction.RIGHT => stairRight,
+      _ => throw new Exception("This shouldn't be possible")
+    };
 
-  private string playerDirection(Direction dir){
-    switch(dir){
-      case Direction.UP: return playerFront;
-      case Direction.DOWN: return playerBack;
-      case Direction.LEFT: return playerLeft;
-      default: return playerRight;
-    }
-  }
+  private string playerDirection(Direction dir)
+    => dir switch
+    {
+      Direction.UP => playerFront,
+      Direction.DOWN => playerBack,
+      Direction.LEFT => playerLeft,
+      Direction.RIGHT => playerRight,
+      _ => throw new Exception("This shouldn't be possible")
+    };
 
-  public string tileLevel(Block block, int i, int j){
-    switch(block){
-      case Block.OPEN:return open + dataObj.levels[j, i];
-      case Block.BLOCKED: return blocked + dataObj.levels[j, i];
-      case Block.WATER: return water + dataObj.levels[j, i];
-      case Block.TREE: return tree + dataObj.levels[j, i];
-      case Block.DESERT: return desert + dataObj.levels[j, i];
-      case Block.HOME: return home + dataObj.levels[j, i];
-      case Block.MOUNTAIN: return mountain+1;
-      case Block.STONE: return mountain+1;
-      case Block.LOCK: return home + dataObj.levels[j, i];
-      default:
-      currentStair++;
-      return stairDirection(dataObj.stairs[currentStair].dir);
-    }
-  }
+  private string tileLevel(Block block, int i, int j)
+    => block switch
+    {
+      Block.OPEN => open + dataObj.grid[j][i].Level,
+      Block.BLOCKED => mountain + dataObj.grid[j][i].Level,
+      Block.LOCK => home + dataObj.grid[j][i].Level,
+      Block.STAIR => stairDirection(dataObj.stairs.First(e => e.X == j && e.Y == i).Dir),
+      Block.VOID => throw new NotImplementedException(),
+      _ => throw new Exception("This shouldn't be possible")
+    };
 
   private GameObject mapInstantiation(GameObject obj, Block block, int level, int x, int y, int i, int j){
     string tile = tileLevel(block, i, j);
@@ -202,8 +195,8 @@ public class dataLink : MonoBehaviour
 
   private void playerInstantiation(GameObject tile, Player player){
     float playerLevel = 0.25f;
-    string playerPrefab = playerDirection(player.dir);
-    int level = dataObj.levels[player.y,player.x];
+    string playerPrefab = playerDirection(player.Dir);
+    int level = dataObj.grid[player.Y][player.X].Level;
     playerLevel += (level-1)*0.4f;
     Vector3 coo = new Vector3(tile.transform.position.x, tile.transform.position.y+playerLevel, 0);
 
@@ -217,7 +210,7 @@ public class dataLink : MonoBehaviour
   {
     var gemLevel = -0.35f;
     var gemPrefab = gem;
-    var level = dataObj.levels[gemObj.X, gemObj.Y];
+    var level = dataObj.grid[gemObj.Y][gemObj.X].Level;
     gemLevel += (level - 1) * 0.4f;
     var tilePos = tile.transform.position;
     var coo = new Vector3(tilePos.x, tilePos.y + gemLevel, 0);
@@ -229,21 +222,33 @@ public class dataLink : MonoBehaviour
   }
 
   private void instantiation(){
-    gridObject = new GameObject[dataObj.grid.GetLength(0), dataObj.grid.GetLength(1)];
+    
+    gridObject = new GameObject[dataObj.grid.Length, dataObj.grid[0].Length];
 
-    int x = dataObj.grid.GetLength(1)/2;
-    int y =dataObj.grid.GetLength(0)/2;
+    var x = dataObj.grid[0].Length / 2;
+    var y = dataObj.grid.Length / 2;
 
-    for(int i =0; i<dataObj.grid.GetLength(1); i++){
-      for(int j = 0; j<dataObj.grid.GetLength(0); j++){
-        gridObject[j,i] = mapInstantiation(gridObject[j,i], dataObj.grid[j,i], dataObj.levels[j,i], x, y, i, j);
-        if (dataObj.layout[j, i] == Item.GEM) { GemInstantiation(gridObject[j, i], new Gem(j, i));}
+    for (var i = 0; i < gridObject.GetLength(1); i++)
+    {
+      for (var j = 0; j < gridObject.GetLength(0); j++)
+      {
+        var tile = dataObj.grid[j][i];
+        gridObject[j, i] = mapInstantiation(gridObject[j, i], tile.Block, tile.Level, x, y, i, j);
       }
     }
-    for(int i=0; i<dataObj.players.Length; i++){
-      Player player = dataObj.players[i];
+    
+    // gridObject = dataObj.grid.Select((l, i) =>
+    //   l.Select((t, j) =>
+    //     mapInstantiation(new GameObject(), t.Block, t.Level, x, y, j, i)).ToArray()).ToArray();
+    
+    foreach (var gemCoo in dataObj.gems)
+    {
+      GemInstantiation(gridObject[gemCoo.y, gemCoo.x], new Gem(gemCoo.x, gemCoo.y));
+    }
 
-      playerInstantiation(gridObject[player.y, player.x], player);
+    foreach (var playerCoo in dataObj.players)
+    {
+      playerInstantiation(gridObject[playerCoo.Y, playerCoo.X], playerCoo);
     }
   }
 
@@ -251,7 +256,7 @@ public class dataLink : MonoBehaviour
   void Start()
   {
 
-    currentMap = "map2.json";
+    currentMap = "map5.json";
 
     dataSer = des.deserialization(pathStarterMap + currentMap);
 

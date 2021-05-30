@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using UnityEngine.Networking;
 using System;
 using System.IO;
+using Newtonsoft.Json.Converters;
 
 namespace JsonBridge{
 
@@ -17,14 +18,27 @@ namespace JsonBridge{
       this.url = url;
     }
 
-    public string serialization(DataSerialized data, string map){
+    public string serialization(DataOutSerialized data, string map)
+    {
 
-      string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+      JsonConvert.DefaultSettings = () =>
+      {
+        var settings = new JsonSerializerSettings();
+        settings.Converters.Add(new StringEnumConverter());
+        return settings;
+      };
+      
+      var json = JsonConvert.SerializeObject(data, 
+        Formatting.Indented,
+        new JsonSerializerSettings
+        {
+          NullValueHandling = NullValueHandling.Ignore
+        });
       File.WriteAllText(map,json);
-      Debug.Log("Serialization done");
+      Debug.Log("Serialization done"); // TODO remove redundant serialization
 
       string resp = new JsonRequestHandler(url)
-      .Feed(JsonConvert.SerializeObject(data))
+      .Feed(json)
       .Fetch()
       .get();
 
@@ -47,10 +61,10 @@ namespace JsonBridge{
 
     }
 
-    public DataSerialized deserialization(string jsonFilePath){
+    public DataOutSerialized deserialization(string jsonFilePath){
 
       string mapJson = System.IO.File.ReadAllText(jsonFilePath);
-      return JsonConvert.DeserializeObject<DataSerialized>(mapJson);
+      return JsonConvert.DeserializeObject<DataOutSerialized>(mapJson);
     }
 
   }

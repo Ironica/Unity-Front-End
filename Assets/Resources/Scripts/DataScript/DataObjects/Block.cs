@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 
 public enum Block
 {
+  [EnumMember(Value = "OPEN")]
   OPEN,
+  
+  [EnumMember(Value = "BLOCKED")]
   BLOCKED,
-  WATER,
-  TREE,
-  DESERT,
-  HOME,
-  MOUNTAIN,
-  STONE,
+  
+  [EnumMember(Value = "LOCK")]
   LOCK,
-  STAIR
+  
+  [EnumMember(Value = "STAIR")]
+  STAIR,
+  
+  [EnumMember(Value = "VOID")]
+  VOID,
 }

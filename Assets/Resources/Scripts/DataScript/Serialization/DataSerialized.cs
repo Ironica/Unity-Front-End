@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace JsonBridge{
@@ -17,14 +18,14 @@ namespace JsonBridge{
 
   public class ResponseModel: IModel
   {
-    public ResponseModel(string status, DataResponseSerialized[] payload)
+    public ResponseModel(string status, DataPayloadSerialized[] payload)
     {
       this.status = status;
       this.payload = payload;
     }
 
     public string status { get; }
-    public DataResponseSerialized[] payload { get; }
+    public DataPayloadSerialized[] payload { get; }
   }
 
   public class ErrorMessageModel: IModel
@@ -38,49 +39,48 @@ namespace JsonBridge{
       this.msg = msg;
     }
   }
-
-  [System.Serializable]
-  public class DataSerialized
+  
+  public class DataOutSerialized
   {
-    //Common Part of the Playground's Incoming / Outgoing Data
-    public string[,] grid;
-    public string[,] layout;
-    public string[,] colors;
-
-    public int[,] levels;
-
-    public Portal[] portals;
+    public string type;
+    public string code;
+    
+    public GridObject[][] grid;
+    
+    public Coordinates[] gems;
+    public Coordinates[] beepers;
+    public SwitchSerialized[] switches;
+    public PortalSerialized[] portals;
+    
+    public LockSerialized[] locks;
+    public StairSerialized[] stairs;
+    public PlatformSerialized[] platforms;
 
     public PlayerSerialized[] players;
 
-    //The Incoming (from Front-end to Compiler) Data Structure
-    public string type;
-    public string code;
-    public Lock[] locks;
-    public StairSerialized[] stairs;
-
-    public DataSerialized(){}
+    public string consoleLog;
+    public string special;
+    
+    public DataOutSerialized(){}
 
   }
 
   [Serializable]
-  public class DataResponseSerialized
+  public class DataPayloadSerialized
   {
-    public string[,] grid;
-    public string[,] itemLayout;
-    public string[,] colors;
+    public PayloadGridObject[][] grid;
 
-    public int[,] levels;
+    public Coordinates[] gems;
+    public Coordinates[] beepers;
 
-    public Portal[] portals;
+    public PortalSerialized[] portals;
+    public PlatformSerialized[] platforms;
+    public LockSerialized[] locks;
     public PlayerSerialized[] players;
+    public string consoleLog;
+    public string special;
 
-    public string type;
-    public string code;
-    public Lock[] locks;
-    public StairSerialized[] stairs;
-
-    public DataResponseSerialized()
+    public DataPayloadSerialized()
     {
     }
   }
