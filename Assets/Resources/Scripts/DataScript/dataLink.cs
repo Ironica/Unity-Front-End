@@ -384,6 +384,7 @@ public class dataLink : MonoBehaviour
   public void saveMap()
   {
     DataMap dataMap = new DataMap(currentMap, getUserCode());
+    dataMap.goals = new bool[]{true, false, false, true};
     SaveMapManager.saveData(dataMap);
   }
 
@@ -393,6 +394,7 @@ public class dataLink : MonoBehaviour
     GameObject.Find("UserCode")
     .GetComponent<InputField>()
     .text = dataMap.code;
+    Debug.Log("goals: " + dataMap.goals[2]);
   }
 
   // Start is called before the first frame update
