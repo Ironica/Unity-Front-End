@@ -29,7 +29,7 @@ public class dataLink : MonoBehaviour
   public Data dataObj;
   public JsonBridge.DataConvert converter;
   private JsonBridge.JsonSerDes des;
-  private JsonBridge.DataOutSerialized[] payloads;
+  private List<JsonBridge.DataOutSerialized> payloads;
   private string currentMap;
   GameObject[,] gridObject;
   List<GameObject> gemObjects = new List<GameObject>();
@@ -66,7 +66,7 @@ public class dataLink : MonoBehaviour
 
   public string mapName;
 
-  /**
+  /*
  * * * * Data Flow for DataLink Class and Compile() Method * * * *
  *
  *                                       User Input
@@ -108,6 +108,9 @@ public class dataLink : MonoBehaviour
  *
  */
 
+  /**
+   * This method returns the user's input
+   */
   private string getUserCode(){
     return GameObject.Find("UserCode")
     .GetComponent<InputField>()
@@ -132,6 +135,27 @@ public class dataLink : MonoBehaviour
       special = dps.special,
       consoleLog = dps.consoleLog
     };
+
+  /**
+   * Method called when user click on Reset.
+   */
+  public void OnResetClick()
+  {
+    payloads.Clear();
+    this.dataSer.code = "";
+    GameObject.Find("UserCode").GetComponent<InputField>().text = "";
+    progression.value = 0;
+    // Resetting the map means reinitialize it.
+    converter.dataSer = dataSer;
+    converter.serializedToObject();
+    
+    foreach (Transform child in this.gameObject.transform.GetChild(3).GetChild(0))
+    {
+      Destroy(child.gameObject); // Destroy last frame
+    }
+    
+    instantiation();
+  }
 
   /*
   **  Method called when the user compiles his code
@@ -181,12 +205,14 @@ public class dataLink : MonoBehaviour
       case ResponseModel rspAns:
       {
         //Get the frame array for the animation, convert from DataPayloadSerialized[] to DataOutSerialized[]
-        payloads = rspAns.payload.Select(e => AppendPayloadInfoToDataOutLayout(dataSer, e)).ToArray();
-        Debug.Log("Number frame " + payloads.Length);
+        payloads = rspAns.payload.Select(e => AppendPayloadInfoToDataOutLayout(dataSer, e)).ToList();
+        Debug.Log("Number frame " + payloads.Count);
 
         // Loop into each payload to extract data and send to dataObj
-        foreach (var payload in payloads)
+        while (payloads.Count > 0)
         {
+          var payload = payloads[0];
+          payloads.RemoveAt(0);
           converter.dataSer = payload;
           var json = JsonConvert.SerializeObject(converter.dataSer, Formatting.Indented);
           File.WriteAllText(pathCurrentMap + currentMap, json); // is this useful?
@@ -199,7 +225,7 @@ public class dataLink : MonoBehaviour
 
           instantiation(); // call method on dataObj to update it
 
-          float progress = (float) 1/payloads.Length;
+          float progress = (float) 1/payloads.Count;
           progression.value += progress;
 
           //Sleep for 1 seconds
@@ -354,7 +380,7 @@ public class dataLink : MonoBehaviour
   // Start is called before the first frame update
   private void Start()
   {
-    progression = gameObject.transform.Find("Porgress_bar").gameObject.GetComponent<Slider>();
+    progression = gameObject.transform.Find("Progress_Bar").gameObject.GetComponent<Slider>();
     progression.value = 0;
     currentMap = "map6.json";
 
