@@ -18,15 +18,15 @@ suspend fun move(p: Any) {
   }
 }
 
-val jobA = launch { 
+val jobA = launch {
   delay(500)
-  move(a) 
+  move(a)
 }
-val jobB = launch { 
+val jobB = launch {
   delay(250)
-  move(b) 
+  move(b)
 }
 val jobC = launch {
   delay(750)
-  move(c) 
+  move(c)
 }
