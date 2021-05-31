@@ -160,8 +160,11 @@ public class dataLink : MonoBehaviour
   /*
   **  Method called when the user compiles his code
   */
-  public async void compile(){
+  public async void compile()
+  {
 
+    progression.value = 0;
+    
     /*if( the frame[] is empty )
     */
 
@@ -208,6 +211,8 @@ public class dataLink : MonoBehaviour
         payloads = rspAns.payload.Select(e => AppendPayloadInfoToDataOutLayout(dataSer, e)).ToList();
         Debug.Log("Number frame " + payloads.Count);
 
+        progression.maxValue = payloads.Count;
+
         // Loop into each payload to extract data and send to dataObj
         while (payloads.Count > 0)
         {
@@ -224,9 +229,8 @@ public class dataLink : MonoBehaviour
           }
 
           instantiation(); // call method on dataObj to update it
-
-          float progress = (float) 1/payloads.Count;
-          progression.value += progress;
+          
+          progression.value += 1;
 
           //Sleep for 1 seconds
           await Task.Delay(1000);
@@ -396,7 +400,7 @@ public class dataLink : MonoBehaviour
   {
     progression = gameObject.transform.Find("Progress_Bar").gameObject.GetComponent<Slider>();
     progression.value = 0;
-    currentMap = "map6.json";
+    currentMap = "map5.json";
 
     // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
     des = new JsonSerDes(url, port, api);
