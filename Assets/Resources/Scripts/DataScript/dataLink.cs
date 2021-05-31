@@ -326,12 +326,12 @@ public class dataLink : MonoBehaviour
   // We will find the next port available in TCP to establish the server
   private void Awake()
   {
-    
+
     var lis = new TcpListener(IPAddress.Loopback, 0);
     lis.Start();
     port = ((IPEndPoint) lis.LocalEndpoint).Port;
     lis.Stop();
-    
+
     Debug.Log($"Using port {port}");
 
     var pros = new Process
@@ -351,10 +351,24 @@ public class dataLink : MonoBehaviour
 
   }
 
+  public void saveMap()
+  {
+    DataMap dataMap = new DataMap(currentMap, getUserCode());
+    SaveMapManager.saveData(dataMap);
+  }
+
+  public void loadMap()
+  {
+    DataMap dataMap = SaveMapManager.loadData(currentMap);
+    GameObject.Find("UserCode")
+    .GetComponent<InputField>()
+    .text = dataMap.code;
+  }
+
   // Start is called before the first frame update
   private void Start()
   {
-    progression = gameObject.transform.Find("Porgress_bar").gameObject.GetComponent<Slider>();
+    progression = gameObject.transform.Find("Progress_Bar").gameObject.GetComponent<Slider>();
     progression.value = 0;
     currentMap = "map6.json";
 
