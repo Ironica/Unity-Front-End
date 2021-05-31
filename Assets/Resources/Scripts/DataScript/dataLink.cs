@@ -305,7 +305,7 @@ public class dataLink : MonoBehaviour
   void Start()
   {
 
-    currentMap = "map5.json";
+    currentMap = "map6.json";
 
     dataSer = des.deserialization(pathStarterMap + currentMap);
 
