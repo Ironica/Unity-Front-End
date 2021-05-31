@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
     
     void Start()
     {
+        
         musicIndex = rand.Next(3);
         audio.clip = playlist[musicIndex];
         audio.Play();

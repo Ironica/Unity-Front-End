@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.96315277}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -279.01477, y: 3396.267}
+  m_AnchoredPosition: {x: -279.0148, y: 3396.2676}
   m_SizeDelta: {x: 1.1199951, y: 0.43499947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!199 &59766301
@@ -5039,6 +5039,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4a3e373968c804d90e09064a0df63e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playlist:
+  - {fileID: 8300000, guid: 22f5328aba3577441b4af4c49c2e47a0, type: 3}
+  - {fileID: 8300000, guid: 49cf63c5357d49e4b962f4fccd64d763, type: 3}
+  - {fileID: 8300000, guid: 46cab242027ea2f4c840f3ac0592a361, type: 3}
+  audio: {fileID: 209750729}
 --- !u!82 &209750729
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5160,7 +5165,7 @@ GameObject:
   - component: {fileID: 387633630}
   - component: {fileID: 387633631}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5233,10 +5238,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 2031608934}
   m_HandleRect: {fileID: 1879433446}
   m_Direction: 0
-  m_MinValue: -30
+  m_MinValue: -15
   m_MaxValue: 30
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: -30
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -5903,7 +5908,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754186467}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -7091,7 +7096,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.80600005}
   m_AnchorMax: {x: 1, y: 0.90400004}
-  m_AnchoredPosition: {x: -0.7514572, y: -11.5}
+  m_AnchoredPosition: {x: -0.75146484, y: -11.5}
   m_SizeDelta: {x: 0.5479965, y: -0.020000458}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1888488345

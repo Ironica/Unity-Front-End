@@ -31,13 +31,19 @@ namespace JsonBridge{
       return resp;
     }
 
-    public ResponseModel webDeserialization(string resp){
+    public IModel webDeserialization(string resp)
+    {
 
-      ResponseModel answers = JsonConvert.DeserializeObject<ResponseModel>(resp);
+      var respObj = JObject.Parse(resp);
 
-      Debug.Log("Deserialization done");
+      if (string.Equals(respObj["status"].ToString(), "OK"))
+      {
+        Debug.Log("Response OK, processing deserialization...");
+        return respObj.ToObject<ResponseModel>();
+      }
 
-      return answers;
+      Debug.Log("Response Error, processing deserialization...");
+      return respObj.ToObject<ErrorMessageModel>();
 
     }
 
