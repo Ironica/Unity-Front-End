@@ -27,7 +27,7 @@ public class ChoiceMenu : MonoBehaviour
             ChoiceWindow.SetActive(true);
             isActiveChoice = true;
         }
-       
+
     }
 
     public void CloseChoice()
@@ -37,20 +37,20 @@ public class ChoiceMenu : MonoBehaviour
     }
     public void ChangeMap()
     {
-        
+
     }
     public void SaveFile()
     {
-        
+
     }
     public void LoadFile()
     {
-        
+
     }
-    
+
     public void SetVolume(float volume)
     {
         audioMix.SetFloat("Volume", volume);
     }
-  
+
 }
