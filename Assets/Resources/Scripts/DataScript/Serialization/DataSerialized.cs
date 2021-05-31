@@ -1,32 +1,41 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace JsonBridge{
 
+  /**
+   * Abstract Model Interface
+   * Minimum requirement: implement `status` field which is a string
+   */
   public interface IModel
   {
-    public string status { get; }
+    public string status { get; } // TODO change this to enum
   }
 
-  public class BareResponseModel: IModel
-  {
-    public string status { get; }
-  }
-
+  /**
+   * The first Model that implements interface
+   * It represents the layout of a response when everything is okay
+   * It contains an array of payload (payloads: DataPayloadSerialized[])
+   */
   public class ResponseModel: IModel
   {
-    public ResponseModel(string status, DataResponseSerialized[] payload)
+    public ResponseModel(string status, DataPayloadSerialized[] payload)
     {
       this.status = status;
       this.payload = payload;
     }
 
     public string status { get; }
-    public DataResponseSerialized[] payload { get; }
+    public DataPayloadSerialized[] payload { get; }
   }
 
+  /**
+   * The second Model that implements interface
+   * It contains only a message info, use it to display to user or for debug purpose
+   */
   public class ErrorMessageModel: IModel
   {
     public string status { get; }
@@ -38,49 +47,58 @@ namespace JsonBridge{
       this.msg = msg;
     }
   }
-
-  [System.Serializable]
-  public class DataSerialized
+  
+  /**
+   * The data structure representing every request format, it contains complete info of a playground including Game Type
+   * and user's code.
+   * See DataLink.dataSer in DataLink class for more information.
+   */
+  public class DataOutSerialized
   {
-    //Common Part of the Playground's Incoming / Outgoing Data
-    public string[,] grid;
-    public string[,] layout;
-    public string[,] colors;
-
-    public int[,] levels;
-
-    public Portal[] portals;
+    public string type; // TODO change this to enum
+    public string code;
+    
+    public GridObject[][] grid;
+    
+    public Coordinates[] gems;
+    public Coordinates[] beepers;
+    public SwitchSerialized[] switches;
+    public PortalSerialized[] portals;
+    
+    public LockSerialized[] locks;
+    public StairSerialized[] stairs;
+    public PlatformSerialized[] platforms;
 
     public PlayerSerialized[] players;
 
-    //The Incoming (from Front-end to Compiler) Data Structure
-    public string type;
-    public string code;
-    public Lock[] locks;
-    public StairSerialized[] stairs;
-
-    public DataSerialized(){}
+    public string consoleLog;
+    public string special;
+    
+    public DataOutSerialized(){}
 
   }
 
+  /**
+   * This data structure represents a frame that you will receive from the server. It should contain only what could be
+   * changed during the animation, evaluated from the server.
+   * You concatenate each frame with your initial map (see DataOutSerialized for more info).
+   */
   [Serializable]
-  public class DataResponseSerialized
+  public class DataPayloadSerialized
   {
-    public string[,] grid;
-    public string[,] itemLayout;
-    public string[,] colors;
+    public PayloadGridObject[][] grid;
 
-    public int[,] levels;
+    public Coordinates[] gems;
+    public Coordinates[] beepers;
 
-    public Portal[] portals;
+    public PortalSerialized[] portals;
+    public PlatformSerialized[] platforms;
+    public LockSerialized[] locks;
     public PlayerSerialized[] players;
+    public string consoleLog;
+    public string special;
 
-    public string type;
-    public string code;
-    public Lock[] locks;
-    public StairSerialized[] stairs;
-
-    public DataResponseSerialized()
+    public DataPayloadSerialized()
     {
     }
   }

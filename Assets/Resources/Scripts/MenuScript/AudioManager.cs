@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         
-        musicIndex = rand.Next(3);
+        musicIndex = rand.Next(playlist.Length);
         audio.clip = playlist[musicIndex];
         audio.Play();
     }
@@ -20,7 +20,7 @@ public class AudioManager : MonoBehaviour
     {
         if (!audio.isPlaying)
         {
-            musicIndex = rand.Next(3);
+            musicIndex = rand.Next(playlist.Length);
             audio.clip = playlist[musicIndex];
             audio.Play();
         }
