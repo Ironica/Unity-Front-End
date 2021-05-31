@@ -7,7 +7,7 @@ public static class SaveMapManager
   public static void saveData(DataMap map)
   {
     BinaryFormatter formatter = new BinaryFormatter();
-    string path = Application.persistentDataPath + "/" + map.name + "txt";
+    string path = Application.persistentDataPath + "/" + map.name + ".save";
     Debug.Log(path);
     FileStream stream = new FileStream(path, FileMode.Create);
 
@@ -17,7 +17,7 @@ public static class SaveMapManager
 
   public static DataMap loadData(string mapName)
   {
-    string path = Application.persistentDataPath + "/" + mapName + "txt";
+    string path = Application.persistentDataPath + "/" + mapName + ".save";
     if(File.Exists(path))
     {
       BinaryFormatter formatter = new BinaryFormatter();
