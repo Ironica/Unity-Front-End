@@ -3,20 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using JetBrains.Annotations;
 using JsonBridge;
 using Newtonsoft.Json;
+using Resources.Scripts.DataScript;
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
+using Debug = UnityEngine.Debug;
 
 // Test
 public class dataLink : MonoBehaviour
 {
 
+  [CanBeNull] private ProcessHolder ph;
+  private int port;
+  private string serverLocation = "Assets/Resources/EmbeddedServer/simulatte-3.1.1.jar";
+
   public JsonBridge.DataOutSerialized dataSer;
   public Data dataObj;
   public JsonBridge.DataConvert converter;
-  private JsonBridge.JsonSerDes des = new JsonBridge.JsonSerDes(url);
+  private JsonBridge.JsonSerDes des;
   private JsonBridge.DataOutSerialized[] payloads;
   private string currentMap;
   GameObject[,] gridObject;
@@ -44,7 +56,8 @@ public class dataLink : MonoBehaviour
   private string gem = "Prefabs/ITEM/GEM";
 
 
-  public const string url = "http://127.0.0.1:9370/simulatte";
+  private const string url = "http://127.0.0.1";
+  private const string api = "simulatte";
 
   private const string pathStarterMap = "Assets/Resources/MapJson/StarterMap/";
   private const string pathCurrentMap = "Assets/Resources/MapJson/CurrentMap/";
@@ -302,11 +315,43 @@ public class dataLink : MonoBehaviour
     }
   }
 
+  // We launch the server before the program starts
+  // We will find the next port available in TCP to establish the server
+  private void Awake()
+  {
+    
+    var lis = new TcpListener(IPAddress.Loopback, 0);
+    lis.Start();
+    port = ((IPEndPoint) lis.LocalEndpoint).Port;
+    lis.Stop();
+    
+    Debug.Log($"Using port {port}");
+
+    var pros = new Process
+    {
+      StartInfo = new ProcessStartInfo
+      {
+        FileName = "java",
+        Arguments = $"-jar {serverLocation} -port={port}",
+        UseShellExecute = false,
+        RedirectStandardOutput = true,
+        RedirectStandardError = true,
+        CreateNoWindow = true,
+      }
+    };
+
+    pros.Start();
+
+  }
+
   // Start is called before the first frame update
-  void Start()
+  private void Start()
   {
 
     currentMap = "map6.json";
+
+    // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
+    des = new JsonSerDes(url, port, api);
 
     dataSer = des.deserialization(pathStarterMap + currentMap);
 
@@ -322,8 +367,14 @@ public class dataLink : MonoBehaviour
   }
 
   // Update is called once per frame
-  void Update()
+  private void Update()
   {
 
+  }
+
+  private void OnDestroy()
+  {
+    var shutdownApi = "simulatte/shutdown";
+    new ShutDown(shutdownApi, port).ShutDownOldServer();
   }
 }

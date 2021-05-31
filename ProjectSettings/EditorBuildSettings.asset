@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Exception.unity
+    guid: dd5b74a56b2fe48dca58b3a3fd1e174d
   m_configObjects: {}

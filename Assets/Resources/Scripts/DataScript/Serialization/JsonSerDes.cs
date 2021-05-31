@@ -13,9 +13,13 @@ namespace JsonBridge{
   public class JsonSerDes
   {
     private readonly string url;
+    private readonly int port;
+    private readonly string api;
 
-    public JsonSerDes(string url){
+    public JsonSerDes(string url, int port, string api){
       this.url = url;
+      this.port = port;
+      this.api = api;
     }
 
     /**
@@ -41,7 +45,7 @@ namespace JsonBridge{
       File.WriteAllText(map,json); // Useless?
       Debug.Log("Serialization done"); // TODO remove redundant serialization
 
-      return new JsonRequestHandler(url)
+      return new JsonRequestHandler($"{url}:{port}/{api}")
       .Feed(json)
       .Fetch()
       .Get();
