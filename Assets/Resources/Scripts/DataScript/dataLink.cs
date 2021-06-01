@@ -12,6 +12,7 @@ using System.Net.Sockets;
 using JetBrains.Annotations;
 using JsonBridge;
 using Newtonsoft.Json;
+using Resources.Scripts;
 using Resources.Scripts.DataScript;
 using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
@@ -20,10 +21,6 @@ using Debug = UnityEngine.Debug;
 // Test
 public class dataLink : MonoBehaviour
 {
-
-  [CanBeNull] private ProcessHolder ph;
-  private int port;
-  private string serverLocation = "Assets/Resources/EmbeddedServer/simulatte-3.1.1.jar";
 
   public JsonBridge.DataOutSerialized dataSer;
   public Data dataObj;
@@ -352,33 +349,10 @@ public class dataLink : MonoBehaviour
       playerInstantiation(gridObject[playerCoo.Y, playerCoo.X], playerCoo);
     }
   }
-
-  // We launch the server before the program starts
-  // We will find the next port available in TCP to establish the server
+  
   private void Awake()
   {
 
-    var lis = new TcpListener(IPAddress.Loopback, 0);
-    lis.Start();
-    port = ((IPEndPoint) lis.LocalEndpoint).Port;
-    lis.Stop();
-
-    Debug.Log($"Using port {port}");
-
-    var pros = new Process
-    {
-      StartInfo = new ProcessStartInfo
-      {
-        FileName = "java",
-        Arguments = $"-jar {serverLocation} -port={port}",
-        UseShellExecute = false,
-        RedirectStandardOutput = true,
-        RedirectStandardError = true,
-        CreateNoWindow = true,
-      }
-    };
-
-    pros.Start();
 
   }
 
@@ -408,7 +382,7 @@ public class dataLink : MonoBehaviour
     currentMap = "map5.json";
 
     // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
-    des = new JsonSerDes(url, port, api);
+    des = new JsonSerDes(url, Global.port, api);
 
     dataSer = des.deserialization(pathStarterMap + currentMap);
 
@@ -429,10 +403,11 @@ public class dataLink : MonoBehaviour
 
   }
 
-  private void OnDestroy()
+  // TODO copy this method to each scene
+  private void OnApplicationQuit()
   {
     var shutdownApi = "simulatte/shutdown";
-    new ShutDown(shutdownApi, port).ShutDownOldServer();
+    new ShutDown(shutdownApi, Global.port).ShutDownOldServer();
 
     foreach (Transform child in gameBoard.transform)
     {
