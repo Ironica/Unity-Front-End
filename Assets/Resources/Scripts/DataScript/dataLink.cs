@@ -232,7 +232,7 @@ public class dataLink : MonoBehaviour
   void Start()
   {
 
-    currentMap = "map2.json";
+    currentMap = "MapTestDylan.json";
 
     dataSer = des.deserialization(pathStarterMap + currentMap);
 
