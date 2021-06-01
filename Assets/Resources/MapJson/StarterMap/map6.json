@@ -1,0 +1,22 @@
+﻿{
+  "type": "default",
+  "code": "",
+  "grid": [
+    [{"block": "OPEN", "level": 1, "biome": "PLAINS"},{"block": "OPEN", "level": 1, "biome": "PLAINS"},{"block": "OPEN", "level": 1, "biome": "PLAINS"}],
+    [{"block": "OPEN", "level": 1, "biome": "PLAINS"},{"block": "OPEN", "level": 1, "biome": "PLAINS"},{"block": "OPEN", "level": 1, "biome": "PLAINS"}],
+    [{"block": "OPEN", "level": 1, "biome": "PLAINS"},{"block": "OPEN", "level": 1, "biome": "PLAINS"},{"block": "OPEN", "level": 1, "biome": "PLAINS"}],
+    [{"block": "OPEN", "level": 1, "biome": "PLAINS"},{"block": "OPEN", "level": 1, "biome": "PLAINS"},{"block": "OPEN", "level": 1, "biome": "PLAINS"}]
+  ],
+  "gems": [{"x": 2, "y": 3}],
+  "beepers": [{"x": 1, "y": 1}],
+  "switches": [],
+  "platforms": [],
+  "portals": [],
+  "locks": [],
+  "stairs": [],
+  "players": [
+    {"id": 1, "x": 0, "y": 0, "dir": "DOWN", "role": "PLAYER", "stamina": 90 },
+    {"id": 2, "x": 1, "y": 0, "dir": "DOWN", "role": "SPECIALIST", "stamina": 120 },
+    {"id": 3, "x": 2, "y": 0, "dir": "DOWN", "role": "PLAYER", "stamina": 100 }
+  ]
+}
