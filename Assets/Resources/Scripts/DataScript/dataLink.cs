@@ -36,6 +36,7 @@ public class dataLink : MonoBehaviour
   GameObject playerObject;
 
   private Slider progression;
+  private GameObject gameBoard;
 
   //Ground
   private string open       = "Prefabs/PLAIN_OPEN_LEVEL";
@@ -67,50 +68,50 @@ public class dataLink : MonoBehaviour
   public string mapName;
 
   /*
- * * * * Data Flow for DataLink Class and Compile() Method * * * *
- *
- *                                       User Input
- *                                         ↓
- *                                         ↓
- * ┌──────────────┐                     ┌───────────────────┐                       ╔═════════════════╗
- * │              │  serializeToObject  │                   │  webDeserialization   ║                 ║
- * │ this.dataObj │ ←────────────────── │   this.dataSer    │ →→→→→→→→→→→→→→→→→→→→→ ║ Back-end Server ║
- * │ ──────────── │    (initialize)     │ ───────────────── │ (send request to srv) ║                 ║
- * │     Data     │                     │ DataOutSerialized │                       ╚═════════════════╝
- * │              │ ←─┐                 │                   │
- * └──────────────┘   │                 └───────────────────┘                                ↓
- *                    │                                                                      ↓
- *  serializeToObject │                                                                      ↓ Receive response as rspAns
- *                    │                                                                      └→→→→→→→→→→┐
- *   (for each frame) │                                                                                 ↓
- *                    │                                                                                 ↓
- *
- *       ┌───────────────────┐           ┌─────────────────────┐                              ┌─────────────────────────┐
- *       │                   │           │                     │                              │                         │
- *       │      payload      │  forEach  │      payloads       │ appendPayloadToDataOutLayout │     rspAns.payload      │
- *       │ ───────────────── │ ←──────── │ ─────────────────── │ ←─────────────────────────── │ ─────────────────────── │
- *       │ DataOutSerialized │           │ DataOutSerialized[] │  Array.Select() conversion   │ DataPayloadSerialized[] │
- *       │                   │           │                     │                              │                         │
- *       └───────────────────┘           └─────────────────────┘                              └─────────────────────────┘
- *
- * - this.dataObj is the object that connected to the display of playground, it will mutate at each frame
- * - this.dataSer contains the initial map info, the only change applied to it is at each time the user enters
- *   a code. In the future we should have the ability to modify this.dataSer in order to change the map.
- *   But at the moment it shouldn't be modified unless when the user update his code.
- *
- * - the appendPayloadToDataOutLayout() method receives a frame of rspAns.payload, but also the this.dataSer object,
- *   in order to concatenate a full playground info using both info received from the server and that of this.dataSer
- *   We use an Array.Select(Callback) method (equiv. Array.stream().map(callback) in Java) to apply this method to
- *   every frame of rspAns.
- * - As you can see, payloads has type DataOutSerialized[] and payload has therefore DataOutSerialized, which correspond
- *   to this.dataSer. The SerializeToObject() method is therefore applicable to both side of this.dataSer and payload.
- * - We just need to call SerializeToObject() method in a loop for each payload of the payloads to update the dataObj.
- *
- */
+  * * * * Data Flow for DataLink Class and Compile() Method * * * *
+  *
+  *                                       User Input
+  *                                         ↓
+  *                                         ↓
+  * ┌──────────────┐                     ┌───────────────────┐                       ╔═════════════════╗
+  * │              │  serializeToObject  │                   │  webDeserialization   ║                 ║
+  * │ this.dataObj │ ←────────────────── │   this.dataSer    │ →→→→→→→→→→→→→→→→→→→→→ ║ Back-end Server ║
+  * │ ──────────── │    (initialize)     │ ───────────────── │ (send request to srv) ║                 ║
+  * │     Data     │                     │ DataOutSerialized │                       ╚═════════════════╝
+  * │              │ ←─┐                 │                   │
+  * └──────────────┘   │                 └───────────────────┘                                ↓
+  *                    │                                                                      ↓
+  *  serializeToObject │                                                                      ↓ Receive response as rspAns
+  *                    │                                                                      └→→→→→→→→→→┐
+  *   (for each frame) │                                                                                 ↓
+  *                    │                                                                                 ↓
+  *
+  *       ┌───────────────────┐           ┌─────────────────────┐                              ┌─────────────────────────┐
+  *       │                   │           │                     │                              │                         │
+  *       │      payload      │  forEach  │      payloads       │ appendPayloadToDataOutLayout │     rspAns.payload      │
+  *       │ ───────────────── │ ←──────── │ ─────────────────── │ ←─────────────────────────── │ ─────────────────────── │
+  *       │ DataOutSerialized │           │ DataOutSerialized[] │  Array.Select() conversion   │ DataPayloadSerialized[] │
+  *       │                   │           │                     │                              │                         │
+  *       └───────────────────┘           └─────────────────────┘                              └─────────────────────────┘
+  *
+  * - this.dataObj is the object that connected to the display of playground, it will mutate at each frame
+  * - this.dataSer contains the initial map info, the only change applied to it is at each time the user enters
+  *   a code. In the future we should have the ability to modify this.dataSer in order to change the map.
+  *   But at the moment it shouldn't be modified unless when the user update his code.
+  *
+  * - the appendPayloadToDataOutLayout() method receives a frame of rspAns.payload, but also the this.dataSer object,
+  *   in order to concatenate a full playground info using both info received from the server and that of this.dataSer
+  *   We use an Array.Select(Callback) method (equiv. Array.stream().map(callback) in Java) to apply this method to
+  *   every frame of rspAns.
+  * - As you can see, payloads has type DataOutSerialized[] and payload has therefore DataOutSerialized, which correspond
+  *   to this.dataSer. The SerializeToObject() method is therefore applicable to both side of this.dataSer and payload.
+  * - We just need to call SerializeToObject() method in a loop for each payload of the payloads to update the dataObj.
+  *
+  */
 
   /**
-   * This method returns the user's input
-   */
+  * This method returns the user's input
+  */
   private string getUserCode(){
     return GameObject.Find("UserCode")
     .GetComponent<InputField>()
@@ -118,27 +119,27 @@ public class dataLink : MonoBehaviour
   }
 
   /**
-   * This method converts DataPayloadSerialized object to DataOutSerialized object, by appending info from the original
-   * map (dataSer: DataOutSerialized)
-   */
+  * This method converts DataPayloadSerialized object to DataOutSerialized object, by appending info from the original
+  * map (dataSer: DataOutSerialized)
+  */
   private static DataOutSerialized AppendPayloadInfoToDataOutLayout(DataOutSerialized dos, DataPayloadSerialized dps)
-   => new DataOutSerialized
-    {
-      type = dos.type, code = dos.code,
-      grid = dps.grid.Select((l, j) =>
-        l.Select((e, i) =>
-          new GridObject(e.block, dos.grid[j][i].biome, e.level)).ToArray()).ToArray(),
-      gems = dps.gems, beepers = dps.beepers,
-      switches = dos.switches, portals = dps.portals, locks = dps.locks, platforms = dps.platforms,
-      stairs = dos.stairs,
-      players = dps.players,
-      special = dps.special,
-      consoleLog = dps.consoleLog
-    };
+  => new DataOutSerialized
+  {
+    type = dos.type, code = dos.code,
+    grid = dps.grid.Select((l, j) =>
+    l.Select((e, i) =>
+    new GridObject(e.block, dos.grid[j][i].biome, e.level)).ToArray()).ToArray(),
+    gems = dps.gems, beepers = dps.beepers,
+    switches = dos.switches, portals = dps.portals, locks = dps.locks, platforms = dps.platforms,
+    stairs = dos.stairs,
+    players = dps.players,
+    special = dps.special,
+    consoleLog = dps.consoleLog
+  };
 
   /**
-   * Method called when user click on Reset.
-   */
+  * Method called when user click on Reset.
+  */
   public void OnResetClick()
   {
     payloads.Clear();
@@ -148,12 +149,12 @@ public class dataLink : MonoBehaviour
     // Resetting the map means reinitialize it.
     converter.dataSer = dataSer;
     converter.serializedToObject();
-    
-    foreach (Transform child in this.gameObject.transform.GetChild(3).GetChild(0))
+
+    foreach (Transform child in gameBoard.transform)
     {
       Destroy(child.gameObject); // Destroy last frame
     }
-    
+
     instantiation();
   }
 
@@ -164,7 +165,7 @@ public class dataLink : MonoBehaviour
   {
 
     progression.value = 0;
-    
+
     /*if( the frame[] is empty )
     */
 
@@ -223,17 +224,17 @@ public class dataLink : MonoBehaviour
           File.WriteAllText(pathCurrentMap + currentMap, json); // is this useful?
           converter.serializedToObject();
 
-          foreach (Transform child in this.gameObject.transform.GetChild(3).GetChild(0))
+          foreach (Transform child in gameBoard.transform)
           {
             Destroy(child.gameObject); // Destroy last frame
           }
 
           instantiation(); // call method on dataObj to update it
-          
+
           progression.value += 1;
 
           //Sleep for 1 seconds
-          await Task.Delay(1000);
+          await Task.Delay(250);
           //Debug.Log("Frame " + i);
 
         }
@@ -254,40 +255,40 @@ public class dataLink : MonoBehaviour
 
   private string stairDirection(Direction dir)
   => dir switch
-    {
-      Direction.UP => stairFront,
-      Direction.DOWN => stairBack,
-      Direction.LEFT => stairLeft,
-      Direction.RIGHT => stairRight,
-      _ => throw new Exception("This shouldn't be possible")
-    };
+  {
+    Direction.UP => stairFront,
+    Direction.DOWN => stairBack,
+    Direction.LEFT => stairLeft,
+    Direction.RIGHT => stairRight,
+    _ => throw new Exception("This shouldn't be possible")
+  };
 
   private string playerDirection(Direction dir)
-    => dir switch
-    {
-      Direction.UP => playerFront,
-      Direction.DOWN => playerBack,
-      Direction.LEFT => playerLeft,
-      Direction.RIGHT => playerRight,
-      _ => throw new Exception("This shouldn't be possible")
-    };
+  => dir switch
+  {
+    Direction.UP => playerFront,
+    Direction.DOWN => playerBack,
+    Direction.LEFT => playerLeft,
+    Direction.RIGHT => playerRight,
+    _ => throw new Exception("This shouldn't be possible")
+  };
 
   private string tileLevel(Block block, int i, int j)
-    => block switch
-    {
-      Block.OPEN => open + dataObj.grid[j][i].Level,
-      Block.BLOCKED => mountain + dataObj.grid[j][i].Level,
-      Block.LOCK => home + dataObj.grid[j][i].Level,
-      Block.STAIR => stairDirection(dataObj.stairs.First(e => e.X == j && e.Y == i).Dir),
-      Block.VOID => throw new NotImplementedException(),
-      _ => throw new Exception("This shouldn't be possible")
-    };
+  => block switch
+  {
+    Block.OPEN => open + dataObj.grid[j][i].Level,
+    Block.BLOCKED => mountain + dataObj.grid[j][i].Level,
+    Block.LOCK => home + dataObj.grid[j][i].Level,
+    Block.STAIR => stairDirection(dataObj.stairs.First(e => e.X == j && e.Y == i).Dir),
+    Block.VOID => throw new NotImplementedException(),
+    _ => throw new Exception("This shouldn't be possible")
+  };
 
   private GameObject mapInstantiation(GameObject obj, Block block, int level, int x, int y, int i, int j){
     string tile = tileLevel(block, i, j);
     Vector2 coo = setCoordinates(new Vector2(j-x, i-y));
     obj  = Instantiate(UnityEngine.Resources.Load(tile), new Vector3(coo.x,coo.y, 0), Quaternion.identity) as GameObject;
-    obj.transform.parent = this.gameObject.transform.GetChild(3).GetChild(0);
+    obj.transform.parent = gameBoard.transform;
     return obj;
   }
 
@@ -300,7 +301,7 @@ public class dataLink : MonoBehaviour
     Vector3 coo = new Vector3(tile.transform.position.x, tile.transform.position.y+playerLevel, 0);
 
     playerObject = Instantiate(UnityEngine.Resources.Load(playerPrefab), coo, Quaternion.identity) as GameObject;
-    playerObject.transform.parent = this.gameObject.transform.GetChild(3).GetChild(0);
+    playerObject.transform.parent = gameBoard.transform;
     playerObject.GetComponent<SpriteRenderer>().sortingOrder = level;
 
   }
@@ -315,7 +316,7 @@ public class dataLink : MonoBehaviour
     var coo = new Vector3(tilePos.x, tilePos.y + gemLevel, 0);
 
     var gemObject = Instantiate(UnityEngine.Resources.Load(gemPrefab), coo, Quaternion.identity) as GameObject;
-    gemObject.transform.parent = this.gameObject.transform.GetChild(3).GetChild(0);
+    gemObject.transform.parent = gameBoard.transform;
     gemObject.GetComponent<SpriteRenderer>().sortingOrder = level;
     gemObjects.Add(gemObject);
   }
@@ -391,15 +392,17 @@ public class dataLink : MonoBehaviour
   public void loadMap()
   {
     DataMap dataMap = SaveMapManager.loadData(currentMap);
-    GameObject.Find("UserCode")
-    .GetComponent<InputField>()
-    .text = dataMap.code;
-    Debug.Log("goals: " + dataMap.goals[2]);
+    if(dataMap != null){
+      GameObject.Find("UserCode")
+      .GetComponent<InputField>()
+      .text = dataMap.code;
+    }
   }
 
   // Start is called before the first frame update
   private void Start()
   {
+    gameBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Elements").gameObject as GameObject;
     progression = gameObject.transform.Find("Progress_Bar").gameObject.GetComponent<Slider>();
     progression.value = 0;
     currentMap = "map5.json";
@@ -430,5 +433,10 @@ public class dataLink : MonoBehaviour
   {
     var shutdownApi = "simulatte/shutdown";
     new ShutDown(shutdownApi, port).ShutDownOldServer();
+
+    foreach (Transform child in gameBoard.transform)
+    {
+      Destroy(child.gameObject); // Destroy last frame
+    }
   }
 }
