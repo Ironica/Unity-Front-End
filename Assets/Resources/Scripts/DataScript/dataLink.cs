@@ -438,11 +438,22 @@ public class dataLink : MonoBehaviour
 
   }
 
-  // Update is called once per frame
-  private void Update()
-  {
+  // TEST pour le change map
+  /*private void Update()
+ {
+    if (Input.GetKeyDown(KeyCode.A))
+    {
+      currentMap = "MapTestDylan.json";
 
-  }
+      dataSer = des.deserialization(pathStarterMap + currentMap);
+
+      dataObj = new Data();
+
+      converter = new JsonBridge.DataConvert(dataSer, dataObj);
+      converter.serializedToObject();
+      Debug.Log("On est la");
+    }
+  }*/
 
   // TODO copy this method to each scene
   private void OnApplicationQuit()
