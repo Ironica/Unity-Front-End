@@ -7,16 +7,16 @@ public enum Block
 {
   [EnumMember(Value = "OPEN")]
   OPEN,
-  
+
   [EnumMember(Value = "BLOCKED")]
   BLOCKED,
-  
+
   [EnumMember(Value = "LOCK")]
   LOCK,
-  
+
   [EnumMember(Value = "STAIR")]
   STAIR,
-  
+
   [EnumMember(Value = "VOID")]
   VOID,
 }

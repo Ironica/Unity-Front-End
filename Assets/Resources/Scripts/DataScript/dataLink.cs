@@ -17,12 +17,12 @@ using Resources.Scripts.DataScript;
 using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
-
 // Test
 public class dataLink : MonoBehaviour
 {
 
   public JsonBridge.DataOutSerialized dataSer;
+  public JsonBridge.DataInSerialized dataString;
   public Data dataObj;
   public JsonBridge.DataConvert converter;
   private JsonBridge.JsonSerDes des;
@@ -34,6 +34,7 @@ public class dataLink : MonoBehaviour
 
   private Slider progression;
   private GameObject gameBoard;
+  private GameObject tiles;
 
   //Ground
   private string open       = "Prefabs/PLAIN_OPEN_LEVEL";
@@ -63,6 +64,7 @@ public class dataLink : MonoBehaviour
   private const string pathCurrentMap = "Assets/Resources/MapJson/CurrentMap/";
 
   public string mapName;
+  public Button myButton;
 
   /*
   * * * * Data Flow for DataLink Class and Compile() Method * * * *
@@ -152,7 +154,7 @@ public class dataLink : MonoBehaviour
       Destroy(child.gameObject); // Destroy last frame
     }
 
-    instantiation();
+    instantiation(false);
   }
 
   /*
@@ -226,7 +228,7 @@ public class dataLink : MonoBehaviour
             Destroy(child.gameObject); // Destroy last frame
           }
 
-          instantiation(); // call method on dataObj to update it
+          instantiation(false); // call method on dataObj to update it
 
           progression.value += 1;
 
@@ -285,7 +287,7 @@ public class dataLink : MonoBehaviour
     string tile = tileLevel(block, i, j);
     Vector2 coo = setCoordinates(new Vector2(j-x, i-y));
     obj  = Instantiate(UnityEngine.Resources.Load(tile), new Vector3(coo.x,coo.y, 0), Quaternion.identity) as GameObject;
-    obj.transform.parent = gameBoard.transform;
+    obj.transform.parent = tiles.transform;
     return obj;
   }
 
@@ -318,21 +320,28 @@ public class dataLink : MonoBehaviour
     gemObjects.Add(gemObject);
   }
 
-  private void instantiation(){
+  private void instantiation(bool tileInstantiation){
     // Create Game Object
     // Note. Can only use array of GameObject[,], if we use GameObject[][] Unity will create lots of GameObject
-    gridObject = new GameObject[dataObj.grid.Length, dataObj.grid[0].Length];
+    if(tileInstantiation)
+    {
+      gridObject = new GameObject[dataObj.grid.Length, dataObj.grid[0].Length];
+    }
 
     var x = dataObj.grid[0].Length / 2;
     var y = dataObj.grid.Length / 2;
 
     // Since we use GameObject[,], sorry no Linq but only imperative loop
-    for (var i = 0; i < gridObject.GetLength(1); i++)
+    if(tileInstantiation)
     {
-      for (var j = 0; j < gridObject.GetLength(0); j++)
+      Debug.Log("Only once billy");
+      for (var i = 0; i < gridObject.GetLength(1); i++)
       {
-        var tile = dataObj.grid[j][i];
-        gridObject[j, i] = mapInstantiation(gridObject[j, i], tile.Block, tile.Level, x, y, i, j);
+        for (var j = 0; j < gridObject.GetLength(0); j++)
+        {
+          var tile = dataObj.grid[j][i];
+          gridObject[j, i] = mapInstantiation(gridObject[j, i], tile.Block, tile.Level, x, y, i, j);
+        }
       }
     }
 
@@ -349,7 +358,7 @@ public class dataLink : MonoBehaviour
       playerInstantiation(gridObject[playerCoo.Y, playerCoo.X], playerCoo);
     }
   }
-  
+
   private void Awake()
   {
 
@@ -373,13 +382,45 @@ public class dataLink : MonoBehaviour
     }
   }
 
+  public void changeMap()
+  {
+    foreach (Transform child in gameBoard.transform)
+    {
+      Destroy(child.gameObject); // Destroy last frame
+    }
+    foreach (Transform child in tiles.transform)
+    {
+      Destroy(child.gameObject); // Destroy last frame
+    }
+
+    //Pour récupérer le nom
+
+    currentMap = "?";
+
+    //Fin
+
+    dataSer = des.deserialization(pathStarterMap + currentMap);
+
+    dataObj = new Data();
+
+    converter = new JsonBridge.DataConvert(dataSer, dataObj);
+    converter.serializedToObject();
+
+    instantiation(true);
+  }
+
   // Start is called before the first frame update
   private void Start()
   {
+
     gameBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Elements").gameObject as GameObject;
+    tiles = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Tiles").gameObject as GameObject;
+
     progression = gameObject.transform.Find("Progress_Bar").gameObject.GetComponent<Slider>();
     progression.value = 0;
-    currentMap = "MapTestDylan.json";
+
+    //TODO Get the name of the map from the maps interface
+    currentMap = "map5.json";
 
     // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
     des = new JsonSerDes(url, Global.port, api);
@@ -393,25 +434,14 @@ public class dataLink : MonoBehaviour
 
     //string response  = des.serialization(dataSer, pathStarterMap + currentMap);
 
-    instantiation();
+    instantiation(true);
 
   }
 
   // Update is called once per frame
   private void Update()
   {
-    if (Input.GetKeyDown(KeyCode.A))
-    {
-      currentMap = "MapTestDylan.json";
-      
-      dataSer = des.deserialization(pathStarterMap + currentMap);
 
-      dataObj = new Data();
-
-      converter = new JsonBridge.DataConvert(dataSer, dataObj);
-      converter.serializedToObject();
-      Debug.Log("On est la");
-    }
   }
 
   // TODO copy this method to each scene
@@ -421,6 +451,10 @@ public class dataLink : MonoBehaviour
     new ShutDown(shutdownApi, Global.port).ShutDownOldServer();
 
     foreach (Transform child in gameBoard.transform)
+    {
+      Destroy(child.gameObject); // Destroy last frame
+    }
+    foreach (Transform child in tiles.transform)
     {
       Destroy(child.gameObject); // Destroy last frame
     }

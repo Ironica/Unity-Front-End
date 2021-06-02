@@ -35,14 +35,14 @@ namespace JsonBridge{
         settings.Converters.Add(new StringEnumConverter());
         return settings;
       };
-      
+
       var json = JsonConvert.SerializeObject(data, // If a field of serialized object is null then it will be ignored
         Formatting.Indented,
         new JsonSerializerSettings
         {
           NullValueHandling = NullValueHandling.Ignore
         });
-      File.WriteAllText(map,json); // Useless?
+
       Debug.Log("Serialization done"); // TODO remove redundant serialization
 
       return new JsonRequestHandler($"{url}:{port}/{api}")
