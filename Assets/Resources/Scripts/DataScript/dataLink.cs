@@ -379,7 +379,7 @@ public class dataLink : MonoBehaviour
     gameBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Elements").gameObject as GameObject;
     progression = gameObject.transform.Find("Progress_Bar").gameObject.GetComponent<Slider>();
     progression.value = 0;
-    currentMap = "MapTestDylan.json";
+    currentMap = "map5.json";
 
     // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
     des = new JsonSerDes(url, Global.port, api);
@@ -397,9 +397,9 @@ public class dataLink : MonoBehaviour
 
   }
 
-  // Update is called once per frame
-  private void Update()
-  {
+  // TEST pour le change map
+  /*private void Update()
+ {
     if (Input.GetKeyDown(KeyCode.A))
     {
       currentMap = "MapTestDylan.json";
@@ -412,7 +412,7 @@ public class dataLink : MonoBehaviour
       converter.serializedToObject();
       Debug.Log("On est la");
     }
-  }
+  }*/
 
   // TODO copy this method to each scene
   private void OnApplicationQuit()
