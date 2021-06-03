@@ -20,7 +20,7 @@ using Debug = UnityEngine.Debug;
 // Test
 public class dataLink : MonoBehaviour
 {
-
+  
   public JsonBridge.DataOutSerialized dataSer;
   public JsonBridge.DataInSerialized dataString;
   public Data dataObj;
@@ -63,8 +63,8 @@ public class dataLink : MonoBehaviour
   private const string pathStarterMap = "Assets/Resources/MapJson/StarterMap/";
   private const string pathCurrentMap = "Assets/Resources/MapJson/CurrentMap/";
 
-  public string mapName;
-  public Button myButton;
+  /*public string mapName;
+  public Button myButton;*/
 
   /*
   * * * * Data Flow for DataLink Class and Compile() Method * * * *
@@ -384,6 +384,7 @@ public class dataLink : MonoBehaviour
 
   public void changeMap()
   {
+    Debug.Log(gameBoard);
     foreach (Transform child in gameBoard.transform)
     {
       Destroy(child.gameObject); // Destroy last frame
@@ -395,7 +396,8 @@ public class dataLink : MonoBehaviour
 
     //Pour récupérer le nom
 
-    currentMap = "?";
+    currentMap= StatData.getCurrent();
+    
 
     //Fin
 
@@ -413,14 +415,14 @@ public class dataLink : MonoBehaviour
   private void Start()
   {
 
-    gameBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Elements").gameObject as GameObject;
-    tiles = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Tiles").gameObject as GameObject;
+   gameBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Elements").gameObject as GameObject;
+   tiles = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Tiles").gameObject as GameObject;
 
     progression = gameObject.transform.Find("Progress_Bar").gameObject.GetComponent<Slider>();
     progression.value = 0;
 
     //TODO Get the name of the map from the maps interface
-    currentMap = "map5.json";
+    currentMap = StatData.getCurrent();
 
     // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
     des = new JsonSerDes(url, Global.port, api);
@@ -439,21 +441,13 @@ public class dataLink : MonoBehaviour
   }
 
   // TEST pour le change map
-  /*private void Update()
+ /* private void Update()
  {
-    if (Input.GetKeyDown(KeyCode.A))
-    {
-      currentMap = "MapTestDylan.json";
-
-      dataSer = des.deserialization(pathStarterMap + currentMap);
-
-      dataObj = new Data();
-
-      converter = new JsonBridge.DataConvert(dataSer, dataObj);
-      converter.serializedToObject();
-      Debug.Log("On est la");
-    }
-  }*/
+   if (Input.GetKeyDown(KeyCode.A))
+   {
+     changeMap();
+   }
+ }*/
 
   // TODO copy this method to each scene
   private void OnApplicationQuit()

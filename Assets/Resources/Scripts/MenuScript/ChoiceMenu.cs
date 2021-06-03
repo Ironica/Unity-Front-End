@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class ChoiceMenu : MonoBehaviour
 {
-    public GameObject ChoiceWindow;
+    public GameObject choiceWindow;
     private bool isActiveChoice = false;
     public AudioMixer audioMix;
 
@@ -13,6 +14,8 @@ public class ChoiceMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) &&  isActiveChoice)
         {
             CloseChoice();
+           // mapMenu.SetActive(false);
+          //  png.SetActive(false);
         }
     }
 
@@ -24,7 +27,7 @@ public class ChoiceMenu : MonoBehaviour
         }
         else
         {
-            ChoiceWindow.SetActive(true);
+            choiceWindow.SetActive(true);
             isActiveChoice = true;
         }
 
@@ -32,12 +35,12 @@ public class ChoiceMenu : MonoBehaviour
 
     public void CloseChoice()
     {
-        ChoiceWindow.SetActive(false);
+        choiceWindow.SetActive(false);
         isActiveChoice = false;
     }
     public void ChangeMap()
     {
-
+        SceneManager.LoadScene("MapMenu");
     }
     public void SaveFile()
     {
