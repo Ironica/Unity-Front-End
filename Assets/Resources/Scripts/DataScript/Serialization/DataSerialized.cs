@@ -81,6 +81,54 @@ namespace JsonBridge{
 
   }
 
+  /**
+   * This is the data structure that we will send to the server, it derives from the dataSer structure
+   */
+  public class RealDataOutSerialized
+  {
+    public string type;
+    public string code;
+
+    public OutgoingGridObject[][] grid;
+    public Coordinates[] gems;
+    public Coordinates[] beepers;
+    public SwitchSerialized[] switches;
+    public PortalSerialized[] portals;
+    
+    public LockSerialized[] locks;
+    public StairSerialized[] stairs;
+    public PlatformSerialized[] platforms;
+
+    public PlayerSerialized[] players;
+
+    // We reserve a constructor for function call
+    public RealDataOutSerialized(
+      string type, 
+      string code, 
+      OutgoingGridObject[][] grid, 
+      Coordinates[] gems, 
+      Coordinates[] beepers,
+      SwitchSerialized[] switches, 
+      PortalSerialized[] portals,
+      LockSerialized[] locks,
+      StairSerialized[] stairs,
+      PlatformSerialized[] platforms, 
+      PlayerSerialized[] players)
+    {
+      this.type = type;
+      this.code = code;
+      this.grid = grid;
+      this.gems = gems;
+      this.beepers = beepers;
+      this.switches = switches;
+      this.portals = portals;
+      this.locks = locks;
+      this.stairs = stairs;
+      this.platforms = platforms;
+      this.players = players;
+    }
+  }
+
   public class DataInSerialized
   {
     public string type; // TODO change this to enum
@@ -114,7 +162,7 @@ namespace JsonBridge{
   [Serializable]
   public class DataPayloadSerialized
   {
-    public PayloadGridObject[][] grid;
+    public OutgoingGridObject[][] grid;
 
     public Coordinates[] gems;
     public Coordinates[] beepers;

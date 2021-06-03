@@ -75,17 +75,17 @@ public class dataLink : MonoBehaviour
   *
   *                                       User Input
   *                                         ↓
-  *                                         ↓
-  * ┌──────────────┐                     ┌───────────────────┐                       ╔═════════════════╗
-  * │              │  serializeToObject  │                   │  webDeserialization   ║                 ║
-  * │ this.dataObj │ ←────────────────── │   this.dataSer    │ →→→→→→→→→→→→→→→→→→→→→ ║ Back-end Server ║
-  * │ ──────────── │    (initialize)     │ ───────────────── │ (send request to srv) ║                 ║
-  * │     Data     │                     │ DataOutSerialized │                       ╚═════════════════╝
-  * │              │ ←─┐                 │                   │
-  * └──────────────┘   │                 └───────────────────┘                                ↓
-  *                    │                                                                      ↓
-  *  serializeToObject │                                                                      ↓ Receive response as rspAns
-  *                    │                                                                      └→→→→→→→→→→┐
+  *                                         ↓       JsonSerDes.convertDataSerializedToOutgoingData
+  * ┌──────────────┐                     ┌───────────────────┐             ┌───────────────────┐                       ╔═════════════════╗
+  * │              │  serializeToObject  │                   │             │                   │ webDeserialization    ║                 ║
+  * │ this.dataObj │ ←────────────────── │   this.dataSer    │───────────→ │                   │ →→→→→→→→→→→→→→→→→→→→→ ║ Back-end Server ║
+  * │ ──────────── │    (initialize)     │ ───────────────── │             │ RealDataOutSerial.│ (send request to srv) ║                 ║
+  * │     Data     │                     │ DataOutSerialized │             │                   │                       ╚═════════════════╝
+  * │              │ ←─┐                 │                   │             │                   │
+  * └──────────────┘   │                 └───────────────────┘             └───────────────────┘                                ↓
+  *                    │                                                                                                        ↓
+  *  serializeToObject │                                                                             Receive response as rspAns ↓
+  *                    │                                                                                 ←←←←←←←←←←←←←←←←←←←←←←←←
   *   (for each frame) │                                                                                 ↓
   *                    │                                                                                 ↓
   *
