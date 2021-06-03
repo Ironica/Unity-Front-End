@@ -20,7 +20,7 @@ using Debug = UnityEngine.Debug;
 // Test
 public class dataLink : MonoBehaviour
 {
-  
+
   public JsonBridge.DataOutSerialized dataSer;
   public JsonBridge.DataInSerialized dataString;
   public Data dataObj;
@@ -397,7 +397,7 @@ public class dataLink : MonoBehaviour
     //Pour récupérer le nom
 
     currentMap= StatData.getCurrent();
-    
+
 
     //Fin
 
@@ -422,7 +422,8 @@ public class dataLink : MonoBehaviour
     progression.value = 0;
 
     //TODO Get the name of the map from the maps interface
-    currentMap = StatData.getCurrent();
+    //currentMap = StatData.getCurrent();
+    currentMap = "map5.json";
 
     // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
     des = new JsonSerDes(url, Global.port, api);
