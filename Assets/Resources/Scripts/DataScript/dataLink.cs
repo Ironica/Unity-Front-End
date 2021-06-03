@@ -350,6 +350,29 @@ public class dataLink : MonoBehaviour
     gemObjects.Add(gemObject);
   }
 
+  private void switchInstantiation(GameObject tile, Switch switchObj)
+{
+  var switchLevel = -0.35f;
+  string switchPrefab;
+  if(switchObj.On)
+  {
+    switchPrefab = switchOn;
+  }
+  else
+  {
+    switchPrefab = switchOff;
+  }
+  var level = dataObj.grid[switchObj.Y][switchObj.X].Level;
+  switchLevel += (level-1) * 0.4f;
+  var tilePos = tile.transform.position;
+  var coo = new Vector3(tilePos.x, tilePos.y + switchLevel, 0);
+
+  var switchObject = Instantiate(UnityEngine.Resources.Load(switchPrefab), coo, Quaternion.identity) as GameObject;
+  switchObject.transform.parent = gameBoard.transform;
+  switchObject.GetComponent<SpriteRenderer>().sortingOrder = level;
+  switchObjects.Add(switchObject);
+}
+
   private void instantiation(bool tileInstantiation)
   {
     // Create Game Object
@@ -383,6 +406,11 @@ public class dataLink : MonoBehaviour
     foreach (var gemCoo in dataObj.gems)
     {
       GemInstantiation(gridObject[gemCoo.y, gemCoo.x], new Gem(gemCoo.x, gemCoo.y));
+    }
+
+    foreach (var switchCoo in dataObj.switches)
+    {
+      switchInstantiation(gridObject[switchCoo.Y, switchCoo.X], new Switch(switchCoo.X, switchCoo.Y, switchCoo.On));
     }
 
     foreach (var playerCoo in dataObj.players)
