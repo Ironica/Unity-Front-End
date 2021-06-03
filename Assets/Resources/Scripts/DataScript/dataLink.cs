@@ -30,6 +30,7 @@ public class dataLink : MonoBehaviour
   private string currentMap;
   GameObject[,] gridObject;
   List<GameObject> gemObjects = new List<GameObject>();
+  List<GameObject> switchObjects = new List<GameObject>();
   GameObject playerObject;
 
   private Slider progression;
@@ -59,7 +60,8 @@ public class dataLink : MonoBehaviour
 
   // Items
   private string gem = "Prefabs/ITEM/GEM";
-
+  private string switchOn = "Prefabs/ITEM/SWITCH_ON";
+  private string switchOff = "Prefabs/ITEM/SWITCH_OFF";
 
   private const string url = "http://127.0.0.1";
   private const string api = "simulatte";
@@ -291,17 +293,6 @@ public class dataLink : MonoBehaviour
     Block.VOID => throw new NotImplementedException(),
     _ => throw new Exception("This shouldn't be possible")
   };
-  /*private string tileLevel(string block, int i, int j)
-  => block switch
-  {
-    "PLAIN" => plain + dataObj.grid[j][i].Level,
-    "HOME" => home + dataObj.grid[j][i].Level,
-    "MOUNTAIN" => mountain + dataObj.grid[j][i].Level,
-    "DESERT" => desert + dataObj.grid[j][i].Level,
-    "STAIR" => stairDirection(dataObj.stairs.First(e => e.X == j && e.Y == i).Dir),
-    //Block.VOID => throw new NotImplementedException(),
-    _ => throw new Exception("This shouldn't be possible")
-  };*/
 
   private GameObject mapInstantiation(GameObject obj, Block block, int level, int x, int y, int i, int j)
   {
@@ -310,29 +301,6 @@ public class dataLink : MonoBehaviour
     obj  = Instantiate(UnityEngine.Resources.Load(tile), new Vector3(coo.x,coo.y, 0), Quaternion.identity) as GameObject;
     obj.transform.parent = tiles.transform;
     return obj;
-  }
-  /*private GameObject mapInstantiation(GameObject obj, string block, int level, int x, int y, int i, int j)
-  {
-    string tile = tileLevel(block, i, j);
-    Vector2 coo = setCoordinates(new Vector2(j-x, i-y));
-    obj  = Instantiate(UnityEngine.Resources.Load(tile), new Vector3(coo.x,coo.y, 0), Quaternion.identity) as GameObject;
-    obj.transform.parent = tiles.transform;
-    return obj;
-  }*/
-
-
-  private void playerInstantiation(GameObject tile, Player player)
-  {
-    float playerLevel = 0.25f;
-    string playerPrefab = playerDirection(player.Dir);
-    int level = dataObj.grid[player.Y][player.X].Level;
-    playerLevel += (level-1)*0.4f;
-    Vector3 coo = new Vector3(tile.transform.position.x, tile.transform.position.y+playerLevel, 0);
-
-    playerObject = Instantiate(UnityEngine.Resources.Load(playerPrefab), coo, Quaternion.identity) as GameObject;
-    playerObject.transform.parent = gameBoard.transform;
-    playerObject.GetComponent<SpriteRenderer>().sortingOrder = level;
-
   }
 
   private void GemInstantiation(GameObject tile, Gem gemObj)
@@ -349,6 +317,67 @@ public class dataLink : MonoBehaviour
     gemObject.GetComponent<SpriteRenderer>().sortingOrder = level;
     gemObjects.Add(gemObject);
   }
+
+  private void switchInstantiation(GameObject tile, Switch switchObj)
+  {
+    var switchLevel = -0.35f;
+    string switchPrefab;
+    if(switchObj.On)
+    {
+      switchPrefab = switchOn;
+    }
+    else
+    {
+      switchPrefab = switchOff;
+    }
+    var level = dataObj.grid[switchObj.Y][switchObj.X].Level;
+    switchLevel += (level-1) * 0.4f;
+    var tilePos = tile.transform.position;
+    var coo = new Vector3(tilePos.x, tilePos.y + switchLevel, 0);
+
+    var switchObject = Instantiate(UnityEngine.Resources.Load(switchPrefab), coo, Quaternion.identity) as GameObject;
+    switchObject.transform.parent = gameBoard.transform;
+    switchObject.GetComponent<SpriteRenderer>().sortingOrder = level;
+    switchObjects.Add(switchObject);
+  }
+
+  private void playerInstantiation(GameObject tile, Player player)
+  {
+    float playerLevel = 0.25f;
+    string playerPrefab = playerDirection(player.Dir);
+    int level = dataObj.grid[player.Y][player.X].Level;
+    playerLevel += (level-1)*0.4f;
+    Vector3 coo = new Vector3(tile.transform.position.x, tile.transform.position.y+playerLevel, 0);
+
+    playerObject = Instantiate(UnityEngine.Resources.Load(playerPrefab), coo, Quaternion.identity) as GameObject;
+    playerObject.transform.parent = gameBoard.transform;
+    playerObject.GetComponent<SpriteRenderer>().sortingOrder = level+1;
+
+  }
+
+
+  private void switchInstantiation(GameObject tile, Switch switchObj)
+{
+  var switchLevel = -0.35f;
+  string switchPrefab;
+  if(switchObj.On)
+  {
+    switchPrefab = switchOn;
+  }
+  else
+  {
+    switchPrefab = switchOff;
+  }
+  var level = dataObj.grid[switchObj.Y][switchObj.X].Level;
+  switchLevel += (level-1) * 0.4f;
+  var tilePos = tile.transform.position;
+  var coo = new Vector3(tilePos.x, tilePos.y + switchLevel, 0);
+
+  var switchObject = Instantiate(UnityEngine.Resources.Load(switchPrefab), coo, Quaternion.identity) as GameObject;
+  switchObject.transform.parent = gameBoard.transform;
+  switchObject.GetComponent<SpriteRenderer>().sortingOrder = level;
+  switchObjects.Add(switchObject);
+}
 
   private void instantiation(bool tileInstantiation)
   {
@@ -385,10 +414,16 @@ public class dataLink : MonoBehaviour
       GemInstantiation(gridObject[gemCoo.y, gemCoo.x], new Gem(gemCoo.x, gemCoo.y));
     }
 
+    foreach (var switchCoo in dataObj.switches)
+    {
+      switchInstantiation(gridObject[switchCoo.Y, switchCoo.X], new Switch(switchCoo.X, switchCoo.Y, switchCoo.On));
+    }
+
     foreach (var playerCoo in dataObj.players)
     {
       playerInstantiation(gridObject[playerCoo.Y, playerCoo.X], playerCoo);
     }
+
   }
 
   private void Awake()
@@ -446,7 +481,14 @@ public class dataLink : MonoBehaviour
 
   }
 
-
+  // TEST pour le change map
+  /* private void Update()
+  {
+  if (Input.GetKeyDown(KeyCode.A))
+  {
+  changeMap();
+}
+}*/
 
 // TODO copy this method to each scene
 private void OnApplicationQuit()
