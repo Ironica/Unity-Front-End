@@ -65,7 +65,7 @@
       {"block": "MOUNTAIN", "level": 1, "biome": "PLAINS"},
       {"block": "OPEN", "level": 1, "biome": "PLAINS"},
       {"block": "OPEN", "level": 1, "biome": "PLAINS"},
-      {"block": "STAIR", "level": 1, "biome": "PLAINS"},
+      {"block": "HILL", "level": 1, "biome": "PLAINS"},
       {"block": "OPEN", "level": 1, "biome": "PLAINS"},
       {"block": "MOUNTAIN", "level": 1, "biome": "PLAINS"},
       {"block": "MOUNTAIN", "level": 1, "biome": "PLAINS"}],
@@ -124,6 +124,6 @@
   "locks": [],
   "stairs": [],
   "players": [{
-    "id": 1, "x": 0, "y": 5, "dir": "RIGHT", "role": "PLAYER", "stamina": 500
+    "id": 1, "x": 5, "y":0, "dir": "RIGHT", "role": "PLAYER", "stamina": 500
   }]
 }

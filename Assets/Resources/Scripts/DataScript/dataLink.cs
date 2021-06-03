@@ -426,8 +426,8 @@ public class dataLink : MonoBehaviour
     progression.value = 0;
 
     //TODO Get the name of the map from the maps interface
-    //currentMap = StatData.getCurrent();
-    currentMap = "map5.json";
+    currentMap = StatData.getCurrent();
+    //currentMap = "map5.json";
 
     // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
     des = new JsonSerDes(url, Global.port, api);
@@ -446,14 +446,7 @@ public class dataLink : MonoBehaviour
 
   }
 
-  // TEST pour le change map
-  /* private void Update()
-  {
-  if (Input.GetKeyDown(KeyCode.A))
-  {
-  changeMap();
-}
-}*/
+
 
 // TODO copy this method to each scene
 private void OnApplicationQuit()

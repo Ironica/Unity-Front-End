@@ -10,4 +10,16 @@ public class MapMenu : MonoBehaviour
   StatData.setCurrent("map5.json");
   SceneManager.LoadScene("Interface");
  }
+
+ public void mapDylan()
+ {
+  StatData.setCurrent("MapTestDylan.json");
+  SceneManager.LoadScene("Interface");
+ }
+
+ public void mapTest()
+ {
+  StatData.setCurrent("Test.json");
+  SceneManager.LoadScene("Interface");
+ }
 }
