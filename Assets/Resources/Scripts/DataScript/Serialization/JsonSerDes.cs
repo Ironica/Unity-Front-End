@@ -6,7 +6,9 @@ using Newtonsoft.Json.Linq;
 using UnityEngine.Networking;
 using System;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json.Converters;
+using Resources.Scripts.DataScript.DataObjects;
 
 namespace JsonBridge{
 
@@ -21,6 +23,42 @@ namespace JsonBridge{
       this.port = port;
       this.api = api;
     }
+    
+    // TODO move these two helper functions to appropriate place
+
+    /**
+     * Helper method for conversion between Block and BlockData
+     */
+    private BlockData convertFrontEndBlockDataToSerializableData(Block block)
+      => block switch
+      {
+        Block.OPEN => BlockData.OPEN,
+        Block.HOME => BlockData.OPEN,
+        Block.MOUNTAIN => BlockData.BLOCKED,
+        Block.DESERT => BlockData.OPEN,
+        Block.TREE => BlockData.BLOCKED,
+        Block.WATER => BlockData.BLOCKED,
+        Block.HILL => BlockData.OPEN,
+        Block.STAIR => BlockData.STAIR,
+        Block.VOID => BlockData.VOID,
+        _ => throw new Exception("JsonSerDes:: Unknown block data")
+      };
+
+    /**
+     * This method convert dataSer (DataOutSerialized) to RealDataOutSerialized that will be dispatched to the server
+     */
+    private RealDataOutSerialized convertDataSerializedToOutgoingData(DataOutSerialized data)
+      => new RealDataOutSerialized(
+        data.type, data.code,
+        data.grid.Select(l =>
+          l.Select(e => new OutgoingGridObject(
+            convertFrontEndBlockDataToSerializableData(e.block),
+            e.biome, e.level
+          )).ToArray()).ToArray(),
+        data.gems, data.beepers, data.switches, data.portals,
+        data.locks, data.stairs, data.platforms,
+        data.players
+      );
 
     /**
      * This method pack the DataOutSerialized data into serialized json format, and send it to the server,
@@ -36,7 +74,7 @@ namespace JsonBridge{
         return settings;
       };
 
-      var json = JsonConvert.SerializeObject(data, // If a field of serialized object is null then it will be ignored
+      var json = JsonConvert.SerializeObject(convertDataSerializedToOutgoingData(data), // If a field of serialized object is null then it will be ignored
         Formatting.Indented,
         new JsonSerializerSettings
         {
