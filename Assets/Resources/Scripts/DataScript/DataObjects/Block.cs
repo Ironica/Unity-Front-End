@@ -8,11 +8,23 @@ public enum Block
   [EnumMember(Value = "OPEN")]
   OPEN,
 
-  [EnumMember(Value = "BLOCKED")]
-  BLOCKED,
+  [EnumMember(Value = "OPEN")]
+  HOME,
 
-  [EnumMember(Value = "LOCK")]
-  LOCK,
+  [EnumMember(Value = "BLOCKED")]
+  MOUNTAIN,
+
+  [EnumMember(Value = "OPEN")]
+  DESERT,
+
+  [EnumMember(Value = "BLOCKED")]
+  TREE,
+
+  [EnumMember(Value = "BLOCKED")]
+  WATER,
+
+  [EnumMember(Value = "OPEN")]
+  HILL,
 
   [EnumMember(Value = "STAIR")]
   STAIR,

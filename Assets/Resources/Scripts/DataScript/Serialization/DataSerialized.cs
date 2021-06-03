@@ -86,7 +86,7 @@ namespace JsonBridge{
     public string type; // TODO change this to enum
     public string code;
 
-    public string[][] grid;
+    public GridString[][] grid;
 
     public Coordinates[] gems;
     public Coordinates[] beepers;

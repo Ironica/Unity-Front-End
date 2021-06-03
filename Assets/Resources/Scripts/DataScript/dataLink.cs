@@ -14,13 +14,13 @@ using JsonBridge;
 using Newtonsoft.Json;
 using Resources.Scripts;
 using Resources.Scripts.DataScript;
-using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 // Test
 public class dataLink : MonoBehaviour
 {
 
+  public JsonBridge.DataInSerialized dataIn;
   public JsonBridge.DataOutSerialized dataSer;
   public JsonBridge.DataInSerialized dataString;
   public Data dataObj;
@@ -40,6 +40,10 @@ public class dataLink : MonoBehaviour
   private string open       = "Prefabs/PLAIN_OPEN_LEVEL";
   private string home       = "Prefabs/PLAIN_HOME_LEVEL";
   private string mountain   = "Prefabs/PLAIN_MOUNTAIN_LEVEL";
+  private string desert     = "Prefabs/PLAIN_DESERT_LEVEL";
+  private string tree       = "Prefabs/PLAIN_TREE_LEVEL";
+  private string water      = "Prefabs/PLAIN_WATER_LEVEL";
+  private string hill       = "Prefabs/PLAIN_HILL_LEVEL";
 
   // Stairs
   private string  stairLeft     = "Prefabs/PLAIN_STAIRS_LEFT";
@@ -111,7 +115,8 @@ public class dataLink : MonoBehaviour
   /**
   * This method returns the user's input
   */
-  private string getUserCode(){
+  private string getUserCode()
+  {
     return GameObject.Find("UserCode")
     .GetComponent<InputField>()
     .text;
@@ -127,7 +132,7 @@ public class dataLink : MonoBehaviour
     type = dos.type, code = dos.code,
     grid = dps.grid.Select((l, j) =>
     l.Select((e, i) =>
-    new GridObject(e.block, dos.grid[j][i].biome, e.level)).ToArray()).ToArray(),
+    new GridObject(dos.grid[j][i].block, dos.grid[j][i].biome, e.level)).ToArray()).ToArray(),
     gems = dps.gems, beepers = dps.beepers,
     switches = dos.switches, portals = dps.portals, locks = dps.locks, platforms = dps.platforms,
     stairs = dos.stairs,
@@ -276,23 +281,48 @@ public class dataLink : MonoBehaviour
   => block switch
   {
     Block.OPEN => open + dataObj.grid[j][i].Level,
-    Block.BLOCKED => mountain + dataObj.grid[j][i].Level,
-    Block.LOCK => home + dataObj.grid[j][i].Level,
+    Block.HOME => home + dataObj.grid[j][i].Level,
+    Block.MOUNTAIN => mountain + dataObj.grid[j][i].Level,
+    Block.DESERT => desert + dataObj.grid[j][i].Level,
+    Block.TREE => tree + dataObj.grid[j][i].Level,
+    Block.WATER => water + dataObj.grid[j][i].Level,
+    Block.HILL => hill + dataObj.grid[j][i].Level,
     Block.STAIR => stairDirection(dataObj.stairs.First(e => e.X == j && e.Y == i).Dir),
     Block.VOID => throw new NotImplementedException(),
     _ => throw new Exception("This shouldn't be possible")
   };
+  /*private string tileLevel(string block, int i, int j)
+  => block switch
+  {
+    "PLAIN" => plain + dataObj.grid[j][i].Level,
+    "HOME" => home + dataObj.grid[j][i].Level,
+    "MOUNTAIN" => mountain + dataObj.grid[j][i].Level,
+    "DESERT" => desert + dataObj.grid[j][i].Level,
+    "STAIR" => stairDirection(dataObj.stairs.First(e => e.X == j && e.Y == i).Dir),
+    //Block.VOID => throw new NotImplementedException(),
+    _ => throw new Exception("This shouldn't be possible")
+  };*/
 
-  private GameObject mapInstantiation(GameObject obj, Block block, int level, int x, int y, int i, int j){
+  private GameObject mapInstantiation(GameObject obj, Block block, int level, int x, int y, int i, int j)
+  {
     string tile = tileLevel(block, i, j);
     Vector2 coo = setCoordinates(new Vector2(j-x, i-y));
     obj  = Instantiate(UnityEngine.Resources.Load(tile), new Vector3(coo.x,coo.y, 0), Quaternion.identity) as GameObject;
     obj.transform.parent = tiles.transform;
     return obj;
   }
+  /*private GameObject mapInstantiation(GameObject obj, string block, int level, int x, int y, int i, int j)
+  {
+    string tile = tileLevel(block, i, j);
+    Vector2 coo = setCoordinates(new Vector2(j-x, i-y));
+    obj  = Instantiate(UnityEngine.Resources.Load(tile), new Vector3(coo.x,coo.y, 0), Quaternion.identity) as GameObject;
+    obj.transform.parent = tiles.transform;
+    return obj;
+  }*/
 
 
-  private void playerInstantiation(GameObject tile, Player player){
+  private void playerInstantiation(GameObject tile, Player player)
+  {
     float playerLevel = 0.25f;
     string playerPrefab = playerDirection(player.Dir);
     int level = dataObj.grid[player.Y][player.X].Level;
@@ -320,7 +350,8 @@ public class dataLink : MonoBehaviour
     gemObjects.Add(gemObject);
   }
 
-  private void instantiation(bool tileInstantiation){
+  private void instantiation(bool tileInstantiation)
+  {
     // Create Game Object
     // Note. Can only use array of GameObject[,], if we use GameObject[][] Unity will create lots of GameObject
     if(tileInstantiation)
@@ -334,13 +365,14 @@ public class dataLink : MonoBehaviour
     // Since we use GameObject[,], sorry no Linq but only imperative loop
     if(tileInstantiation)
     {
-      Debug.Log("Only once billy");
       for (var i = 0; i < gridObject.GetLength(1); i++)
       {
         for (var j = 0; j < gridObject.GetLength(0); j++)
         {
           var tile = dataObj.grid[j][i];
           gridObject[j, i] = mapInstantiation(gridObject[j, i], tile.Block, tile.Level, x, y, i, j);
+          //gridObject[j, i] = mapInstantiation(gridObject[j, i], dataIn.grid[j][i].block, tile.Level, x, y, i, j);
+
         }
       }
     }
@@ -382,48 +414,20 @@ public class dataLink : MonoBehaviour
     }
   }
 
-  public void changeMap()
-  {
-    Debug.Log(gameBoard);
-    foreach (Transform child in gameBoard.transform)
-    {
-      Destroy(child.gameObject); // Destroy last frame
-    }
-    foreach (Transform child in tiles.transform)
-    {
-      Destroy(child.gameObject); // Destroy last frame
-    }
-
-    //Pour récupérer le nom
-
-    currentMap= StatData.getCurrent();
-
-
-    //Fin
-
-    dataSer = des.deserialization(pathStarterMap + currentMap);
-
-    dataObj = new Data();
-
-    converter = new JsonBridge.DataConvert(dataSer, dataObj);
-    converter.serializedToObject();
-
-    instantiation(true);
-  }
 
   // Start is called before the first frame update
   private void Start()
   {
 
-   gameBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Elements").gameObject as GameObject;
-   tiles = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Tiles").gameObject as GameObject;
+    gameBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Elements").gameObject as GameObject;
+    tiles = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Tiles").gameObject as GameObject;
 
     progression = gameObject.transform.Find("Progress_Bar").gameObject.GetComponent<Slider>();
     progression.value = 0;
 
     //TODO Get the name of the map from the maps interface
-    currentMap = StatData.getCurrent();
-    //currentMap = "map5.json";
+    //currentMap = StatData.getCurrent();
+    currentMap = "map5.json";
 
     // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
     des = new JsonSerDes(url, Global.port, api);
@@ -432,7 +436,8 @@ public class dataLink : MonoBehaviour
 
     dataObj = new Data();
 
-    converter = new JsonBridge.DataConvert(dataSer, dataObj);
+    converter = new JsonBridge.DataConvert(dataIn, dataSer, dataObj);
+    //converter.stringToSerialized();
     converter.serializedToObject();
 
     //string response  = des.serialization(dataSer, pathStarterMap + currentMap);
@@ -442,27 +447,27 @@ public class dataLink : MonoBehaviour
   }
 
   // TEST pour le change map
- /* private void Update()
- {
-   if (Input.GetKeyDown(KeyCode.A))
-   {
-     changeMap();
-   }
- }*/
-
-  // TODO copy this method to each scene
-  private void OnApplicationQuit()
+  /* private void Update()
   {
-    var shutdownApi = "simulatte/shutdown";
-    new ShutDown(shutdownApi, Global.port).ShutDownOldServer();
+  if (Input.GetKeyDown(KeyCode.A))
+  {
+  changeMap();
+}
+}*/
 
-    foreach (Transform child in gameBoard.transform)
-    {
-      Destroy(child.gameObject); // Destroy last frame
-    }
-    foreach (Transform child in tiles.transform)
-    {
-      Destroy(child.gameObject); // Destroy last frame
-    }
+// TODO copy this method to each scene
+private void OnApplicationQuit()
+{
+  var shutdownApi = "simulatte/shutdown";
+  new ShutDown(shutdownApi, Global.port).ShutDownOldServer();
+
+  foreach (Transform child in gameBoard.transform)
+  {
+    Destroy(child.gameObject); // Destroy last frame
   }
+  foreach (Transform child in tiles.transform)
+  {
+    Destroy(child.gameObject); // Destroy last frame
+  }
+}
 }
