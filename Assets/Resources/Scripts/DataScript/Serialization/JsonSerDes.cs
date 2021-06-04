@@ -23,7 +23,7 @@ namespace JsonBridge{
       this.port = port;
       this.api = api;
     }
-    
+
     // TODO move these two helper functions to appropriate place
 
     /**
@@ -64,7 +64,7 @@ namespace JsonBridge{
      * This method pack the DataOutSerialized data into serialized json format, and send it to the server,
      * then it returns the response from server
      */
-    public string serialization(DataOutSerialized data, string map)
+    public string serialization(DataOutSerialized data)
     {
 
       JsonConvert.DefaultSettings = () => // We triggered the JsonConvert's setting so that it takes enums' values into account
@@ -81,7 +81,7 @@ namespace JsonBridge{
           NullValueHandling = NullValueHandling.Ignore
         });
 
-      Debug.Log("Serialization done"); // TODO remove redundant serialization
+      Debug.Log("Serialization done");
 
       return new JsonRequestHandler($"{url}:{port}/{api}")
       .Feed(json)
