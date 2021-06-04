@@ -94,7 +94,7 @@ namespace JsonBridge{
     public Coordinates[] beepers;
     public SwitchSerialized[] switches;
     public PortalSerialized[] portals;
-    
+
     public LockSerialized[] locks;
     public StairSerialized[] stairs;
     public PlatformSerialized[] platforms;
@@ -103,16 +103,16 @@ namespace JsonBridge{
 
     // We reserve a constructor for function call
     public RealDataOutSerialized(
-      string type, 
-      string code, 
-      OutgoingGridObject[][] grid, 
-      Coordinates[] gems, 
+      string type,
+      string code,
+      OutgoingGridObject[][] grid,
+      Coordinates[] gems,
       Coordinates[] beepers,
-      SwitchSerialized[] switches, 
+      SwitchSerialized[] switches,
       PortalSerialized[] portals,
       LockSerialized[] locks,
       StairSerialized[] stairs,
-      PlatformSerialized[] platforms, 
+      PlatformSerialized[] platforms,
       PlayerSerialized[] players)
     {
       this.type = type;
@@ -127,31 +127,6 @@ namespace JsonBridge{
       this.platforms = platforms;
       this.players = players;
     }
-  }
-
-  public class DataInSerialized
-  {
-    public string type; // TODO change this to enum
-    public string code;
-
-    public GridString[][] grid;
-
-    public Coordinates[] gems;
-    public Coordinates[] beepers;
-    public SwitchSerialized[] switches;
-    public PortalSerialized[] portals;
-
-    public LockSerialized[] locks;
-    public StairSerialized[] stairs;
-    public PlatformSerialized[] platforms;
-
-    public PlayerSerialized[] players;
-
-    public string consoleLog;
-    public string special;
-
-    public DataInSerialized(){}
-
   }
 
   /**

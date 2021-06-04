@@ -20,57 +20,67 @@ using Debug = UnityEngine.Debug;
 public class dataLink : MonoBehaviour
 {
 
-  public JsonBridge.DataInSerialized dataIn;
-  public JsonBridge.DataOutSerialized dataSer;
-  public JsonBridge.DataInSerialized dataString;
-  public Data dataObj;
-  public JsonBridge.DataConvert converter;
-  private JsonBridge.JsonSerDes des;
-  private List<JsonBridge.DataOutSerialized> payloads;
-  private string currentMap;
-  GameObject[,] gridObject;
-  List<GameObject> gemObjects = new List<GameObject>();
-  List<GameObject> switchObjects = new List<GameObject>();
-  GameObject playerObject;
-
-  private Slider progression;
-  private GameObject gameBoard;
-  private GameObject tiles;
-
-  //Ground
-  private string open       = "Prefabs/PLAIN_OPEN_LEVEL";
-  private string home       = "Prefabs/PLAIN_HOME_LEVEL";
-  private string mountain   = "Prefabs/PLAIN_MOUNTAIN_LEVEL";
-  private string desert     = "Prefabs/PLAIN_DESERT_LEVEL";
-  private string tree       = "Prefabs/PLAIN_TREE_LEVEL";
-  private string water      = "Prefabs/PLAIN_WATER_LEVEL";
-  private string hill       = "Prefabs/PLAIN_HILL_LEVEL";
-
-  // Stairs
-  private string  stairLeft     = "Prefabs/PLAIN_STAIRS_LEFT";
-  private string  stairRight    = "Prefabs/PLAIN_STAIRS_RIGHT";
-  private string  stairBack     = "Prefabs/PLAIN_STAIRS_BACK";
-  private string  stairFront    = "Prefabs/PLAIN_STAIRS_FRON";
-
-  //Players skin
-  private string playerFront = "Prefabs/ITEM/CHARACTER_FRONT";
-  private string playerBack = "Prefabs/ITEM/CHARACTER_BACK";
-  private string playerLeft = "Prefabs/ITEM/CHARACTER_LEFT";
-  private string playerRight = "Prefabs/ITEM/CHARACTER_RIGHT";
-
-  // Items
-  private string gem = "Prefabs/ITEM/GEM";
-  private string switchOn = "Prefabs/ITEM/SWITCH_ON";
-  private string switchOff = "Prefabs/ITEM/SWITCH_OFF";
-
+  //To connect to the server
   private const string url = "http://127.0.0.1";
   private const string api = "simulatte";
 
-  private const string pathStarterMap = "Assets/Resources/MapJson/StarterMap/";
-  private const string pathCurrentMap = "Assets/Resources/MapJson/CurrentMap/";
+  //Data objects
+  public JsonBridge.DataOutSerialized dataSer;
+  public Data dataObj;
 
-  /*public string mapName;
-  public Button myButton;*/
+  //Object for convertion of data
+  public JsonBridge.DataConvert converter;
+
+  //Object to serialize and deserialize
+  private JsonBridge.JsonSerDes des;
+
+  //Server response object
+  private List<JsonBridge.DataOutSerialized> payloads;
+
+  //The name of the displayed map
+  private string currentMap;
+
+  //The progress bar component
+  private Slider progression;
+
+  //Empty parent objects of gameObject
+  private GameObject gameBoard;
+  private GameObject tiles;
+
+  //All GameObject on the screen
+  GameObject[,] gridObject;
+  GameObject playerObject;
+  List<GameObject> gemObjects         = new List<GameObject>();
+  List<GameObject> switchObjects      = new List<GameObject>();
+
+  //Prefabricated tiles
+  private string open                 = "Prefabs/PLAIN_OPEN_LEVEL";
+  private string home                 = "Prefabs/PLAIN_HOME_LEVEL";
+  private string mountain             = "Prefabs/PLAIN_MOUNTAIN_LEVEL";
+  private string desert               = "Prefabs/PLAIN_DESERT_LEVEL";
+  private string tree                 = "Prefabs/PLAIN_TREE_LEVEL";
+  private string water                = "Prefabs/PLAIN_WATER_LEVEL";
+  private string hill                 = "Prefabs/PLAIN_HILL_LEVEL";
+
+  // Stairs
+  private string  stairLeft           = "Prefabs/PLAIN_STAIRS_LEFT";
+  private string  stairRight          = "Prefabs/PLAIN_STAIRS_RIGHT";
+  private string  stairBack           = "Prefabs/PLAIN_STAIRS_BACK";
+  private string  stairFront          = "Prefabs/PLAIN_STAIRS_FRON";
+
+  //Prefabricated stairs
+  private string playerFront          = "Prefabs/ITEM/CHARACTER_FRONT";
+  private string playerBack           = "Prefabs/ITEM/CHARACTER_BACK";
+  private string playerLeft           = "Prefabs/ITEM/CHARACTER_LEFT";
+  private string playerRight          = "Prefabs/ITEM/CHARACTER_RIGHT";
+
+  //Prefabricated items
+  private string gem                  = "Prefabs/ITEM/GEM";
+  private string switchOn             = "Prefabs/ITEM/SWITCH_ON";
+  private string switchOff            = "Prefabs/ITEM/SWITCH_OFF";
+
+  //Maps folder
+  private const string pathStarterMap = "Assets/Resources/MapJson/StarterMap/";
 
   /*
   * * * * Data Flow for DataLink Class and Compile() Method * * * *
@@ -190,7 +200,7 @@ public class dataLink : MonoBehaviour
     //Convert the data to json format
     //Send the json file to the server
     //Get the response from the server
-    string resp = des.serialization(dataSer, pathCurrentMap + currentMap);
+    string resp = des.serialization(dataSer);
 
 
 
@@ -227,7 +237,6 @@ public class dataLink : MonoBehaviour
           payloads.RemoveAt(0);
           converter.dataSer = payload;
           var json = JsonConvert.SerializeObject(converter.dataSer, Formatting.Indented);
-          File.WriteAllText(pathCurrentMap + currentMap, json); // is this useful?
           converter.serializedToObject();
 
           foreach (Transform child in gameBoard.transform)
@@ -429,7 +438,6 @@ public class dataLink : MonoBehaviour
   // Start is called before the first frame update
   private void Start()
   {
-
     gameBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Elements").gameObject as GameObject;
     tiles = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Tiles").gameObject as GameObject;
 
@@ -447,7 +455,7 @@ public class dataLink : MonoBehaviour
 
     dataObj = new Data();
 
-    converter = new JsonBridge.DataConvert(dataIn, dataSer, dataObj);
+    converter = new JsonBridge.DataConvert(dataSer, dataObj);
     //converter.stringToSerialized();
     converter.serializedToObject();
 

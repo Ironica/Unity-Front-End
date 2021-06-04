@@ -12,13 +12,11 @@ namespace JsonBridge {
   public class DataConvert
   {
 
-    public DataInSerialized dataIn;
     public DataOutSerialized dataSer; // Attention to the call-by-ref behavior of dataSer and dataObj
     public Data dataObj;
 
-    public DataConvert(DataInSerialized dataIn, DataOutSerialized dataSer, Data dataObj)
+    public DataConvert(DataOutSerialized dataSer, Data dataObj)
     {
-      this.dataIn = dataIn;
       this.dataSer = dataSer;
       this.dataObj = dataObj;
     }
@@ -65,38 +63,5 @@ namespace JsonBridge {
       dataObj.special = dataSer.special;
 
     }
-
-    /*public void stringToSerialized()
-    {
-      for(int i=0; i<dataIn.grid.GetLength(0); i++){
-        for(int j =0; j<dataIn.grid.GetLength(1); j++){
-          dataSer.grid[i][j] = tileNameToBlock(dataIn.grid[i][j]);
-        }
-      }
-      dataSer.gems = dataIn.gems;
-      dataSer.beepers = dataIn.beepers;
-      dataSer.switches = dataIn.switches;
-      dataSer.portals = dataIn.portals;
-      dataSer.locks = dataIn.locks;
-      dataSer.stairs = dataIn.stairs;
-      dataSer.platforms = dataIn.platforms;
-      dataSer.players = dataIn.players;
-      dataSer.consoleLog = dataIn.consoleLog;
-      dataSer.special = dataIn.special;
-    }
-
-    private GridObject tileNameToBlock(GridString tile)
-    {
-      Block block;
-      if(tile.Equals("MOUNTAIN") || tile.Equals("TREE") || tile.Equals("WATER"))
-      {
-        block = Block.BLOCKED;
-      }
-      else
-      {
-        block = Block.OPEN;
-      }
-      return new GridObject(block, tile.biome, tile.level);
-    }*/
   }
 }
