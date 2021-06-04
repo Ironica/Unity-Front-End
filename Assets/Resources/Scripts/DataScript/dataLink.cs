@@ -459,20 +459,9 @@ public class dataLink : MonoBehaviour
     //converter.stringToSerialized();
     converter.serializedToObject();
 
-    //string response  = des.serialization(dataSer, pathStarterMap + currentMap);
-
     instantiation(true);
 
   }
-
-  // TEST pour le change map
-  /* private void Update()
-  {
-  if (Input.GetKeyDown(KeyCode.A))
-  {
-  changeMap();
-}
-}*/
 
 // TODO copy this method to each scene
 private void OnApplicationQuit()
