@@ -355,30 +355,6 @@ public class dataLink : MonoBehaviour
 
   }
 
-
-  private void switchInstantiation(GameObject tile, Switch switchObj)
-{
-  var switchLevel = -0.35f;
-  string switchPrefab;
-  if(switchObj.On)
-  {
-    switchPrefab = switchOn;
-  }
-  else
-  {
-    switchPrefab = switchOff;
-  }
-  var level = dataObj.grid[switchObj.Y][switchObj.X].Level;
-  switchLevel += (level-1) * 0.4f;
-  var tilePos = tile.transform.position;
-  var coo = new Vector3(tilePos.x, tilePos.y + switchLevel, 0);
-
-  var switchObject = Instantiate(UnityEngine.Resources.Load(switchPrefab), coo, Quaternion.identity) as GameObject;
-  switchObject.transform.parent = gameBoard.transform;
-  switchObject.GetComponent<SpriteRenderer>().sortingOrder = level;
-  switchObjects.Add(switchObject);
-}
-
   private void instantiation(bool tileInstantiation)
   {
     // Create Game Object
