@@ -22,13 +22,15 @@ namespace JsonBridge{
   */
   public class ResponseModel: IModel
   {
-    public ResponseModel(string status, DataPayloadSerialized[] payload)
+    public ResponseModel(string status, DataPayloadSerialized[] payload, string game)
     {
       this.status = status;
       this.payload = payload;
+      this.game = game;
     }
 
     public string status { get; }
+    public string game { get; }
     public DataPayloadSerialized[] payload { get; }
   }
 
@@ -167,6 +169,7 @@ namespace JsonBridge{
     public Coordinates[] gems;
     public Coordinates[] beepers;
 
+    public SwitchSerialized[] switches;
     public PortalSerialized[] portals;
     public PlatformSerialized[] platforms;
     public LockSerialized[] locks;
