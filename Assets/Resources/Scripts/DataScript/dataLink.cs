@@ -69,10 +69,17 @@ public class dataLink : MonoBehaviour
   private string  stairFront          = "Prefabs/PLAIN_STAIRS_FRON";
 
   //Prefabricated stairs
-  private string playerFront          = "Prefabs/ITEM/CHARACTER_FRONT";
+  /*private string playerFront          = "Prefabs/ITEM/CHARACTER_FRONT";
   private string playerBack           = "Prefabs/ITEM/CHARACTER_BACK";
   private string playerLeft           = "Prefabs/ITEM/CHARACTER_LEFT";
-  private string playerRight          = "Prefabs/ITEM/CHARACTER_RIGHT";
+  private string playerRight          = "Prefabs/ITEM/CHARACTER_RIGHT";*/
+  private string player;
+  private string police               = "Prefabs/ITEM/CHARACTER";
+  private string frog                 = "Prefabs/ITEM/FROG";
+  private string playerFront          = "_FRONT";
+  private string playerBack           = "_BACK";
+  private string playerLeft           = "_LEFT";
+  private string playerRight          = "_RIGHT";
 
   //Prefabricated items
   private string gem                  = "Prefabs/ITEM/GEM";
@@ -237,7 +244,7 @@ public class dataLink : MonoBehaviour
           payloads.RemoveAt(0);
 
           // Debug.Log(payload.switches.Aggregate("", (str, sw) => $"{str}:{sw.on}:"));
-          
+
           converter.dataSer = payload;
           var json = JsonConvert.SerializeObject(converter.dataSer, Formatting.Indented);
           converter.serializedToObject();
@@ -295,10 +302,10 @@ public class dataLink : MonoBehaviour
   private string playerDirection(Direction dir)
   => dir switch
   {
-    Direction.UP => playerFront,
-    Direction.DOWN => playerBack,
-    Direction.LEFT => playerLeft,
-    Direction.RIGHT => playerRight,
+    Direction.UP => player+playerFront,
+    Direction.DOWN => player+playerBack,
+    Direction.LEFT => player+playerLeft,
+    Direction.RIGHT => player+playerRight,
     _ => throw new Exception("This shouldn't be possible")
   };
 
@@ -357,7 +364,7 @@ public class dataLink : MonoBehaviour
 
 
   private void switchInstantiation(GameObject tile, Switch switchObj)
-  { 
+  {
     var switchLevel = 0.00f;
     string switchPrefab = switchObj.On ? switchOn : switchOff;
     var level = dataObj.grid[switchObj.Y][switchObj.X].Level;
@@ -407,7 +414,7 @@ public class dataLink : MonoBehaviour
     }
 
     // Debug.Log(dataObj.switches.Aggregate("", (str, sw) => $"{str}:{sw.On}:"));
-    
+
     foreach (var switchCoo in dataObj.switches)
     {
       switchInstantiation(gridObject[switchCoo.Y, switchCoo.X], new Switch(switchCoo.X, switchCoo.Y, switchCoo.On));
@@ -456,6 +463,8 @@ public class dataLink : MonoBehaviour
     //TODO Get the name of the map from the maps interface
     currentMap = StatData.getCurrent();
     //currentMap = "map5.json";
+
+    player = frog;
 
     // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
     des = new JsonSerDes(url, Global.port, api);
