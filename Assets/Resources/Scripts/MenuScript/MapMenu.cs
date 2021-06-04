@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Resources.Scripts;
+using Resources.Scripts.DataScript;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,5 +23,11 @@ public class MapMenu : MonoBehaviour
  {
   StatData.setCurrent("Test.json");
   SceneManager.LoadScene("Interface");
+ }
+ 
+ private void OnApplicationQuit()
+ {
+  var shutdownApi = "simulatte/shutdown";
+  new ShutDown(shutdownApi, Global.port).ShutDownOldServer();
  }
 }

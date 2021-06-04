@@ -146,7 +146,7 @@ public class dataLink : MonoBehaviour
     l.Select((e, i) =>
     new GridObject(dos.grid[j][i].block, dos.grid[j][i].biome, e.level)).ToArray()).ToArray(),
     gems = dps.gems, beepers = dps.beepers,
-    switches = dos.switches, portals = dps.portals, locks = dps.locks, platforms = dps.platforms,
+    switches = dps.switches, portals = dps.portals, locks = dps.locks, platforms = dps.platforms,
     stairs = dos.stairs,
     players = dps.players,
     special = dps.special,
@@ -235,6 +235,9 @@ public class dataLink : MonoBehaviour
         {
           var payload = payloads[0];
           payloads.RemoveAt(0);
+
+          // Debug.Log(payload.switches.Aggregate("", (str, sw) => $"{str}:{sw.on}:"));
+          
           converter.dataSer = payload;
           var json = JsonConvert.SerializeObject(converter.dataSer, Formatting.Indented);
           converter.serializedToObject();
@@ -255,6 +258,17 @@ public class dataLink : MonoBehaviour
         }
 
         Debug.Log("All frames executed successfully.");
+
+        // Use this structure to handle the end of game procedure, e.g. you can add some layout and effects for different status
+        var gameStatusMessage = rspAns.game switch
+        {
+          "WIN" => "You win! The game has completed successfully.",
+          "LOST" => "You lost! The game has finished.",
+          "PENDING" => "The game was not finished..",
+          _ => throw new Exception("Unsupported game status")
+        };
+
+        Debug.Log(gameStatusMessage);
 
         return;
       }
@@ -327,29 +341,6 @@ public class dataLink : MonoBehaviour
     gemObjects.Add(gemObject);
   }
 
-  private void switchInstantiation(GameObject tile, Switch switchObj)
-  {
-    var switchLevel = -0.35f;
-    string switchPrefab;
-    if(switchObj.On)
-    {
-      switchPrefab = switchOn;
-    }
-    else
-    {
-      switchPrefab = switchOff;
-    }
-    var level = dataObj.grid[switchObj.Y][switchObj.X].Level;
-    switchLevel += (level-1) * 0.4f;
-    var tilePos = tile.transform.position;
-    var coo = new Vector3(tilePos.x, tilePos.y + switchLevel, 0);
-
-    var switchObject = Instantiate(UnityEngine.Resources.Load(switchPrefab), coo, Quaternion.identity) as GameObject;
-    switchObject.transform.parent = gameBoard.transform;
-    switchObject.GetComponent<SpriteRenderer>().sortingOrder = level;
-    switchObjects.Add(switchObject);
-  }
-
   private void playerInstantiation(GameObject tile, Player player)
   {
     float playerLevel = 0.25f;
@@ -362,6 +353,22 @@ public class dataLink : MonoBehaviour
     playerObject.transform.parent = gameBoard.transform;
     playerObject.GetComponent<SpriteRenderer>().sortingOrder = level+1;
 
+  }
+
+
+  private void switchInstantiation(GameObject tile, Switch switchObj)
+  { 
+    var switchLevel = 0.00f;
+    string switchPrefab = switchObj.On ? switchOn : switchOff;
+    var level = dataObj.grid[switchObj.Y][switchObj.X].Level;
+    switchLevel += (level-1) * 0.4f;
+    var tilePos = tile.transform.position;
+    var coo = new Vector3(tilePos.x, tilePos.y + switchLevel, 0);
+
+    var switchObject = Instantiate(UnityEngine.Resources.Load(switchPrefab), coo, Quaternion.identity) as GameObject;
+    switchObject.transform.parent = gameBoard.transform;
+    switchObject.GetComponent<SpriteRenderer>().sortingOrder = level;
+    switchObjects.Add(switchObject);
   }
 
   private void instantiation(bool tileInstantiation)
@@ -399,6 +406,8 @@ public class dataLink : MonoBehaviour
       GemInstantiation(gridObject[gemCoo.y, gemCoo.x], new Gem(gemCoo.x, gemCoo.y));
     }
 
+    // Debug.Log(dataObj.switches.Aggregate("", (str, sw) => $"{str}:{sw.On}:"));
+    
     foreach (var switchCoo in dataObj.switches)
     {
       switchInstantiation(gridObject[switchCoo.Y, switchCoo.X], new Switch(switchCoo.X, switchCoo.Y, switchCoo.On));
