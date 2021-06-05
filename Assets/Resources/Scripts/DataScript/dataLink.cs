@@ -35,7 +35,7 @@ public class dataLink : MonoBehaviour
   private JsonBridge.JsonSerDes des;
 
   //Server response object
-  private List<JsonBridge.DataOutSerialized> payloads;
+  private List<JsonBridge.DataOutSerialized> payloads = new List<DataOutSerialized>();
 
   //The name of the displayed map
   private string currentMap;
@@ -207,8 +207,9 @@ public class dataLink : MonoBehaviour
     //Convert the data to json format
     //Send the json file to the server
     //Get the response from the server
-    string resp = des.serialization(dataSer);
-
+    string resp = await Task.Run(() => des.serialization(dataSer));
+    // use of the async-await pattern so that the UI won't be blocked
+    // in the future could we add some more features during the awaiting time, e.g. a banner, or some notification or some animation???
 
 
     //Deserialization of the response
