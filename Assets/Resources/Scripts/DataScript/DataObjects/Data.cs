@@ -13,7 +13,7 @@ using UnityEngine;
  *
  * - Biome, Block, Direction, Role are enums. Pay attention to "EnumMember" annotation which allows Json Serializer
  *   to recognize their string values.
- * 
+ *
  * - notice that in Data class some items are recorded with Coordinates class. However, you will need to instantialize
  *   the proper classes in last procedure to deal with dataObj.
  */
@@ -23,7 +23,7 @@ using UnityEngine;
  * It should only carry info that's useful to the rendering of the playground
  */
 public class Data{
-  public Tile[][] grid; 
+  public Tile[][] grid;
   public Coordinates[] gems;
   public Coordinates[] beepers;
   public Switch[] switches;
