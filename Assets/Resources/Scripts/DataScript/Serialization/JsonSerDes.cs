@@ -116,5 +116,15 @@ namespace JsonBridge{
       return JsonConvert.DeserializeObject<DataOutSerialized>(mapJson);
     }
 
+    public Inventory inventoryDeserialization(){
+      string inventory = System.IO.File.ReadAllText("Assets/Resources/Inventory/inventory.json");
+      return JsonConvert.DeserializeObject<Inventory>(inventory);
+    }
+
+    public void inventorySerialization(Inventory i){
+      string texte =  JsonConvert.SerializeObject(i);
+      File.WriteAllText("Assets/Resources/Inventory/inventory.json", texte);
+    }
+
   }
 }

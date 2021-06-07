@@ -5,14 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public class DataMap
 {
-    public string name;
-    public bool[] goals;
-    public string code;
+    public string name {get; set;}
+    public string code {get; set;}
+    public int maxGem {get; set;}
+    public bool win {get; set;}
 
-    public DataMap(string name, string code)
+    public DataMap()
     {
-        this.name = name;
-        this.code = code;
-    }
 
+    }
 }

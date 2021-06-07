@@ -76,6 +76,8 @@ namespace JsonBridge{
     public string consoleLog;
     public string special;
 
+    //public GamingConditions gamingConditions;
+
     public DataOutSerialized()
     {
 

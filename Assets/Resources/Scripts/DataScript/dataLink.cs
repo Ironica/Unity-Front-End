@@ -89,6 +89,9 @@ public class dataLink : MonoBehaviour
   //Maps folder
   private const string pathStarterMap = "Assets/Resources/MapJson/StarterMap/";
 
+  //Inventory, with all the gems collected
+  private Inventory pocket;
+
   /*
   * * * * Data Flow for DataLink Class and Compile() Method * * * *
   *
@@ -181,6 +184,10 @@ public class dataLink : MonoBehaviour
     instantiation(false);
   }
 
+
+  public void getGem(Gem[] gems){
+
+  }
   /*
   **  Method called when the user compiles his code
   */
@@ -237,13 +244,20 @@ public class dataLink : MonoBehaviour
 
         progression.maxValue = payloads.Count;
 
+        int gemsNumber = payloads[0].gems.Length;
+        var gems = 0;
+
         // Loop into each payload to extract data and send to dataObj
         while (payloads.Count > 0)
         {
           var payload = payloads[0];
+          gems = gemsNumber - payload.gems.Length;
           payloads.RemoveAt(0);
 
           // Debug.Log(payload.switches.Aggregate("", (str, sw) => $"{str}:{sw.on}:"));
+
+          //Debug.Log("Switch on: " + payload.switches.Aggregate(0, (cnt, sw) => cnt + (sw.on ? 1 : 0)));
+
 
           converter.dataSer = payload;
           var json = JsonConvert.SerializeObject(converter.dataSer, Formatting.Indented);
@@ -274,6 +288,12 @@ public class dataLink : MonoBehaviour
           "PENDING" => "The game was not finished..",
           _ => throw new Exception("Unsupported game status")
         };
+
+        if(true/*rspAns.game.Equals("WIN")*/){//TODO change when we will have the win system
+          Debug.Log("gems: " + gems);
+          pocket.gems += gems;
+          des.inventorySerialization(pocket);
+        }
 
         Debug.Log(gameStatusMessage);
 
@@ -378,6 +398,7 @@ public class dataLink : MonoBehaviour
     switchObjects.Add(switchObject);
   }
 
+
   private void instantiation(bool tileInstantiation)
   {
     // Create Game Object
@@ -430,13 +451,11 @@ public class dataLink : MonoBehaviour
   private void Awake()
   {
 
-
   }
 
   public void saveMap()
   {
-    DataMap dataMap = new DataMap(currentMap, getUserCode());
-    dataMap.goals = new bool[]{true, false, false, true};
+    DataMap dataMap = new DataMap();
     SaveMapManager.saveData(dataMap);
   }
 
@@ -468,6 +487,10 @@ public class dataLink : MonoBehaviour
 
     // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
     des = new JsonSerDes(url, Global.port, api);
+
+    pocket = des.inventoryDeserialization();
+    Debug.Log(pocket.gems);
+
 
     dataSer = des.deserialization(pathStarterMap + currentMap);
 
