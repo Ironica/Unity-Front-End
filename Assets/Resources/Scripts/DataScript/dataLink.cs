@@ -69,11 +69,7 @@ public class dataLink : MonoBehaviour
   private string  stairBack           = "Prefabs/PLAIN_STAIRS_BACK";
   private string  stairFront          = "Prefabs/PLAIN_STAIRS_FRON";
 
-  //Prefabricated stairs
-  /*private string playerFront          = "Prefabs/ITEM/CHARACTER_FRONT";
-  private string playerBack           = "Prefabs/ITEM/CHARACTER_BACK";
-  private string playerLeft           = "Prefabs/ITEM/CHARACTER_LEFT";
-  private string playerRight          = "Prefabs/ITEM/CHARACTER_RIGHT";*/
+  //Prefabricated players
   private string player;
   private string police               = "Prefabs/ITEM/CHARACTER";
   private string frog                 = "Prefabs/ITEM/FROG";
@@ -246,7 +242,7 @@ public class dataLink : MonoBehaviour
         progression.maxValue = payloads.Count;
 
         int gemsNumber = payloads[0].gems.Length;
-        int switchesNumber = payload[0].switches.Length;
+        int switchesNumber = payloads[0].switches.Length;
         int monsterNumber = 0;
 
         var gems = 0;
@@ -284,6 +280,11 @@ public class dataLink : MonoBehaviour
           string switchesScore = switchOn + "/" + switchesNumber;
           string monsterScore = 0 + "/" + monsterNumber;
 
+          GameObject ScoreBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("ScoreBoard").gameObject as GameObject;
+          ScoreBoard.transform.Find("GemScore").gameObject.GetComponent<Text>().text = gemsScore;
+          ScoreBoard.transform.Find("SwitchScore").gameObject.GetComponent<Text>().text = switchesScore;
+          ScoreBoard.transform.Find("KillScore").gameObject.GetComponent<Text>().text = monsterScore;
+
           //Sleep for 1 seconds
           await Task.Delay(250);
           //Debug.Log("Frame " + i);
@@ -319,7 +320,7 @@ public class dataLink : MonoBehaviour
 
         Debug.Log(gameStatusMessage);
 
-      saveMap();
+        saveMap();
 
         return;
       }
