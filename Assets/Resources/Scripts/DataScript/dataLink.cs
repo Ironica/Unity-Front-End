@@ -241,8 +241,8 @@ public class dataLink : MonoBehaviour
 
         progression.maxValue = payloads.Count;
 
-        int gemsNumber = payloads[0].gems.Length;
-        int switchesNumber = payloads[0].switches.Length;
+        int gemsNumber = payloads.FirstOrDefault()?.gems?.Length ?? 0;
+        int switchesNumber = payloads.FirstOrDefault()?.switches?.Length ?? 0;
         int monsterNumber = 0;
 
         var gems = 0;
