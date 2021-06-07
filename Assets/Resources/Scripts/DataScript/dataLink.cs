@@ -246,8 +246,13 @@ public class dataLink : MonoBehaviour
         progression.maxValue = payloads.Count;
 
         int gemsNumber = payloads[0].gems.Length;
+        int switchesNumber = payload[0].switches.Length;
+        int monsterNumber = 0;
+
         var gems = 0;
         var switchOn = 0;
+
+
 
         // Loop into each payload to extract data and send to dataObj
         while (payloads.Count > 0)
@@ -274,6 +279,10 @@ public class dataLink : MonoBehaviour
           instantiation(false); // call method on dataObj to update it
 
           progression.value += 1;
+
+          string gemsScore = gems + "/" + gemsNumber;
+          string switchesScore = switchOn + "/" + switchesNumber;
+          string monsterScore = 0 + "/" + monsterNumber;
 
           //Sleep for 1 seconds
           await Task.Delay(250);
