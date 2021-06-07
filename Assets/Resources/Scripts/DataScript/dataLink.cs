@@ -508,7 +508,6 @@ public class dataLink : MonoBehaviour
   // Start is called before the first frame update
   private void Start()
   {
-
     gameBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Elements").gameObject as GameObject;
     tiles = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Tiles").gameObject as GameObject;
 
@@ -537,6 +536,13 @@ public class dataLink : MonoBehaviour
     converter = new JsonBridge.DataConvert(dataSer, dataObj);
     //converter.stringToSerialized();
     converter.serializedToObject();
+
+    GameObject ScoreBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("ScoreBoard").gameObject as GameObject;
+
+    ScoreBoard.transform.Find("GemScore").gameObject.GetComponent<Text>().text = "0/" + dataObj.gems.Length;
+    ScoreBoard.transform.Find("SwitchScore").gameObject.GetComponent<Text>().text = dataObj.switches.Count(sw => sw.On == true) + "/" + dataObj.switches.Length;
+    ScoreBoard.transform.Find("KillScore").gameObject.GetComponent<Text>().text = "0/" + 0;
+
 
     instantiation(true);
 
