@@ -6,7 +6,6 @@ public static class SaveMapManager
 {
   public static void saveData(DataMap map)
   {
-    Debug.Log("in SaveMapManager scripts: " + map.maxGem);
     BinaryFormatter formatter = new BinaryFormatter();
     string path = Application.persistentDataPath + "/" + map.name + ".save";
     FileStream stream = new FileStream(path, FileMode.Create);

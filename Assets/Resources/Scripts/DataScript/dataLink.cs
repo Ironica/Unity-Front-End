@@ -247,6 +247,7 @@ public class dataLink : MonoBehaviour
 
         int gemsNumber = payloads[0].gems.Length;
         var gems = 0;
+        var switchOn = 0;
 
         // Loop into each payload to extract data and send to dataObj
         while (payloads.Count > 0)
@@ -255,8 +256,9 @@ public class dataLink : MonoBehaviour
           gems = gemsNumber - payload.gems.Length;
           payloads.RemoveAt(0);
 
-          // Debug.Log(payload.switches.Aggregate("", (str, sw) => $"{str}:{sw.on}:"));
-
+          //Debug.Log(payload.switches.Aggregate("", (str, sw) => $"{str}:{sw.on}:"));
+          switchOn = payload.switches.Count(sw => sw.on == true);
+          Debug.Log("switchOn: " + switchOn);
           //Debug.Log("Switch on: " + payload.switches.Aggregate(0, (cnt, sw) => cnt + (sw.on ? 1 : 0)));
 
 
@@ -284,6 +286,13 @@ public class dataLink : MonoBehaviour
         if(gems > dataMap.maxGem)
         {
           dataMap.maxGem = gems;
+        }
+        if(switchOn > dataMap.maxSwitchOn)
+        {
+          Debug.Log("Update switch");
+          Debug.Log("switchOn: " + switchOn);
+          Debug.Log("dataMap.maxSwitchOn: " + dataMap.maxSwitchOn);
+          dataMap.maxSwitchOn = switchOn;
         }
 
         // Use this structure to handle the end of game procedure, e.g. you can add some layout and effects for different status
@@ -476,6 +485,7 @@ public class dataLink : MonoBehaviour
     if(load != null){
       dataMap.code = load.code;
       dataMap.maxGem = load.maxGem;
+      dataMap.maxSwitchOn = load.maxSwitchOn;
       dataMap.win = load.win;
       GameObject.Find("UserCode")
       .GetComponent<InputField>()
