@@ -10,8 +10,11 @@ public class DataMap
     public int maxGem {get; set;}
     public bool win {get; set;}
 
-    public DataMap()
+    public DataMap(string name)
     {
-
+      this.name = name;
+      code = "";
+      maxGem = 0;
+      win = false;
     }
 }

@@ -6,31 +6,30 @@ public static class SaveMapManager
 {
   public static void saveData(DataMap map)
   {
+    Debug.Log("in SaveMapManager scripts: " + map.maxGem);
     BinaryFormatter formatter = new BinaryFormatter();
     string path = Application.persistentDataPath + "/" + map.name + ".save";
-    Debug.Log(path);
     FileStream stream = new FileStream(path, FileMode.Create);
 
     formatter.Serialize(stream, map);
     stream.Close();
   }
 
-  public static DataMap loadData(string mapName)
+  public static DataMap loadData(DataMap map)
   {
-    string path = Application.persistentDataPath + "/" + mapName + ".save";
+    string path = Application.persistentDataPath + "/" + map.name + ".save";
     if(File.Exists(path))
     {
       BinaryFormatter formatter = new BinaryFormatter();
       FileStream stream = new FileStream(path, FileMode.Open);
 
-      DataMap map = formatter.Deserialize(stream) as DataMap;
+      map = formatter.Deserialize(stream) as DataMap;
       stream.Close();
 
       return map;
       } else
       {
-        Debug.LogError("Save file not found in " + path);
-        return null;
+        return new DataMap(map.name);
       }
     }
 

@@ -27,6 +27,7 @@ public class dataLink : MonoBehaviour
   //Data objects
   public JsonBridge.DataOutSerialized dataSer;
   public Data dataObj;
+  public DataMap dataMap;
 
   //Object for convertion of data
   public JsonBridge.DataConvert converter;
@@ -203,7 +204,6 @@ public class dataLink : MonoBehaviour
     dataSer.code = getUserCode(); // Since this.dataSer doesn't change i.e the map doesn't change, we could use it.
     // Should we remove the following lines of code before "Data conversion done"?
     // dataObj.code = getUserCode();
-    Debug.Log(dataObj.code); // useless? since it's always null
 
     //Convert the data object to data serializable
     // converter.dataObj = this.dataObj;
@@ -281,6 +281,11 @@ public class dataLink : MonoBehaviour
 
         Debug.Log("All frames executed successfully.");
 
+        if(gems > dataMap.maxGem)
+        {
+          dataMap.maxGem = gems;
+        }
+
         // Use this structure to handle the end of game procedure, e.g. you can add some layout and effects for different status
         var gameStatusMessage = rspAns.game switch
         {
@@ -291,12 +296,12 @@ public class dataLink : MonoBehaviour
         };
 
         if(true/*rspAns.game.Equals("WIN")*/){//TODO change when we will have the win system
-          Debug.Log("gems: " + gems);
-          pocket.gems += gems;
-          des.inventorySerialization(pocket);
+          dataMap.win = true;
         }
 
         Debug.Log(gameStatusMessage);
+
+      saveMap();
 
         return;
       }
@@ -456,24 +461,34 @@ public class dataLink : MonoBehaviour
 
   public void saveMap()
   {
-    DataMap dataMap = new DataMap();
+    if(dataMap == null){
+      dataMap = new DataMap(currentMap);
+    }
+    dataMap.code = GameObject.Find("UserCode")
+    .GetComponent<InputField>()
+    .text;
     SaveMapManager.saveData(dataMap);
   }
 
   public void loadMap()
   {
-    DataMap dataMap = SaveMapManager.loadData(currentMap);
-    if(dataMap != null){
+    var load = SaveMapManager.loadData(dataMap);
+    if(load != null){
+      dataMap.code = load.code;
+      dataMap.maxGem = load.maxGem;
+      dataMap.win = load.win;
       GameObject.Find("UserCode")
       .GetComponent<InputField>()
       .text = dataMap.code;
     }
+
   }
 
 
   // Start is called before the first frame update
   private void Start()
   {
+
     gameBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Elements").gameObject as GameObject;
     tiles = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Tiles").gameObject as GameObject;
 
@@ -482,6 +497,8 @@ public class dataLink : MonoBehaviour
 
     //TODO Get the name of the map from the maps interface
     currentMap = StatData.getCurrent();
+    dataMap = new DataMap(currentMap);
+    loadMap();
     //currentMap = "map5.json";
 
     player = frog;
@@ -489,8 +506,8 @@ public class dataLink : MonoBehaviour
     // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
     des = new JsonSerDes(url, Global.port, api);
 
-    pocket = des.inventoryDeserialization();
-    Debug.Log(pocket.gems);
+    //pocket = des.inventoryDeserialization();
+    //Debug.Log(pocket.gems);
 
 
     dataSer = des.deserialization(pathStarterMap + currentMap);
@@ -505,19 +522,19 @@ public class dataLink : MonoBehaviour
 
   }
 
-// TODO copy this method to each scene
-private void OnApplicationQuit()
-{
-  var shutdownApi = "simulatte/shutdown";
-  new ShutDown(shutdownApi, Global.port).ShutDownOldServer();
+  // TODO copy this method to each scene
+  private void OnApplicationQuit()
+  {
+    var shutdownApi = "simulatte/shutdown";
+    new ShutDown(shutdownApi, Global.port).ShutDownOldServer();
 
-  foreach (Transform child in gameBoard.transform)
-  {
-    Destroy(child.gameObject); // Destroy last frame
+    foreach (Transform child in gameBoard.transform)
+    {
+      Destroy(child.gameObject); // Destroy last frame
+    }
+    foreach (Transform child in tiles.transform)
+    {
+      Destroy(child.gameObject); // Destroy last frame
+    }
   }
-  foreach (Transform child in tiles.transform)
-  {
-    Destroy(child.gameObject); // Destroy last frame
-  }
-}
 }
