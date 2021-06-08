@@ -1,0 +1,24 @@
+{
+  "skins": [
+    {
+      "itemName": "police",
+      "priceInGems": 5,
+      "sold": false
+    }
+  ],
+  "sounds": [
+    {
+      "itemName": "trap",
+      "priceInGems": 2,
+      "sold": false
+    }
+  ],
+  "themes": [
+    {
+      "itemName": "darkModo",
+      "priceInGems": 8,
+      "sold": false
+    }
+  ],
+  "gems": 7
+}

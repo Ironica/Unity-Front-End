@@ -71,7 +71,7 @@ public class dataLink : MonoBehaviour
 
   //Prefabricated players
   private string player;
-  private string police               = "Prefabs/ITEM/CHARACTER";
+  //private string police               = "Prefabs/ITEM/CHARACTER";
   private string frog                 = "Prefabs/ITEM/FROG";
   private string playerFront          = "_FRONT";
   private string playerBack           = "_BACK";
@@ -300,6 +300,7 @@ public class dataLink : MonoBehaviour
 
         if(gems > dataMap.maxGem)
         {
+          JsonObjConverter.gemGain(gems-dataMap.maxGem);
           dataMap.maxGem = gems;
         }
         if(switchOn > dataMap.maxSwitchOn)
