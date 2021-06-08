@@ -253,6 +253,8 @@ public class dataLink : MonoBehaviour
         var gems = 0;
         var switchOn = 0;
 
+        var nothing = "Nothing important";
+
 
 
         // Loop into each payload to extract data and send to dataObj
