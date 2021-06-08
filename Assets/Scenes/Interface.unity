@@ -193,7 +193,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.96315277}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -279.0148, y: 3396.269}
+  m_AnchoredPosition: {x: -279.01477, y: 3396.2693}
   m_SizeDelta: {x: 1.1199951, y: 0.43499947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!199 &59766301
@@ -5390,7 +5390,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   choiceWindow: {fileID: 0}
-  audioMix: {fileID: 0}
 --- !u!1 &392412406
 GameObject:
   m_ObjectHideFlags: 0
@@ -5601,6 +5600,7 @@ GameObject:
   - component: {fileID: 636133015}
   - component: {fileID: 636133014}
   - component: {fileID: 636133017}
+  - component: {fileID: 636133018}
   m_Layer: 5
   m_Name: Sound_Button
   m_TagString: Untagged
@@ -5672,13 +5672,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 636133018}
+        m_TargetAssemblyTypeName: GestionMusic, Assembly-CSharp
+        m_MethodName: SetVolume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5734,10 +5734,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a14d3285473413dae536e2fdda20ac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundBar: {fileID: 387633629}
   soundSprites:
   - {fileID: 21300000, guid: 850bc7ce806b7ae469562990190cc316, type: 3}
   - {fileID: 21300000, guid: e29eaab3027fc204a87d76d5a5126c67, type: 3}
+--- !u!114 &636133018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636133012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12b9b1cf14a29c48b9de846a411f7de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio: {fileID: 209750729}
 --- !u!1 &662283366
 GameObject:
   m_ObjectHideFlags: 0
@@ -6609,7 +6621,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.08232203, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -8.987509, y: -0.15030098}
+  m_AnchoredPosition: {x: -8.987511, y: -0.15030098}
   m_SizeDelta: {x: -2.575, y: -0.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &896689652
@@ -6933,7 +6945,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.08232203, y: 0.10068349}
   m_AnchorMax: {x: 1, y: 0.89931655}
-  m_AnchoredPosition: {x: -10.7800045, y: -0.00010108948}
+  m_AnchoredPosition: {x: -10.780006, y: -0.00010108948}
   m_SizeDelta: {x: 1.01, y: 0.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1617705187
@@ -7419,7 +7431,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   choiceWindow: {fileID: 1135465012}
-  audioMix: {fileID: 24100000, guid: 8242cd457f6c6004b9c08e93378c87b3, type: 2}
 --- !u!1 &1844108230
 GameObject:
   m_ObjectHideFlags: 0
@@ -7608,7 +7619,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.08232203, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -5.641409, y: 0.000045776367}
+  m_AnchoredPosition: {x: -5.641411, y: 0.000045776367}
   m_SizeDelta: {x: 11.283, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1861089660
