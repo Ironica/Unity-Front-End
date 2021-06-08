@@ -525,6 +525,8 @@ public class dataLink : MonoBehaviour
     loadMap();
     //currentMap = "map5.json";
 
+    gameObject.transform.Find("GameBoard").Find("Map_name").gameObject.GetComponent<Text>().text = currentMap;
+
     player = frog;
 
     // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
@@ -534,7 +536,7 @@ public class dataLink : MonoBehaviour
     //Debug.Log(pocket.gems);
 
 
-    dataSer = des.deserialization(pathStarterMap + currentMap);
+    dataSer = des.deserialization(pathStarterMap + currentMap + ".json");
 
     dataObj = new Data();
 
