@@ -13,17 +13,17 @@
   ],
   "sounds": [
     {
-      "itemName": "trap",
+      "itemName": "free",
       "priceInGems": 2,
       "sold": false
     },
     {
-      "itemName": "Rock'n roll",
+      "itemName": "Winds of stories",
       "priceInGems": 5,
       "sold": false
     },
     {
-      "itemName": "Jazz",
+      "itemName": "Woodland fantasy",
       "priceInGems": 10,
       "sold": true
     }

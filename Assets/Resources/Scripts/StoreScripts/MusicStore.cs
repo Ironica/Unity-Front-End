@@ -7,7 +7,7 @@ public class MusicStore : MonoBehaviour
 
     public void SetVolume()
     {
-        audio.clip = playlist[GetInstanceID()];
+        audio.clip = playlist[1];
         if (audio.volume != 0f)
         {
             audio.volume = 0f;
