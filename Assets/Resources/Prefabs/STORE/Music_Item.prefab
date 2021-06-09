@@ -291,6 +291,7 @@ GameObject:
   - component: {fileID: 8048592435746874598}
   - component: {fileID: 7178319777087652407}
   - component: {fileID: 8139905054378359785}
+  - component: {fileID: 7011972708558591010}
   m_Layer: 5
   m_Name: Buy_Button
   m_TagString: Untagged
@@ -400,6 +401,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7011972708558591010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4159052758611083477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 523890ad90d39e840beb241eac7f657b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6991838987332364491
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,7 +519,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7716137040480163134}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -572,6 +585,7 @@ GameObject:
   - component: {fileID: 5618383020315600912}
   - component: {fileID: 5762495475491396063}
   - component: {fileID: 1551507623132875455}
+  - component: {fileID: 4563972894242633002}
   m_Layer: 5
   m_Name: Play_Pause_Button
   m_TagString: Untagged
@@ -680,3 +694,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4563972894242633002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249787264284787690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6d684a5a69247641b004d5e3745fab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio: {fileID: 0}

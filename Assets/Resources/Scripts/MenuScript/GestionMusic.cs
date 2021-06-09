@@ -3,7 +3,7 @@ using UnityEngine.Audio;
 
 public class GestionMusic : MonoBehaviour
 {
-    public AudioSource audio;
+    public new AudioSource audio;
 
    public void SetVolume()
       {
