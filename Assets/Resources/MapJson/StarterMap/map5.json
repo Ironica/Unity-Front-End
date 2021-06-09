@@ -61,9 +61,14 @@
   ],
   "platforms": [],
   "portals": [],
+  "monsters": [],
   "locks": [],
   "stairs": [],
   "players": [{
     "id": 1, "x": 0, "y": 0, "dir": "RIGHT", "role": "PLAYER", "stamina": 500
-  }]
+  }],
+  "gamingCondition": {
+    "collectGemsBy": 7, "switchesOnBy": 6
+  },
+  "userCollision": true
 }

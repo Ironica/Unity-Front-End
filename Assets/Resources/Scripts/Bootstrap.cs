@@ -12,7 +12,7 @@ namespace Resources.Scripts
     public class Bootstrap
     {
         
-        private static string serverLocation = "Assets/Resources/EmbeddedServer/simulatte-3.1.1.jar";
+        private static string serverLocation = "Assets/Resources/EmbeddedServer/simulatte-3.3.1.jar";
         
         // We launch the server before the program starts
         // We will find the next port available in TCP to establish the server
