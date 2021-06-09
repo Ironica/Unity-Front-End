@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 124902974}
   - component: {fileID: 124902973}
   m_Layer: 5
-  m_Name: Continuer
+  m_Name: Store
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -412,7 +412,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Continue
+  m_Text: Store
 --- !u!222 &124902974
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1687,7 +1687,7 @@ GameObject:
   - component: {fileID: 1244457999}
   - component: {fileID: 1244457998}
   m_Layer: 5
-  m_Name: Continuer
+  m_Name: Store
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1756,7 +1756,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1244457999}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 650075490}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Store
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1244457999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3174,7 +3186,7 @@ GameObject:
   - component: {fileID: 1994017530}
   - component: {fileID: 1994017529}
   m_Layer: 5
-  m_Name: Nouvelle partie
+  m_Name: Continue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3232,7 +3244,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Game
+  m_Text: Continue
 --- !u!222 &1994017530
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3402,7 +3414,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 650075490}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: Continue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

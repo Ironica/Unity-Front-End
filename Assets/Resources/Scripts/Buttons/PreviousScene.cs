@@ -6,16 +6,23 @@ using UnityEngine.SceneManagement;
 public class PreviousScene : MonoBehaviour
 {
 
-    private int previousScene;
-
-    // Start is called before the first frame update
-    void Start()
+  // Update is called once per frame
+  public void goToPreviousScene(){
+    int scene = ChangeSceneManagement.getPreviousScene();
+    ChangeSceneManagement.getCurrentScene();
+    if(scene != SceneManager.GetActiveScene().buildIndex)
     {
-      previousScene = SceneManager.GetActiveScene().buildIndex -1;
+      SceneManager.LoadScene(scene);
     }
+  }
 
-    // Update is called once per frame
-    public void goToPreviousScene(){
-      SceneManager.LoadScene(previousScene);
-    }
+  public void goToStore(){
+    ChangeSceneManagement.getCurrentScene();
+    SceneManager.LoadScene("Scenes/Store");
+  }
+
+  public void goHome(){
+    ChangeSceneManagement.getCurrentScene();
+    SceneManager.LoadScene("Scenes/Menu");
+  }
 }

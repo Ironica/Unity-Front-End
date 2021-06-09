@@ -1,6 +1,11 @@
 {
   "skins": [
     {
+      "itemName": "Frog",
+      "priceInGems": 5,
+      "sold": false
+    },
+    {
       "itemName": "police",
       "priceInGems": 5,
       "sold": false
@@ -8,9 +13,19 @@
   ],
   "sounds": [
     {
-      "itemName": "trap",
+      "itemName": "free",
       "priceInGems": 2,
       "sold": false
+    },
+    {
+      "itemName": "Winds of stories",
+      "priceInGems": 5,
+      "sold": false
+    },
+    {
+      "itemName": "Woodland fantasy",
+      "priceInGems": 10,
+      "sold": true
     }
   ],
   "themes": [
@@ -18,7 +33,12 @@
       "itemName": "darkModo",
       "priceInGems": 8,
       "sold": false
+    },
+    {
+      "itemName": "whiteModo",
+      "priceInGems": 12,
+      "sold": false
     }
   ],
-  "gems": 7
+  "gems": 14
 }

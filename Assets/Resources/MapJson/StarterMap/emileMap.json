@@ -42,7 +42,7 @@
       {"block": "OPEN", "level": 1, "biome": "PLAINS"},
       {"block": "OPEN", "level": 1, "biome": "PLAINS"},
       {"block": "OPEN", "level": 1, "biome": "PLAINS"},
-      {"block": "OPEN", "level": 1, "biome": "PLAINS"}],
+      {"block": "OPEN", "level": 1, "biome": "PLAINS"}]
   ],
   "gems": [
     {"x": 0, "y": 2}
@@ -53,6 +53,7 @@
   ],
   "platforms": [],
   "portals": [],
+  "monsters": [],
   "locks": [],
   "stairs": [],
   "players": [{
