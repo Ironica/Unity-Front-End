@@ -10,7 +10,7 @@ public class StoreLink : MonoBehaviour
   private GameObject sounds;
   private GameObject themes;
 
-  private string buttonSkin = "Prefabs/STORE/BoutonPerso";
+  private string buttonSkin = "Prefabs/STORE/Character_Item";
   private string buttonSound = "Prefabs/STORE/Music_Item";
   private string buttonTheme = "Prefabs/STORE/Theme_Item";
 
@@ -24,15 +24,21 @@ public class StoreLink : MonoBehaviour
     GameObject sounds = GameObject.Find("Music") as GameObject;
     GameObject themes = GameObject.Find("Theme") as GameObject;
 
-    /*for(int i = 0; i < storage.skins.Count; i++)
+    float objX = 0f;
+    for(int i = 0; i < storage.skins.Count; i++)
     {
-      GameObject skinsButton = Instantiate(UnityEngine.Resources.Load(buttonSkin)) as GameObject;
-      skinsButton.transform.SetParent(skins.transform);
+      GameObject skinObject = Instantiate(UnityEngine.Resources.Load(buttonSkin), skins.transform) as GameObject;
+      skinObject.transform.transform.position = skinObject.transform.position + new Vector3(objX,0,0);
+
+      skinObject.transform.Find("Body").Find("Character_Name").GetComponent<Text>().text = "" + storage.skins[i].itemName;
+
+      GameObject price = skinObject.transform.Find("Body").Find("Buy_Button").gameObject as GameObject;
 
       if(!storage.skins[i].sold){
-        skinsButton.transform.Find("PricePerso").GetComponent<Text>().text = "" + storage.skins[i].priceInGems;
+        price.transform.Find("Price").GetComponent<Text>().text = "" + storage.skins[i].priceInGems;
       }
-    }*/
+      objX += 4f;
+    }
 
     float objY = 0f;
     for(int i = 0; i < storage.sounds.Count; i++)

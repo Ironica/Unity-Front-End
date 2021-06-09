@@ -1,6 +1,11 @@
 {
   "skins": [
     {
+      "itemName": "Frog",
+      "priceInGems": 5,
+      "sold": false
+    },
+    {
       "itemName": "police",
       "priceInGems": 5,
       "sold": false
