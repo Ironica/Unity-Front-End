@@ -9,11 +9,11 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("Scenes/Interface");
-        StatData.setCurrent("map5.json");
+        StatData.setCurrent("map5");
     }
     public void Continue()
     {
-        
+
     }
     public void Settings()
     {
@@ -26,6 +26,6 @@ public class MainMenu : MonoBehaviour
     }
     public void Credits()
     {
-        
+
     }
 }

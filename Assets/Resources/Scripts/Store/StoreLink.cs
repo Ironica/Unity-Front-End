@@ -10,19 +10,30 @@ public class StoreLink : MonoBehaviour
   private GameObject sounds;
   private GameObject themes;
 
+  private GameObject top;
+
   private string buttonSkin = "Prefabs/STORE/Character_Item";
   private string buttonSound = "Prefabs/STORE/Music_Item";
   private string buttonTheme = "Prefabs/STORE/Theme_Item";
+
 
   // Start is called before the first frame update
   void Start()
   {
     storage = JsonObjConverter.toObj();
 
+    top = GameObject.Find("Top").gameObject as GameObject;
+    top.transform.Find("GemTotal")
+    .Find("Text")
+    .GetComponent<Text>()
+    .text = "" + storage.gems;
+
     //Affichage des personnages
     GameObject skins = GameObject.Find("Character") as GameObject;
     GameObject sounds = GameObject.Find("Music") as GameObject;
     GameObject themes = GameObject.Find("Theme") as GameObject;
+
+
 
     float objX = 0f;
     for(int i = 0; i < storage.skins.Count; i++)
@@ -38,7 +49,7 @@ public class StoreLink : MonoBehaviour
         price.transform.Find("Price").GetComponent<Text>().text = "" + storage.skins[i].priceInGems;
       }
       objX += 4f;
-      
+
     }
 
     float objY = 0f;
