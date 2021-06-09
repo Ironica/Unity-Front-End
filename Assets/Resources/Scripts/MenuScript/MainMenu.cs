@@ -6,15 +6,16 @@ public class MainMenu : MonoBehaviour
 {
     //public string levelToLoad;
     public GameObject settingsWindow;
-    public void StartGame()
+    public void Continue()
     {
         ChangeSceneManagement.getCurrentScene();
         SceneManager.LoadScene("Scenes/Interface");
         StatData.setCurrent("map5");
     }
-    public void Continue()
+    public void Store()
     {
       ChangeSceneManagement.getCurrentScene();
+      SceneManager.LoadScene("Scenes/Store");
     }
     public void Settings()
     {

@@ -15,4 +15,14 @@ public class PreviousScene : MonoBehaviour
       SceneManager.LoadScene(scene);
     }
   }
+
+  public void goToStore(){
+    ChangeSceneManagement.getCurrentScene();
+    SceneManager.LoadScene("Scenes/Store");
+  }
+
+  public void goHome(){
+    ChangeSceneManagement.getCurrentScene();
+    SceneManager.LoadScene("Scenes/Menu");
+  }
 }

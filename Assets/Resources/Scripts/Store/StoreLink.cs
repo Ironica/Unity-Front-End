@@ -24,7 +24,7 @@ public class StoreLink : MonoBehaviour
 
     top = GameObject.Find("Top").gameObject as GameObject;
     top.transform.Find("GemTotal")
-    .Find("Text")
+    .Find("Total")
     .GetComponent<Text>()
     .text = "" + storage.gems;
 
