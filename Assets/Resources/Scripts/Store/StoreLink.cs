@@ -38,6 +38,7 @@ public class StoreLink : MonoBehaviour
         price.transform.Find("Price").GetComponent<Text>().text = "" + storage.skins[i].priceInGems;
       }
       objX += 4f;
+      
     }
 
     float objY = 0f;
