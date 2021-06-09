@@ -141,12 +141,12 @@ public class dataLink : MonoBehaviour
     .text;
   }
 
-  private string consoleLog
+  private UnityEngine.UI.Text consoleLog
   {
-    set => gameObject.transform.Find("UserCode")
+    get => gameObject.transform.Find("UserCode")
       .gameObject.transform.Find("Console")
       .gameObject.transform.Find("Console_body")
-      .gameObject.transform.Find("Console_Text").GetComponent<Text>().text = value;
+      .gameObject.transform.Find("Console_Text").GetComponent<Text>();
   }
   /**
   * This method converts DataPayloadSerialized object to DataOutSerialized object, by appending info from the original
@@ -228,12 +228,14 @@ public class dataLink : MonoBehaviour
     // use of the async-await pattern so that the UI won't be blocked
     // in the future could we add some more features during the awaiting time, e.g. a banner, or some notification or some animation???
 
-
     //Deserialization of the response
     var answers = des.webDeserialization(resp);
 
     //Print the status of the compilation
     Debug.Log("Status: " + answers.status);
+    
+    // Once we get the resp, we clear the last console
+    consoleLog.text = String.Empty;
 
     // Switch with the type of response
     switch (answers)
@@ -243,6 +245,8 @@ public class dataLink : MonoBehaviour
       case ErrorMessageModel errAns:
       {
         Debug.LogError("Encountered an error in the back-end\n" + errAns.msg);
+        consoleLog.color = Color.red;
+        consoleLog.text = string.Concat(errAns.msg.TakeWhile(e => e != '\n'));
         return;
       }
 
@@ -262,7 +266,7 @@ public class dataLink : MonoBehaviour
         var gems = 0;
         var switchOn = 0;
 
-
+        consoleLog.color = new Color(91, 94, 60);
 
         // Loop into each payload to extract data and send to dataObj
         while (payloads.Count > 0)
@@ -280,8 +284,8 @@ public class dataLink : MonoBehaviour
           converter.dataSer = payload;
           var json = JsonConvert.SerializeObject(converter.dataSer, Formatting.Indented);
           converter.serializedToObject();
-
-          consoleLog = payload.consoleLog;
+          
+          consoleLog.text = payload.consoleLog;
 
           foreach (Transform child in gameBoard.transform)
           {
