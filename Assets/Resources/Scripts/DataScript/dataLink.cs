@@ -141,6 +141,13 @@ public class dataLink : MonoBehaviour
     .text;
   }
 
+  private string consoleLog
+  {
+    set => gameObject.transform.Find("UserCode")
+      .gameObject.transform.Find("Console")
+      .gameObject.transform.Find("Console_body")
+      .gameObject.transform.Find("Console_Text").GetComponent<Text>().text = value;
+  }
   /**
   * This method converts DataPayloadSerialized object to DataOutSerialized object, by appending info from the original
   * map (dataSer: DataOutSerialized)
@@ -154,10 +161,12 @@ public class dataLink : MonoBehaviour
     new GridObject(dos.grid[j][i].block, dos.grid[j][i].biome, e.level)).ToArray()).ToArray(),
     gems = dps.gems, beepers = dps.beepers,
     switches = dps.switches, portals = dps.portals, locks = dps.locks, platforms = dps.platforms,
+    monsters = dps.monsters,
     stairs = dos.stairs,
     players = dps.players,
     special = dps.special,
-    consoleLog = dps.consoleLog
+    consoleLog = dps.consoleLog,
+    gamingCondition = dos.gamingCondition, userCollision = dos.userCollision,
   };
 
   /**
@@ -271,6 +280,8 @@ public class dataLink : MonoBehaviour
           converter.dataSer = payload;
           var json = JsonConvert.SerializeObject(converter.dataSer, Formatting.Indented);
           converter.serializedToObject();
+
+          consoleLog = payload.consoleLog;
 
           foreach (Transform child in gameBoard.transform)
           {

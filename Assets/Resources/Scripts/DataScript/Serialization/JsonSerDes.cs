@@ -56,8 +56,10 @@ namespace JsonBridge{
             e.biome, e.level
           )).ToArray()).ToArray(),
         data.gems, data.beepers, data.switches, data.portals,
+        data.monsters,
         data.locks, data.stairs, data.platforms,
-        data.players
+        data.players,
+        data.gamingCondition, data.userCollision
       );
 
     /**
