@@ -11,11 +11,11 @@ public class PreviousScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      previousScene = SceneManager.GetActiveScene().buildIndex -1;
+      previousScene = SceneManager.GetActiveScene().buildIndex-1;
     }
 
     // Update is called once per frame
     public void goToPreviousScene(){
-      SceneManager.LoadScene(previousScene);
+      SceneManager.LoadScene(0);
     }
 }

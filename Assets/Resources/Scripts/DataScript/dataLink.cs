@@ -233,7 +233,7 @@ public class dataLink : MonoBehaviour
 
     //Print the status of the compilation
     Debug.Log("Status: " + answers.status);
-    
+
     // Once we get the resp, we clear the last console
     consoleLog.text = String.Empty;
 
@@ -284,7 +284,7 @@ public class dataLink : MonoBehaviour
           converter.dataSer = payload;
           var json = JsonConvert.SerializeObject(converter.dataSer, Formatting.Indented);
           converter.serializedToObject();
-          
+
           consoleLog.text = payload.consoleLog;
 
           foreach (Transform child in gameBoard.transform)
@@ -567,7 +567,7 @@ public class dataLink : MonoBehaviour
 
 
     instantiation(true);
-
+    
   }
 
   // TODO copy this method to each scene

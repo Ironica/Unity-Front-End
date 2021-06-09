@@ -9,22 +9,22 @@ public class MapMenu : MonoBehaviour
 {
  public void map5()
  {
-  StatData.setCurrent("map5.json");
+  StatData.setCurrent("map5");
   SceneManager.LoadScene("Interface");
  }
 
  public void mapDylan()
  {
-  StatData.setCurrent("MapTestDylan.json");
+  StatData.setCurrent("MapTestDylan");
   SceneManager.LoadScene("Interface");
  }
 
  public void mapTest()
  {
-  StatData.setCurrent("Test.json");
+  StatData.setCurrent("Test");
   SceneManager.LoadScene("Interface");
  }
- 
+
  private void OnApplicationQuit()
  {
   var shutdownApi = "simulatte/shutdown";
