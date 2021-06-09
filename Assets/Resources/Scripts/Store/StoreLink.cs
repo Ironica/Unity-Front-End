@@ -11,7 +11,7 @@ public class StoreLink : MonoBehaviour
   private GameObject themes;
 
   private string buttonSkin = "Prefabs/STORE/BoutonPerso";
-  private string buttonSound = "Prefabs/STORE/BoutonMusicStore";
+  private string buttonSound = "Prefabs/STORE/Music_Item";
   private string buttonTheme = "Prefabs/STORE/BoutonTheme";
 
   // Start is called before the first frame update
