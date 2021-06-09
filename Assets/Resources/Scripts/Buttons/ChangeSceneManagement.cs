@@ -10,12 +10,12 @@ public static class ChangeSceneManagement
 
     public static void getCurrentScene()
     {
-      previousScene = SceneManager.GetActiveScene().buildIndex;
+        previousScene = SceneManager.GetActiveScene().buildIndex;
     }
 
     public static int getPreviousScene()
     {
 
-      return previousScene;
+        return previousScene;
     }
 }

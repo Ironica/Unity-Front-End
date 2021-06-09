@@ -1,4 +1,6 @@
 using System.Linq;
+using Resources.Scripts;
+using Resources.Scripts.DataScript;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,5 +34,11 @@ public class MainMenu : MonoBehaviour
     {
       ChangeSceneManagement.getCurrentScene();
 
+    }
+    
+    private void OnApplicationQuit()
+    {
+        var shutdownApi = "simulatte/shutdown";
+        new ShutDown(shutdownApi, Global.port).ShutDownOldServer();
     }
 }

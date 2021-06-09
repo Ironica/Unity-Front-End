@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Resources.Scripts;
+using Resources.Scripts.DataScript;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -98,5 +100,11 @@ public class StoreLink : MonoBehaviour
   void Update()
   {
 
+  }
+  
+  private void OnApplicationQuit()
+  {
+    var shutdownApi = "simulatte/shutdown";
+    new ShutDown(shutdownApi, Global.port).ShutDownOldServer();
   }
 }
