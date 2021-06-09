@@ -7,7 +7,7 @@ namespace Resources.Scripts.MenuScript
 {
     public class SoundButton : MonoBehaviour
     {
-        public GameObject soundBar; 
+       
         public Sprite[] soundSprites;
         private Image soundImage;
         private int soundState;
@@ -17,7 +17,7 @@ namespace Resources.Scripts.MenuScript
             soundState = 0;
             soundImage = GetComponent<Button>().image;
             soundImage.sprite = soundSprites[soundState];
-            soundBar.SetActive(false);
+           
 
             gameObject.GetComponent<Button>().onClick.AddListener(TurnOnAndOff);
         }
@@ -26,7 +26,7 @@ namespace Resources.Scripts.MenuScript
         {
             soundState = 1 - soundState;
             soundImage.sprite = soundSprites[soundState];
-            soundBar.SetActive(soundState != 0);
+           
             
         }
     }

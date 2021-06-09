@@ -71,7 +71,7 @@ public class dataLink : MonoBehaviour
 
   //Prefabricated players
   private string player;
-  private string police               = "Prefabs/ITEM/CHARACTER";
+  //private string police               = "Prefabs/ITEM/CHARACTER";
   private string frog                 = "Prefabs/ITEM/FROG";
   private string playerFront          = "_FRONT";
   private string playerBack           = "_BACK";
@@ -300,6 +300,7 @@ public class dataLink : MonoBehaviour
 
         if(gems > dataMap.maxGem)
         {
+          JsonObjConverter.gemGain(gems-dataMap.maxGem);
           dataMap.maxGem = gems;
         }
         if(switchOn > dataMap.maxSwitchOn)
@@ -525,6 +526,8 @@ public class dataLink : MonoBehaviour
     loadMap();
     //currentMap = "map5.json";
 
+    gameObject.transform.Find("GameBoard").Find("Map_name").gameObject.GetComponent<Text>().text = currentMap;
+
     player = frog;
 
     // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
@@ -534,7 +537,7 @@ public class dataLink : MonoBehaviour
     //Debug.Log(pocket.gems);
 
 
-    dataSer = des.deserialization(pathStarterMap + currentMap);
+    dataSer = des.deserialization(pathStarterMap + currentMap + ".json");
 
     dataObj = new Data();
 

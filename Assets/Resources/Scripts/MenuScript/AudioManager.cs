@@ -18,7 +18,7 @@ public class AudioManager : MonoBehaviour
     
     void Update()
     {
-        if (!audio.isPlaying)
+        if (!audio.isPlaying && audio.volume != 0f)
         {
             musicIndex = rand.Next(playlist.Length);
             audio.clip = playlist[musicIndex];

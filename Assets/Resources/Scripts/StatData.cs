@@ -2,7 +2,7 @@
 
 public static class StatData
 {
-    private static string currentMap= "map5.json";
+    private static string currentMap= "map5";
 
     public static string getCurrent()
     {
