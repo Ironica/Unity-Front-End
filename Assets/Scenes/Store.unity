@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 177033826}
   - component: {fileID: 177033825}
   m_Layer: 5
-  m_Name: Themes
+  m_Name: Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 1701036500}
   - component: {fileID: 1701036499}
   m_Layer: 5
-  m_Name: Music
+  m_Name: Theme
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
