@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Resources.Scripts.DataScript.DataObjects.Rules;
 using UnityEngine;
 
 namespace JsonBridge{
@@ -22,16 +23,19 @@ namespace JsonBridge{
   */
   public class ResponseModel: IModel
   {
-    public ResponseModel(string status, DataPayloadSerialized[] payload, string game)
+    public ResponseModel(string status, DataPayloadSerialized[] payload, string game, int gained)
     {
       this.status = status;
       this.payload = payload;
       this.game = game;
+      this.gained = gained;
     }
 
     public string status { get; }
     public string game { get; }
     public DataPayloadSerialized[] payload { get; }
+    
+    public int gained { get; }
   }
 
   /**
@@ -67,6 +71,8 @@ namespace JsonBridge{
     public SwitchSerialized[] switches;
     public PortalSerialized[] portals;
 
+    public Coordinates[] monsters;
+
     public LockSerialized[] locks;
     public StairSerialized[] stairs;
     public PlatformSerialized[] platforms;
@@ -75,6 +81,9 @@ namespace JsonBridge{
 
     public string consoleLog;
     public string special;
+    
+    public GamingCondition gamingCondition;
+    public bool userCollision;
 
     //public GamingConditions gamingConditions;
 
@@ -99,11 +108,16 @@ namespace JsonBridge{
     public SwitchSerialized[] switches;
     public PortalSerialized[] portals;
 
+    public Coordinates[] monsters;
+    
     public LockSerialized[] locks;
     public StairSerialized[] stairs;
     public PlatformSerialized[] platforms;
 
     public PlayerSerialized[] players;
+
+    public GamingCondition gamingCondition;
+    public bool userCollision;
 
     // We reserve a constructor for function call
     public RealDataOutSerialized(
@@ -114,10 +128,13 @@ namespace JsonBridge{
       Coordinates[] beepers,
       SwitchSerialized[] switches,
       PortalSerialized[] portals,
+      Coordinates[] monsters,
       LockSerialized[] locks,
       StairSerialized[] stairs,
       PlatformSerialized[] platforms,
-      PlayerSerialized[] players)
+      PlayerSerialized[] players,
+      GamingCondition gamingCondition,
+      bool userCollision)
     {
       this.type = type;
       this.code = code;
@@ -126,10 +143,13 @@ namespace JsonBridge{
       this.beepers = beepers;
       this.switches = switches;
       this.portals = portals;
+      this.monsters = monsters;
       this.locks = locks;
       this.stairs = stairs;
       this.platforms = platforms;
       this.players = players;
+      this.gamingCondition = gamingCondition;
+      this.userCollision = userCollision;
     }
   }
 
@@ -150,6 +170,7 @@ namespace JsonBridge{
     public PortalSerialized[] portals;
     public PlatformSerialized[] platforms;
     public LockSerialized[] locks;
+    public Coordinates[] monsters;
     public PlayerSerialized[] players;
     public string consoleLog;
     public string special;
