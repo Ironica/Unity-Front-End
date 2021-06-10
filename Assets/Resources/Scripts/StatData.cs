@@ -2,7 +2,7 @@
 
 public static class StatData
 {
-    private static string currentMap= "MapWithPortal";
+    private static string currentMap= "Chap4-3";
 
     public static string getCurrent()
     {
