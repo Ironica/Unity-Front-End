@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1126984524057286618}
   - component: {fileID: 2528340774190265281}
   - component: {fileID: 5034500297445314302}
-  - component: {fileID: 8171751336747890424}
   m_Layer: 5
   m_Name: Price
   m_TagString: Untagged
@@ -80,18 +79,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
---- !u!114 &8171751336747890424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 51661792007932219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d6f4f7cba13642d79f93dd56dd0e554, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &840473208990756453
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,8 +401,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8171751336747890424}
-        m_TargetAssemblyTypeName: Buy, Assembly-CSharp
+      - m_Target: {fileID: 8142442864405689312}
+        m_TargetAssemblyTypeName: PlayPauseStoreMusic, Assembly-CSharp
         m_MethodName: buyTheMusic
         m_Mode: 1
         m_Arguments:
