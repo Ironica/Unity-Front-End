@@ -16,13 +16,6 @@ public class PortalSerialized
         this.coo = coo;
         this.dest = dest;
         this.isActive = isActive;
-    }
-
-    public PortalSerialized(Coordinates coo, Coordinates dest, bool isActive, int energy)
-    {
-        this.coo = coo;
-        this.dest = dest;
-        this.isActive = isActive;
-        this.energy = energy;
+        this.energy = isActive ? 10 : 0;
     }
 }

@@ -385,7 +385,7 @@ public class dataLink : MonoBehaviour
     Block.TREE => tree + dataObj.grid[j][i].Level,
     Block.WATER => water + dataObj.grid[j][i].Level,
     Block.HILL => hill + dataObj.grid[j][i].Level,
-    Block.STAIR => stairDirection(dataObj.stairs.First(e => e.X == j && e.Y == i).Dir),
+    Block.STAIR => stairDirection(dataObj.stairs.First(e => e.X == i && e.Y == j).Dir),
     Block.VOID => throw new NotImplementedException(),
     _ => throw new Exception("This shouldn't be possible")
   };
