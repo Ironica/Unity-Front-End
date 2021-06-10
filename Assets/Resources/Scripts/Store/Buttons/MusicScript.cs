@@ -6,6 +6,7 @@ using System.Linq;
 
 public class MusicScript : MonoBehaviour
 {
+  
   public void getMusicIndex()
   {
     int musicIndex = this.transform.GetSiblingIndex();
@@ -13,6 +14,9 @@ public class MusicScript : MonoBehaviour
     /* TODO: Dylan,
     ** add a function that start the music selected with this musicIndex here
     */
+
+    StatData.indexStoreMusic = musicIndex;
+    StatData.isPlayable = !StatData.isPlayable;
 
   }
 

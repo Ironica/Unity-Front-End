@@ -1,23 +1,23 @@
+using System;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
-public class MusicStore : MonoBehaviour
+public  class MusicStore : MonoBehaviour
 {
-    public new AudioSource audio;
-    public AudioClip[] playlist;
+    public  new AudioSource audio;
+    public  AudioClip[] playlist;
 
-    public void SetVolume()
+    public void Update()
     {
-        audio.clip = playlist[1];
-        if (audio.volume != 0f)
+        if (StatData.isPlayable)
         {
-            audio.volume = 0f;
-            audio.Stop();
-        }
-        else
-        {
+            audio.clip = playlist[StatData.indexStoreMusic];
             audio.volume = 0.2f;
             audio.Play();
         }
-          
+        else
+        {
+            audio.Stop();
+        }
     }
 }
