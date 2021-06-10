@@ -17,11 +17,10 @@ public class Buy : MonoBehaviour
         storage.gems -= price;
         string itemName = transform.parent.parent.Find("Music_Name").GetComponent<Text>().text;
 
-        /*storage.sounds.Select(e => e switch {
-            if(e.itemName == itemName){} =>
-              new ItemForSale(e.itemName, e.priceInGems, true),
-            _ => e
-          });*/
+        storage.sounds = storage.sounds.Select(e => (e.itemName == itemName) switch {
+          true => new ItemForSale(e.itemName, e.priceInGems, true),
+          _ => e
+        }).ToList();
 
 
 
