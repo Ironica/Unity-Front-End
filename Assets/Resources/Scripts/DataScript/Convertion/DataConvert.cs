@@ -48,7 +48,7 @@ namespace JsonBridge {
 
       dataObj.switches = dataSer.switches.Select(e => new Switch(e.coo.x, e.coo.y, e.on)).ToArray();
 
-      dataObj.portals = dataSer.portals.Select(e => new Portal(e.coo.x, e.coo.y, e.energy)).ToArray();
+      dataObj.portals = dataSer.portals.Select(e => new Portal(e.coo.x, e.coo.y, e.isActive)).ToArray();
 
       dataObj.locks = dataSer.locks.Select(e => new Lock(e.coo.x, e.coo.y, e.energy)).ToArray();
 
