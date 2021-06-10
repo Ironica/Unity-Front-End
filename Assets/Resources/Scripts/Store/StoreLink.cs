@@ -68,11 +68,11 @@ public class StoreLink : MonoBehaviour
       if(!storage.sounds[i].sold)
       {
         price.transform.Find("Price").GetComponent<Text>().text = "" + storage.sounds[i].priceInGems;
-        Destroy(use);
       }
       else
       {
-        Destroy(price);
+        price.SetActive(false);
+        use.SetActive(true);
       }
       objY += 0.8f;
     }
@@ -94,6 +94,11 @@ public class StoreLink : MonoBehaviour
     }
 
     JsonObjConverter.toJson(storage);
+  }
+
+  public void buy()
+  {
+    
   }
 
   private void OnApplicationQuit()
