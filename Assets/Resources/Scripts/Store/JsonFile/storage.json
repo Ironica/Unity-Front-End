@@ -25,7 +25,7 @@
     {
       "itemName": "Woodland fantasy",
       "priceInGems": 10,
-      "sold": true
+      "sold": false
     }
   ],
   "themes": [
@@ -40,5 +40,5 @@
       "sold": false
     }
   ],
-  "gems": 14
+  "gems": 0
 }

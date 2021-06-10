@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Resources.Scripts;
+using Resources.Scripts.DataScript;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,11 +68,11 @@ public class StoreLink : MonoBehaviour
       if(!storage.sounds[i].sold)
       {
         price.transform.Find("Price").GetComponent<Text>().text = "" + storage.sounds[i].priceInGems;
-        Destroy(use);
       }
       else
       {
-        Destroy(price);
+        price.SetActive(false);
+        use.SetActive(true);
       }
       objY += 0.8f;
     }
@@ -94,9 +96,14 @@ public class StoreLink : MonoBehaviour
     JsonObjConverter.toJson(storage);
   }
 
-  // Update is called once per frame
-  void Update()
+  public void buy()
   {
+    
+  }
 
+  private void OnApplicationQuit()
+  {
+    var shutdownApi = "simulatte/shutdown";
+    new ShutDown(shutdownApi, Global.port).ShutDownOldServer();
   }
 }
