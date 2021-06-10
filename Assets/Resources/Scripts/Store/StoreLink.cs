@@ -96,12 +96,6 @@ public class StoreLink : MonoBehaviour
     JsonObjConverter.toJson(storage);
   }
 
-  // Update is called once per frame
-  void Update()
-  {
-
-  }
-  
   private void OnApplicationQuit()
   {
     var shutdownApi = "simulatte/shutdown";
