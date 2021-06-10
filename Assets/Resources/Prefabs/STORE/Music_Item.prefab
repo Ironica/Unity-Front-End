@@ -505,6 +505,7 @@ GameObject:
   - component: {fileID: 4713283870156582468}
   - component: {fileID: 8420326662896979452}
   - component: {fileID: 3801667298575762518}
+  - component: {fileID: 8142442864405689312}
   m_Layer: 5
   m_Name: Music_Item
   m_TagString: Untagged
@@ -573,6 +574,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8142442864405689312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7716137040480163134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a39ef46cc5bd849b695da87d30614858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8249787264284787690
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,7 +705,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5762495475491396063}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: [{m_Target: {fileID: 0}, m_TargetAssemblyTypeName: 'MusicStore, Assembly-CSharp',
-          m_MethodName: SetVolume, m_Mode: 1, m_Arguments: {m_ObjectArgument: {fileID: 0},
-            m_ObjectArgumentAssemblyTypeName: 'UnityEngine.Object, UnityEngine', m_IntArgument: 0,
-            m_FloatArgument: 0, m_StringArgument: '', m_BoolArgument: 0}, m_CallState: 2}]
+      m_Calls:
+      - m_Target: {fileID: 8142442864405689312}
+        m_TargetAssemblyTypeName: PlayPauseStoreMusic, Assembly-CSharp
+        m_MethodName: getMusicIndex
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

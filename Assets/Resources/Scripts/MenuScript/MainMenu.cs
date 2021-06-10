@@ -35,7 +35,7 @@ public class MainMenu : MonoBehaviour
       ChangeSceneManagement.getCurrentScene();
 
     }
-    
+
     private void OnApplicationQuit()
     {
         var shutdownApi = "simulatte/shutdown";
