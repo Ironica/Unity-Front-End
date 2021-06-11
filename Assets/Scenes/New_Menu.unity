@@ -483,14 +483,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding:
     m_Left: 0
-    m_Right: -2
+    m_Right: 0
     m_Top: 0
-    m_Bottom: -1
+    m_Bottom: 0
   m_ChildAlignment: 4
   fitType: 0
   rows: 2
   columns: 2
-  cellSize: {x: 173.5025, y: 138.8659}
+  cellSize: {x: 172.5025, y: 138.3659}
   spacing: {x: 7, y: 7}
 --- !u!114 &318579120
 MonoBehaviour:
