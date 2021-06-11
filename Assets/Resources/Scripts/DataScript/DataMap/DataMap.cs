@@ -6,6 +6,7 @@ using UnityEngine;
 public class DataMap
 {
     public string name {get; set;}
+    public string chapterFile {get; set;}
 
     public string storyTilte {get; set;}
     public string story {get; set;}
@@ -24,6 +25,7 @@ public class DataMap
     public DataMap(string name)
     {
       this.name = name;
+      chapterFile = "";
 
       storyTilte = "";
       story = "";

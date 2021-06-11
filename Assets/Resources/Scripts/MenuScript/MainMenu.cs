@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     {
         ChangeSceneManagement.getCurrentScene();
         SceneManager.LoadScene("Scenes/Interface");
-        StatData.setCurrent("map5");
+        //StatData.setCurrent("map5");
     }
     public void Store()
     {

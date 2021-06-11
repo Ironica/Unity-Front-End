@@ -514,6 +514,9 @@ public class dataLink : MonoBehaviour
   {
     var load = SaveMapManager.loadData(dataMap);
     if(load != null){
+
+      dataMap.chapterFile = load.chapterFile;
+
       dataMap.storyTilte = load.storyTilte;
       dataMap.story = load.story;
 
