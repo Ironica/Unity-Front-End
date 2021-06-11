@@ -90,6 +90,9 @@ public class StoreLink : MonoBehaviour
       {
         price.transform.Find("Price").GetComponent<Text>().text = "" + storage.themes[i].priceInGems;
       }
+      else {
+        price.SetActive(false);
+      }
       objY += 1.5f;
     }
 
@@ -98,7 +101,7 @@ public class StoreLink : MonoBehaviour
 
   public void buy()
   {
-    
+
   }
 
   private void OnApplicationQuit()

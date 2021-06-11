@@ -2,15 +2,13 @@
 {
     public int X { get; }
     public int Y { get; }
-    
-    public int Energy { get; }
 
-    public bool IsActive => Energy > 0;
+    public bool isActive { get; }
 
-    public Portal(int x, int y, int? energy)
+    public Portal(int x, int y, bool isActive)
     {
         this.X = x;
         this.Y = y;
-        this.Energy = energy ?? 0;
+        this.isActive = isActive;
     }
 }

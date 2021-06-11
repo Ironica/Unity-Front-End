@@ -10,19 +10,10 @@ public class PortalSerialized
 
 
     public bool isActive { get; }
-    public int? energy { get; }
 
     public PortalSerialized(Coordinates coo, Coordinates dest, bool isActive){
         this.coo = coo;
         this.dest = dest;
         this.isActive = isActive;
-    }
-
-    public PortalSerialized(Coordinates coo, Coordinates dest, bool isActive, int energy)
-    {
-        this.coo = coo;
-        this.dest = dest;
-        this.isActive = isActive;
-        this.energy = energy;
     }
 }

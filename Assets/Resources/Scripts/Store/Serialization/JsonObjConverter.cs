@@ -13,10 +13,10 @@ public static class JsonObjConverter
   public static void toJson(ItemsInStore store){
     var json = JsonConvert.SerializeObject(store, Formatting.Indented);
 
-    StreamWriter monStreamWriter = new StreamWriter(path);
-    monStreamWriter.WriteLine(json);
+    StreamWriter myStreamWriter = new StreamWriter(path);
+    myStreamWriter.WriteLine(json);
 
-    monStreamWriter.Close();
+    myStreamWriter.Close();
   }
 
 

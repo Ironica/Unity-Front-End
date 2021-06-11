@@ -13,9 +13,9 @@
   ],
   "sounds": [
     {
-      "itemName": "free",
+      "itemName": "Free",
       "priceInGems": 2,
-      "sold": false
+      "sold": true
     },
     {
       "itemName": "Winds of stories",
@@ -25,19 +25,19 @@
     {
       "itemName": "Woodland fantasy",
       "priceInGems": 10,
-      "sold": false
+      "sold": true
     }
   ],
   "themes": [
     {
       "itemName": "darkModo",
       "priceInGems": 8,
-      "sold": false
+      "sold": true
     },
     {
       "itemName": "whiteModo",
       "priceInGems": 12,
-      "sold": false
+      "sold": true
     }
   ],
   "gems": 0

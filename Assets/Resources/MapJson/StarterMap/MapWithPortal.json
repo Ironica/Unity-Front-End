@@ -1,0 +1,233 @@
+{
+  "type": "default",
+  "code": "",
+  "grid": [
+    [
+      {
+        "block": "DESERT",
+        "level": 1,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "STAIR",
+        "level": 2,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "DESERT",
+        "level": 2,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "OPEN",
+        "level": 1,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "MOUNTAIN",
+        "level": 1,
+        "biome": "PLAINS"
+      }
+    ],
+    [
+      {
+        "block": "DESERT",
+        "level": 1,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "DESERT",
+        "level": 1,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "HILL",
+        "level": 2,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "OPEN",
+        "level": 1,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "TREE",
+        "level": 1,
+        "biome": "PLAINS"
+      }
+    ],
+    [
+      {
+        "block": "OPEN",
+        "level": 1,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "MOUNTAIN",
+        "level": 1,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "HOME",
+        "level": 2,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "OPEN",
+        "level": 1,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "OPEN",
+        "level": 1,
+        "biome": "PLAINS"
+      }
+    ],
+    [
+      {
+        "block": "OPEN",
+        "level": 1,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "HILL",
+        "level": 1,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "OPEN",
+        "level": 2,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "WATER",
+        "level": 1,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "HILL",
+        "level": 1,
+        "biome": "PLAINS"
+      }
+    ],
+    [
+      {
+        "block": "OPEN",
+        "level": 1,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "MOUNTAIN",
+        "level": 1,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "OPEN",
+        "level": 2,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "STAIR",
+        "level": 2,
+        "biome": "PLAINS"
+      },
+      {
+        "block": "OPEN",
+        "level": 1,
+        "biome": "PLAINS"
+      }
+    ]
+  ],
+  "gems": [
+    {
+      "x": 0,
+      "y": 0
+    },
+    {
+      "x": 3,
+      "y": 2
+    },
+    {
+      "x": 0,
+      "y": 3
+    }
+  ],
+  "beepers": [
+  ],
+  "switches": [
+    {
+      "coo": {
+        "x": 0,
+        "y": 1
+      },
+      "on": false
+    },
+    {
+      "coo": {
+        "x": 0,
+        "y": 3
+      },
+      "on": false
+    }
+  ],
+  "portals": [
+    {
+      "coo": {
+        "x": 0,
+        "y": 4
+      },
+      "dest": {
+        "x": 3,
+        "y": 0
+      },
+      "isActive": true
+    }
+  ],
+  "locks": [
+  ],
+  "stairs": [
+    {
+      "coo": {
+        "x": 1,
+        "y": 0
+      },
+      "dir": "LEFT"
+    },
+    {
+      "coo": {
+        "x": 3,
+        "y": 4
+      },
+      "dir": "RIGHT"
+    }
+  ],
+  "monsters": [
+    {
+      "x": 4,
+      "y": 2
+    }
+  ],
+  "platforms": [
+  ],
+  "players": [
+    {
+      "id": 1,
+      "x": 2,
+      "y": 4,
+      "dir": "UP",
+      "role": "PLAYER",
+      "stamina": 200
+    }
+  ],
+  "gamingCondition": {
+    "collectGemsBy": 3,
+    "switchesOnBy": 2,
+    "arriveAt": [
+      {
+        "x": 2,
+        "y": 4
+      }
+    ]
+  },
+  "userCollision": true
+}

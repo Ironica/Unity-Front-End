@@ -2,7 +2,9 @@
 
 public static class StatData
 {
-    private static string currentMap= "map5";
+    private static string currentMap= "Chap4-1";
+    public static bool isPlayable { get; set; }
+    public static int indexStoreMusic { get; set; }
 
     public static string getCurrent()
     {

@@ -1,0 +1,13 @@
+{
+  "name": "MapWithPortal",
+  "storyTilte": "MapWithPortal story",
+  "story": "This the history of someone that really wants to put portals on the map…
+  Because apple did it.",
+  "goalsTitle": "Get those fucking gems !",
+  "goal": "GEM",
+  "code": "",
+  "maxGem": 0,
+  "maxSwitchOn": 0,
+  "maxMonster": 0,
+  "win": false
+}
