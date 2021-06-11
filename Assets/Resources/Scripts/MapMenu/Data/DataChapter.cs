@@ -5,5 +5,10 @@ using UnityEngine;
 public class DataChapter
 {
   public string chapterName;
-  public string mapName;
+  public List<DataMap> maps;
+
+  public DataChapter()
+  {
+
+  }
 }

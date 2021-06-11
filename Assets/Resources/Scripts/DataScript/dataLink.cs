@@ -144,9 +144,9 @@ public class dataLink : MonoBehaviour
   private UnityEngine.UI.Text consoleLog
   {
     get => gameObject.transform.Find("UserCode")
-      .gameObject.transform.Find("Console")
-      .gameObject.transform.Find("Console_body")
-      .gameObject.transform.Find("Console_Text").GetComponent<Text>();
+    .gameObject.transform.Find("Console")
+    .gameObject.transform.Find("Console_body")
+    .gameObject.transform.Find("Console_Text").GetComponent<Text>();
   }
   /**
   * This method converts DataPayloadSerialized object to DataOutSerialized object, by appending info from the original
@@ -514,10 +514,20 @@ public class dataLink : MonoBehaviour
   {
     var load = SaveMapManager.loadData(dataMap);
     if(load != null){
+      dataMap.storyTilte = load.storyTilte;
+      dataMap.story = load.story;
+
+      dataMap.goalsTitle = load.goalsTitle;
+      dataMap.goal = load.goal;
+
       dataMap.code = load.code;
+
       dataMap.maxGem = load.maxGem;
       dataMap.maxSwitchOn = load.maxSwitchOn;
+      dataMap.maxMonster = load.maxMonster;
+
       dataMap.win = load.win;
+
       GameObject.Find("UserCode")
       .GetComponent<InputField>()
       .text = dataMap.code;
@@ -567,7 +577,7 @@ public class dataLink : MonoBehaviour
 
 
     instantiation(true);
-    
+
   }
 
   // TODO copy this method to each scene
