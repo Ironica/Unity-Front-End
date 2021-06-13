@@ -56,13 +56,13 @@ public class dataLink2 : MonoBehaviour
   List<GameObject> switchObjects      = new List<GameObject>();
 
   //Prefabricated tiles
-  private string open                 = "Prefabs/PLAIN_OPEN_LEVEL";
-  private string home                 = "Prefabs/PLAIN_HOME_LEVEL";
-  private string mountain             = "Prefabs/PLAIN_MOUNTAIN_LEVEL";
-  private string desert               = "Prefabs/PLAIN_DESERT_LEVEL";
-  private string tree                 = "Prefabs/PLAIN_TREE_LEVEL";
-  private string water                = "Prefabs/PLAIN_WATER_LEVEL";
-  private string hill                 = "Prefabs/PLAIN_HILL_LEVEL";
+  private string open                 = "Prefabs/3D/PLAIN/PLAIN_OPEN_LEVEL";
+  private string home                 = "Prefabs/3D/PLAIN/PLAIN_HOME_LEVEL";
+  private string mountain             = "Prefabs/3D/PLAIN/PLAIN_MOUNTAIN_LEVEL";
+  private string desert               = "Prefabs/3D/PLAIN/PLAIN_DESERT_LEVEL";
+  private string tree                 = "Prefabs/3D/PLAIN/PLAIN_TREE_LEVEL";
+  private string water                = "Prefabs/3D/PLAIN/PLAIN_WATER_LEVEL";
+  private string hill                 = "Prefabs/3D/PLAIN/PLAIN_HILL_LEVEL";
 
   // Stairs
   private string  stairLeft           = "Prefabs/PLAIN_STAIRS_LEFT";
@@ -73,11 +73,11 @@ public class dataLink2 : MonoBehaviour
   //Prefabricated players
   private string player;
   //private string police               = "Prefabs/ITEM/CHARACTER";
-  private string frog                 = "Prefabs/ITEM/FROG";
-  private string playerFront          = "_FRONT";
-  private string playerBack           = "_BACK";
-  private string playerLeft           = "_LEFT";
-  private string playerRight          = "_RIGHT";
+  private string frog                 = "Prefabs/3D/FROG";
+  private string playerFront          = "";
+  private string playerBack           = "";
+  private string playerLeft           = "";
+  private string playerRight          = "";
 
   //Prefabricated items
   private string gem                  = "Prefabs/ITEM/GEM";
@@ -354,8 +354,8 @@ public class dataLink2 : MonoBehaviour
   }
 
   private Vector2 setCoordinates(Vector2 vector){
-    Vector2 i = new Vector2(-0.5f, -0.25f);
-    Vector2 j = new Vector2(0.5f, -0.25f);
+    Vector2 i = new Vector2(0f, 2f);
+    Vector2 j = new Vector2(-2f, 0f);
     return vector.x*i + vector.y*j;
   }
 
@@ -398,7 +398,7 @@ public class dataLink2 : MonoBehaviour
   {
     string tile = tileLevel(block, i, j);
     Vector2 coo = setCoordinates(new Vector2(j-x, i-y));
-    obj  = Instantiate(UnityEngine.Resources.Load(tile), new Vector3(coo.x,coo.y, 0), Quaternion.identity) as GameObject;
+    obj  = Instantiate(UnityEngine.Resources.Load(tile), new Vector3(coo.x,0, coo.y), Quaternion.identity) as GameObject;
     obj.transform.parent = tiles.transform;
     return obj;
   }
@@ -420,15 +420,16 @@ public class dataLink2 : MonoBehaviour
 
   private void playerInstantiation(GameObject tile, Player player)
   {
-    float playerLevel = 0.25f;
+    float playerLevel = 0;
     string playerPrefab = playerDirection(player.Dir);
     int level = dataObj.grid[player.Y][player.X].Level;
-    playerLevel += (level-1)*0.4f;
-    Vector3 coo = new Vector3(tile.transform.position.x, tile.transform.position.y+playerLevel, 0);
+    //playerLevel += (level-1)*0.4f;
+    var position = tile.transform.position;
+    Vector3 coo = new Vector3(position.x, -1, position.y - 5   );
 
     playerObject = Instantiate(UnityEngine.Resources.Load(playerPrefab), coo, Quaternion.identity) as GameObject;
     playerObject.transform.parent = gameBoard.transform;
-    playerObject.GetComponent<SpriteRenderer>().sortingOrder = level+1;
+    //playerObject.GetComponent<SpriteRenderer>().sortingOrder = level+1;
 
   }
 
