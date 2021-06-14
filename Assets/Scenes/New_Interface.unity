@@ -1515,7 +1515,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 804696289}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1451918863}
+        m_TargetAssemblyTypeName: PreviousScene, Assembly-CSharp
+        m_MethodName: goHome
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &804696289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3581,6 +3593,7 @@ GameObject:
   - component: {fileID: 1451918859}
   - component: {fileID: 1451918858}
   - component: {fileID: 1451918862}
+  - component: {fileID: 1451918863}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -3683,6 +3696,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57cdecb9ebfb4728929314e4b02269e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1451918863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451918857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6386c31172ac14a6d84e2b248f3f1270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1537604105
