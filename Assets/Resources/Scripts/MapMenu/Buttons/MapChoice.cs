@@ -22,6 +22,6 @@ public class MapChoice : MonoBehaviour
 
     public void quitToInterface()
     {
-      SceneManager.LoadScene("Scenes/Interface");
+      SceneManager.LoadScene("Scenes/New_Interface");
     }
 }
