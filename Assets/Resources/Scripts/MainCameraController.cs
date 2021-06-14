@@ -8,15 +8,17 @@ using UnityEngine;
 public class MainCameraController : MonoBehaviour
 {
 
-    public Vector3 selfPos;
+    public Vector3 selfPos = new Vector3(10, 10, 10);
     public Quaternion selfRot;
     
     public float maxScroll;
     public float minScroll;
+    public float maxPan;
     public float maxYRotateAngles = 70;
     public float minYRotateAngles = 5;
     public float rotateSpeed = 5;
     public float scrollSpeed = 1;
+    public float panSpeed = 0.5f;
 
     public GameObject target;
 
@@ -35,18 +37,22 @@ public class MainCameraController : MonoBehaviour
         offsetPlayerPos = transform.position - playerTransform.position;
     }
 
-    public void Reset()
+    public void OnClickReset()
     {
+        target = GameObject.Find("Tiles");
+        playerTransform = GetMiddle(target).transform;
         transform.position = selfPos;
         transform.rotation = selfRot;
+        transform.LookAt(playerTransform);
+        offsetPlayerPos = transform.position - playerTransform.position;
     }
-
 
     void Update()
     {
         transform.position = playerTransform.position + offsetPlayerPos;
         RotateCamera();
         ScrollView();
+        Pan();
     }
     void RotateCamera()
     {
@@ -95,6 +101,50 @@ public class MainCameraController : MonoBehaviour
             distance += -System.Math.Abs(Input.GetAxis("Mouse ScrollWheel")) * scrollSpeed;
             
             offsetPlayerPos = offsetPlayerPos.normalized * distance;
+        }
+    }
+
+    void Pan()
+    {
+        if (Input.GetKey("w") && offsetPlayerPos.magnitude < maxPan)
+        {
+            transform.Translate(0, panSpeed, 0);
+            offsetPlayerPos = transform.position - playerTransform.position;
+            if (offsetPlayerPos.magnitude > maxPan)
+            {
+                transform.Translate(0, -panSpeed, 0);
+                offsetPlayerPos = transform.position - playerTransform.position;
+            }
+        }
+        if (Input.GetKey("s") && offsetPlayerPos.magnitude < maxPan)
+        {
+            transform.Translate(0, -panSpeed, 0);
+            offsetPlayerPos = transform.position - playerTransform.position;
+            if (offsetPlayerPos.magnitude > maxPan)
+            {
+                transform.Translate(0, panSpeed, 0);
+                offsetPlayerPos = transform.position - playerTransform.position;
+            }
+        }
+        if (Input.GetKey("a") && offsetPlayerPos.magnitude < maxPan)
+        {
+            transform.Translate(-panSpeed, 0, 0);
+            offsetPlayerPos = transform.position - playerTransform.position;
+            if (offsetPlayerPos.magnitude > maxPan)
+            {
+                transform.Translate(panSpeed, 0, 0);
+                offsetPlayerPos = transform.position - playerTransform.position;
+            }
+        }
+        if (Input.GetKey("d") && offsetPlayerPos.magnitude < maxPan)
+        {
+            transform.Translate(panSpeed, 0, 0);
+            offsetPlayerPos = transform.position - playerTransform.position;
+            if (offsetPlayerPos.magnitude > maxPan)
+            {
+                transform.Translate(-panSpeed, 0, 0);
+                offsetPlayerPos = transform.position - playerTransform.position;
+            }
         }
     }
 
