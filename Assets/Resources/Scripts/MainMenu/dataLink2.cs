@@ -176,6 +176,7 @@ public class dataLink2 : MonoBehaviour
   */
   public void OnResetClick()
   {
+    
     payloads.Clear();
     this.dataSer.code = "";
     GameObject.Find("UserCode").GetComponent<InputField>().text = "";
@@ -517,7 +518,6 @@ public class dataLink2 : MonoBehaviour
 
   private void Awake()
   {
-
   }
 
   public void saveMap()
@@ -564,6 +564,7 @@ public class dataLink2 : MonoBehaviour
   // Start is called before the first frame update
   private void Start()
   {
+
     gameBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Elements").gameObject as GameObject;
     tiles = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Tiles").gameObject as GameObject;
 
