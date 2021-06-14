@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4313243059512985552}
   - component: {fileID: 1513477195809023886}
   - component: {fileID: 4708947576028253027}
-  - component: {fileID: 3579480674626226119}
+  - component: {fileID: 7388178264478784015}
   m_Layer: 5
   m_Name: Chapter_Name
   m_TagString: Untagged
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3579480674626226119
+--- !u!114 &7388178264478784015
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -268,7 +268,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3579480674626226119}
+      - m_Target: {fileID: 7388178264478784015}
         m_TargetAssemblyTypeName: MapChoice, Assembly-CSharp
         m_MethodName: changeChapter
         m_Mode: 1

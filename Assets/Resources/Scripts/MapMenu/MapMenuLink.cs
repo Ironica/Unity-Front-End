@@ -15,12 +15,12 @@ public class MapMenuLink : MonoBehaviour
   private int currentChapter;
   private string currentMap;
 
-  
+
   private void leftSideBook(DataChapter chapter)
   {
     Debug.Log("leftSideBook");
     GameObject Map_Panel = transform.Find("Main_Panel").Find("Map_Panel").gameObject as GameObject;
-    
+
     float mapY = 0f;
     foreach(DataMap map in chapter.maps)
     {
@@ -30,7 +30,7 @@ public class MapMenuLink : MonoBehaviour
       mapY += 0.5f;
     }
   }
-  
+
 
   private void destroyLeftSideBook()
   {
@@ -68,7 +68,6 @@ public class MapMenuLink : MonoBehaviour
     int chapterNumber = 1;
     float bookX = 0f;
     foreach(DataChapter chapter in ChapterManagement.chapters){
-      Debug.Log("In foreach");
       GameObject chapter_Button = Instantiate(UnityEngine.Resources.Load(chapterPath), transform.Find("Main_Panel").Find("Chapter_Panel")) as GameObject;
       chapter_Button.transform.position = chapter_Button.transform.position + new Vector3(0,bookX,0);
       chapter_Button.transform.Find("Chapter_Name").GetComponent<TMP_Text>().text = "Chapter " + chapterNumber;
@@ -104,7 +103,9 @@ public class MapMenuLink : MonoBehaviour
       }
 
     }
+
     if(ChapterManagement.currentChapter != currentChapter){
+      Debug.Log("Chapter changement");
       leftSideBook(ChapterManagement.chapters[currentChapter]);
     }
   }
