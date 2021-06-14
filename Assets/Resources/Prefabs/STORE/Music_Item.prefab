@@ -719,7 +719,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8142442864405689312}
-        m_TargetAssemblyTypeName: PlayPauseStoreMusic, Assembly-CSharp
+        m_TargetAssemblyTypeName: MusicScript, Assembly-CSharp
         m_MethodName: getMusicIndex
         m_Mode: 1
         m_Arguments:
