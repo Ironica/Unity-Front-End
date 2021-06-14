@@ -12,9 +12,11 @@ public class MapMenuLink : MonoBehaviour
   private string mapButtonPath = "Prefabs/MAP_MENU/Map_Button";
 
   private int currentChapter;
+  private string currentMap;
 
   private void leftSideBook(DataChapter chapter)
   {
+    Debug.Log("leftSideBook");
     GameObject openedBook = transform.Find("Background").Find("Opened_Book").gameObject as GameObject;
 
     openedBook.transform.Find("Chapter_Name").GetComponent<Text>().text = chapter.chapterName;
@@ -34,7 +36,6 @@ public class MapMenuLink : MonoBehaviour
     {
       Destroy(child.gameObject);
     }
-
   }
 
   private void rigthSideBook(DataMap map)
@@ -57,12 +58,6 @@ public class MapMenuLink : MonoBehaviour
     openedBook.transform.Find("Goals").GetComponent<Text>().text = goal;
   }
 
-  public void chooseMap(Button bookButton)
-  {
-    //int bookIndex = bookButton.transform.parent.GetSiblingIndex();
-    Debug.Log(bookButton.name);
-  }
-
 
   void Start()
   {
@@ -71,6 +66,7 @@ public class MapMenuLink : MonoBehaviour
     int chapterNumber = 1;
     float bookX = 0f;
     foreach(DataChapter chapter in ChapterManagement.chapters){
+      Debug.Log("In foreach");
       GameObject book = Instantiate(UnityEngine.Resources.Load(bookPath), transform.Find("Background").Find("Library")) as GameObject;
       book.transform.position = book.transform.position + new Vector3(bookX,0,0);
       book.transform.Find("Book_Button").Find("Book_Number").GetComponent<Text>().text = "" + chapterNumber;
@@ -81,11 +77,31 @@ public class MapMenuLink : MonoBehaviour
     currentChapter = ChapterManagement.currentChapter;
 
     leftSideBook(ChapterManagement.chapters[currentChapter]);
-    rigthSideBook(ChapterManagement.chapters[0].maps[0]);
+    //rigthSideBook(ChapterManagement.chapters[0].maps[0]);
   }
 
   void Update()
   {
+    if(!StatData.getCurrent().Equals(currentMap))
+    {
+      currentMap = StatData.getCurrent();
+      int i = 0;
+      bool found = false;
+      while(i<ChapterManagement.chapters[currentChapter].maps.Count && !found)
+      {
+        if(ChapterManagement.chapters[currentChapter].maps[i].name.Equals(currentMap))
+        {
+          rigthSideBook(ChapterManagement.chapters[currentChapter].maps[i]);
+          found = true;
+        }
+        i++;
+      }
+      if(!found)
+      {
+        Debug.Log("Map could not be load");
+      }
+
+    }
     if(ChapterManagement.currentChapter != currentChapter){
       leftSideBook(ChapterManagement.chapters[currentChapter]);
     }
