@@ -10,6 +10,8 @@ public static class ChapterManagement
   public static List<DataChapter> chapters = new List<DataChapter>();
   private static string path = "Assets/Resources/MapJson/DataMap/";
 
+  public static int currentChapter = 0;
+
   public static void chaptersConstruction()
   {
     string[] files = Directory.GetFiles(path);
