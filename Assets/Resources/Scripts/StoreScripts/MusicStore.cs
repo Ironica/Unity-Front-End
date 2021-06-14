@@ -12,12 +12,17 @@ public  class MusicStore : MonoBehaviour
         if (StatData.isPlayable)
         {
             audio.clip = playlist[StatData.indexStoreMusic];
-            audio.volume = 0.2f;
-            audio.Play();
+            if (!audio.isPlaying)
+            {
+                audio.Play();
+            }
         }
         else
         {
-            audio.Stop();
+            if (audio.isPlaying)
+            {
+                audio.Stop();
+            }
         }
     }
 }
