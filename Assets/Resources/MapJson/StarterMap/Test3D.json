@@ -1,0 +1,25 @@
+{
+  "type": "default",
+  "code": "val totalGem = 0\nvar collected = 0\nval p = Player()\nfun Player.turnRight() {\n    p.turnLeft()\n    p.turnLeft()\n    p.turnLeft()\n}\n\nwhile (collected < totalGem) {\n    if (p.isOnGem) {\n        print(\"Collected gem!\")\n        p.collectGem()\n        collected += 1\n    }\n    if (p.isOnClosedSwitch) {\n        print(\"Toggled switch!\")\n        p.toggleSwitch()\n    }\n    if (!p.isBlockedRight) {\n        p.turnRight()\n        p.moveForward()\n    } else {\n        if (p.isBlocked) {\n            while (p.isBlocked) {\n                p.turnLeft()\n            }\n        }\n        p.moveForward()\n    }\n}",
+  "grid": [
+    [{"block": "TREE", "level": 1, "biome": "PLAINS"},
+      {"block": "HOME", "level": 1, "biome": "PLAINS"}
+    ],
+    
+    [{"block": "MOUNTAIN", "level": 1, "biome": "PLAINS"},
+      {"block": "DESERT", "level": 1, "biome": "PLAINS"}
+    ]
+  ],
+  "gems": [
+  ],
+  "beepers": [],
+  "switches": [],
+  "platforms": [],
+  "monsters": [],
+  "portals": [],
+  "locks": [],
+  "stairs": [],
+  "players": [{
+    "id": 1, "x": 1, "y":0, "dir": "RIGHT", "role": "PLAYER", "stamina": 500
+  }]
+}

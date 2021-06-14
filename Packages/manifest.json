@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.coffee.ui-effect": "https://github.com/mob-sakai/UIEffect.git",
     "com.unity.2d.animation": "5.0.5",
     "com.unity.2d.pixel-perfect": "4.0.1",
     "com.unity.2d.psdimporter": "4.0.2",

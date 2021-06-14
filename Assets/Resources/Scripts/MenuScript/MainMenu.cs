@@ -19,21 +19,36 @@ public class MainMenu : MonoBehaviour
       ChangeSceneManagement.getCurrentScene();
       SceneManager.LoadScene("Scenes/Store");
     }
-    public void Settings()
+
+    public void MapMenu()
     {
         ChangeSceneManagement.getCurrentScene();
+        SceneManager.LoadScene("Scenes/Map_Menu");
+    }
+    public void Settings()
+    {
         settingsWindow.SetActive(true);
     }
 
     public void CloseSettings()
     {
-        ChangeSceneManagement.getCurrentScene();
         settingsWindow.SetActive(false);
     }
     public void Credits()
     {
       ChangeSceneManagement.getCurrentScene();
+      // TODO add credit scene
+    }
 
+    public void Help()
+    {
+        ChangeSceneManagement.getCurrentScene();
+        // TODO add help scene
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 
     private void OnApplicationQuit()
