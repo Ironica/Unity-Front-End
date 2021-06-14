@@ -11,6 +11,8 @@ public class MapMenuLink : MonoBehaviour
   private string bookPath = "Prefabs/MAP_MENU/Book";
   private string mapButtonPath = "Prefabs/MAP_MENU/Map_Button";
 
+  private int currentChapter;
+
   private void leftSideBook(DataChapter chapter)
   {
     GameObject openedBook = transform.Find("Background").Find("Opened_Book").gameObject as GameObject;
@@ -19,11 +21,20 @@ public class MapMenuLink : MonoBehaviour
     float mapY = 0f;
     foreach(DataMap map in chapter.maps)
     {
-      GameObject mapObject = Instantiate(UnityEngine.Resources.Load(mapButtonPath), openedBook.transform) as GameObject;
+      GameObject mapObject = Instantiate(UnityEngine.Resources.Load(mapButtonPath), openedBook.transform.Find("Map_Buttons")) as GameObject;
       mapObject.transform.position = mapObject.transform.position - new Vector3(0, mapY, 0);
       mapObject.transform.Find("Map_Name").GetComponent<Text>().text = map.name;
       mapY += 0.5f;
     }
+  }
+
+  private void destroyLeftSideBook()
+  {
+    foreach (Transform child in transform.Find("Background").Find("Opened_Book").Find("Map_Buttons"))
+    {
+      Destroy(child.gameObject);
+    }
+
   }
 
   private void rigthSideBook(DataMap map)
@@ -46,9 +57,10 @@ public class MapMenuLink : MonoBehaviour
     openedBook.transform.Find("Goals").GetComponent<Text>().text = goal;
   }
 
-  public void chooseMap()
+  public void chooseMap(Button bookButton)
   {
-
+    //int bookIndex = bookButton.transform.parent.GetSiblingIndex();
+    Debug.Log(bookButton.name);
   }
 
 
@@ -66,7 +78,16 @@ public class MapMenuLink : MonoBehaviour
       chapterNumber++;
     }
 
-      leftSideBook(ChapterManagement.chapters[0]);
-      rigthSideBook(ChapterManagement.chapters[0].maps[0]);
+    currentChapter = ChapterManagement.currentChapter;
+
+    leftSideBook(ChapterManagement.chapters[currentChapter]);
+    rigthSideBook(ChapterManagement.chapters[0].maps[0]);
+  }
+
+  void Update()
+  {
+    if(ChapterManagement.currentChapter != currentChapter){
+      leftSideBook(ChapterManagement.chapters[currentChapter]);
+    }
   }
 }
