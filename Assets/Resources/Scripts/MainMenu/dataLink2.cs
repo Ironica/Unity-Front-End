@@ -504,6 +504,15 @@ public class dataLink2 : MonoBehaviour
       playerInstantiation(gridObject[playerCoo.Y, playerCoo.X], playerCoo);
     }
 
+    foreach(Transform child in tiles.transform)
+    {
+      child.position = new Vector3(child.position.x+3f,child.position.y,child.position.z);
+    }
+    foreach(Transform child in gameBoard.transform)
+    {
+      child.position = new Vector3(child.position.x+3f,child.position.y,child.position.z);
+    }
+
   }
 
   private void Awake()
