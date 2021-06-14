@@ -597,7 +597,7 @@ public class dataLink2 : MonoBehaviour
     //converter.stringToSerialized();
     converter.serializedToObject();
 
-    GameObject ScoreBoard = gameObject.transform.Find("ScoreBoard").gameObject as GameObject;
+    GameObject ScoreBoard = gameObject.transform.Find("Top_Panel").gameObject.transform.Find("ScoreBoard").gameObject as GameObject;
     ScoreBoard.transform.Find("GemScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = "0/" + dataObj.gems.Length;
     ScoreBoard.transform.Find("SwitchScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = dataObj.switches.Count(sw => sw.On == true) + "/" + dataObj.switches.Length;
     ScoreBoard.transform.Find("KillScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = "0/" + 0;
