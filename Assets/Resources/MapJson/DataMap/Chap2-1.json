@@ -6,7 +6,9 @@
   \nNo risk should be taken to move forward ... so be careful where you step ... ",
   "goalsTitle": "Activate the switch to move forward",
   "goal": 1,
-  "code": "",
+  "code": "/* HELPS
+You only have to put the switch on to win but don't forget to look arround for gems to upgrade your inventory.
+  */",
   "maxGem": 0,
   "maxSwitchOn": 0,
   "maxMonster": 0,
