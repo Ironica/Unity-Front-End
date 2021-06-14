@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,8 @@ public class MapChoice : MonoBehaviour
 {
     public void changeChapter()
     {
+      Debug.Log("I am in changeChapter function");
+      Debug.Log(transform.parent.GetSiblingIndex());
       ChapterManagement.currentChapter = transform.parent.GetSiblingIndex();
     }
 

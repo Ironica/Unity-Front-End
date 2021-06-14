@@ -24,7 +24,7 @@ public class MapMenuLink : MonoBehaviour
     float mapY = 0f;
     foreach(DataMap map in chapter.maps)
     {
-      GameObject mapObject = Instantiate(UnityEngine.Resources.Load(mapButtonPath), Map_Panel.transform.Find("Map_Buttons")) as GameObject;
+      GameObject mapObject = Instantiate(UnityEngine.Resources.Load(mapButtonPath), Map_Panel.transform) as GameObject;
       mapObject.transform.position = mapObject.transform.position - new Vector3(0, mapY, 0);
       mapObject.transform.Find("Map_Name").GetComponent<TMP_Text>().text = map.name;
       mapY += 0.5f;
@@ -72,7 +72,7 @@ public class MapMenuLink : MonoBehaviour
       GameObject chapter_Button = Instantiate(UnityEngine.Resources.Load(chapterPath), transform.Find("Main_Panel").Find("Chapter_Panel")) as GameObject;
       chapter_Button.transform.position = chapter_Button.transform.position + new Vector3(0,bookX,0);
       chapter_Button.transform.Find("Chapter_Name").GetComponent<TMP_Text>().text = "Chapter " + chapterNumber;
-      bookX -= 25f;
+      bookX -= 0.09f * Screen.height;
       chapterNumber++;
     }
 
