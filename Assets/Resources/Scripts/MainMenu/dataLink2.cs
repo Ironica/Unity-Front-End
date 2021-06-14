@@ -660,6 +660,11 @@ private void test()
 }
 
 private void Update(){
+
+  foreach(GameObject gem in gemObjects)
+  {
+    gem.transform.Rotate(Vector3.down * 20f * Time.deltaTime);
+  }
   if (Input.GetKey("up"))
   {
     test();
