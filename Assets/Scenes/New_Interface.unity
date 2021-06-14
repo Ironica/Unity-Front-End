@@ -1088,8 +1088,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.021806855, y: 0.07747206}
   m_AnchorMax: {x: 0.2962305, y: 0.9222112}
-  m_AnchoredPosition: {x: 0.09020996, y: -0.55300903}
-  m_SizeDelta: {x: 0.0347, y: 30.0649}
+  m_AnchoredPosition: {x: 0.09020996, y: -1.0787048}
+  m_SizeDelta: {x: 0.0347, y: 31.116}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &732367107
 MonoBehaviour:
@@ -1549,7 +1549,6 @@ GameObject:
   - component: {fileID: 866738365}
   - component: {fileID: 866738367}
   - component: {fileID: 866738366}
-  - component: {fileID: 866738368}
   - component: {fileID: 866738369}
   m_Layer: 0
   m_Name: SwitchScore
@@ -1591,7 +1590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: -8235126972059873128, guid: eb4c2e8d68a1d6c4fba53259e00b0ad1, type: 2}
+  m_Material: {fileID: 0}
   m_Color: {r: 0.15294118, g: 0.68235296, b: 0.37647063, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -1617,20 +1616,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 866738364}
   m_CullTransparentMesh: 1
---- !u!114 &866738368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 866738364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 5c7e0c2bb012def409b6ec01674d48a2, type: 2}
-  radius: 16.6
 --- !u!114 &866738369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2624,7 +2609,6 @@ GameObject:
   - component: {fileID: 1301989916}
   - component: {fileID: 1301989915}
   - component: {fileID: 1301989914}
-  - component: {fileID: 1301989917}
   - component: {fileID: 1301989918}
   m_Layer: 0
   m_Name: Compile
@@ -2748,20 +2732,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301989912}
   m_CullTransparentMesh: 1
---- !u!114 &1301989917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301989912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: c11604e4dfba38040b7675b678f6c38a, type: 2}
-  radius: 17.61
 --- !u!114 &1301989918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2907,7 +2877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: -8235126972059873128, guid: eb4c2e8d68a1d6c4fba53259e00b0ad1, type: 2}
+  m_Material: {fileID: 0}
   m_Color: {r: 0.16078432, g: 0.5019608, b: 0.7254902, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -2961,7 +2931,6 @@ GameObject:
   - component: {fileID: 1394193754}
   - component: {fileID: 1394193756}
   - component: {fileID: 1394193755}
-  - component: {fileID: 1394193757}
   - component: {fileID: 1394193758}
   m_Layer: 0
   m_Name: KillScore
@@ -3003,7 +2972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: -8235126972059873128, guid: eb4c2e8d68a1d6c4fba53259e00b0ad1, type: 2}
+  m_Material: {fileID: 0}
   m_Color: {r: 0.08627451, g: 0.627451, b: 0.52156866, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -3029,20 +2998,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394193753}
   m_CullTransparentMesh: 1
---- !u!114 &1394193757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1394193753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 5c7e0c2bb012def409b6ec01674d48a2, type: 2}
-  radius: 16.6
 --- !u!114 &1394193758
 MonoBehaviour:
   m_ObjectHideFlags: 0
