@@ -176,7 +176,7 @@ public class dataLink2 : MonoBehaviour
   */
   public void OnResetClick()
   {
-    
+
     payloads.Clear();
     this.dataSer.code = "";
     GameObject.Find("UserCode").GetComponent<InputField>().text = "";
