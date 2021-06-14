@@ -1,9 +1,10 @@
 {
   "name": "Chap2-1",
-  "chapterFile": "",
-  "storyTilte": "",
-  "story": "",
-  "goalsTitle": "",
+  "chapterFile": "Chapter 2",
+  "storyTilte": "Land analysis",
+  "story": "Going alone on an adventure confronts you with the dangers of these lands.
+  \nNo risk should be taken to move forward ... so be careful where you step ... ",
+  "goalsTitle": "Activate the switch to move forward",
   "goal": 1,
   "code": "",
   "maxGem": 0,
