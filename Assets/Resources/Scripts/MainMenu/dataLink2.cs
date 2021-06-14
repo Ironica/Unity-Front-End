@@ -363,7 +363,7 @@ public class dataLink2 : MonoBehaviour
   private Vector3 setCoordinates(Vector3 vector){
     Vector3 i = new Vector3(0f, 0f, 2f);
     Vector3 j = new Vector3(-2f, 0f, 0f);
-    return vector.x*i + vector.z*j;
+    return vector.x*i + vector.z*j + new Vector3(3f, 0f, 0f);
   }
 
   private string stairDirection(Direction dir)
@@ -505,14 +505,14 @@ public class dataLink2 : MonoBehaviour
       playerInstantiation(gridObject[playerCoo.Y, playerCoo.X], playerCoo);
     }
 
-    foreach(Transform child in tiles.transform)
+    /*foreach(Transform child in tiles.transform)
     {
       child.position = new Vector3(child.position.x+3f,child.position.y,child.position.z);
     }
     foreach(Transform child in gameBoard.transform)
     {
       child.position = new Vector3(child.position.x+3f,child.position.y,child.position.z);
-    }
+    }*/
 
   }
 

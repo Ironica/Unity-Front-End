@@ -29,6 +29,21 @@ public static class ChapterManagement
 
   }
 
+  private static bool contains(List<DataMap> maps, string mapName)
+  {
+    int i = 0;
+    bool found = false;
+    while(i<maps.Count && !found)
+    {
+      if(maps[i].name.Equals(mapName))
+      {
+        found = true;
+      }
+      i++;
+    }
+    return found;
+  }
+
   private static void addToAChapter(DataMap map)
   {
     var chapterName = map.chapterFile;
@@ -37,6 +52,7 @@ public static class ChapterManagement
     {
       if(chapters[i].chapterName.Equals(map.chapterFile))
       {
+        if(!contains(chapters[i].maps, map.name))
         chapters[i].maps.Add(map);
         found = true;
       }
