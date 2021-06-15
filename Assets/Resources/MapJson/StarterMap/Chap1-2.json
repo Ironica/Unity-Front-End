@@ -1,0 +1,189 @@
+{
+    "type": "default",
+    "code": "",
+    "grid": [
+        [
+            {
+                "block": "WATER",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "STONE",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "TREE",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "HILL",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "MOUNTAIN",
+                "level": 1,
+                "biome": "PLAINS"
+            }
+        ],
+        [
+            {
+                "block": "OPEN",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "OPEN",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "OPEN",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "OPEN",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "MOUNTAIN",
+                "level": 1,
+                "biome": "PLAINS"
+            }
+        ],
+        [
+            {
+                "block": "TREE",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "OPEN",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "OPEN",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "OPEN",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "TREE",
+                "level": 1,
+                "biome": "PLAINS"
+            }
+        ],
+        [
+            {
+                "block": "TREE",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "WATER",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "OPEN",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "OPEN",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "OPEN",
+                "level": 1,
+                "biome": "PLAINS"
+            }
+        ],
+        [
+            {
+                "block": "MOUNTAIN",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "WATER",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "STONE",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "OPEN",
+                "level": 1,
+                "biome": "PLAINS"
+            },
+            {
+                "block": "OPEN",
+                "level": 1,
+                "biome": "PLAINS"
+            }
+        ]
+    ],
+    "gems": [
+        {
+            "x": 2,
+            "y": 1
+        }
+    ],
+    "beepers": [
+    ],
+    "switches": [
+        {
+            "coo": {
+                "x": 2,
+                "y": 3
+            },
+            "on": false
+        }
+    ],
+    "portals": [
+    ],
+    "locks": [
+    ],
+    "stairs": [
+    ],
+    "monsters": [
+    ],
+    "platforms": [
+    ],
+    "players": [
+        {
+            "id": 1,
+            "x": 0,
+            "y": 1,
+            "dir": "RIGHT",
+            "role": "PLAYER",
+            "stamina": 200
+        }
+    ],
+    "gamingCondition": {
+        "collectGemsBy": 1,
+        "switchesOnBy": 1,
+        "arriveAt": [
+            {
+                "x": 4,
+                "y": 3
+            }
+        ]
+    },
+    "userCollision": true
+}
