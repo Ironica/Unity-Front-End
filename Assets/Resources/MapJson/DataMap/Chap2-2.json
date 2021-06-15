@@ -1,0 +1,26 @@
+{
+  "name": "Chap2-2",
+  "chapterFile": "Chapter 2",
+  "storyTitle": "Nested loops and conditional",
+  "story": "A story",
+  "goal": "GEM",
+  "code": "/*Replace each 'value' in for loops with the correct numbers.
+  The if statement takes as a parameter a boolean condition, a value either 'true' or 'false'.
+  If the condition is true, the program will execute the content of the if that is between the {}*/
+  Choose one of these condition to add inside the if() to check if there is a gem where the player is: p.isBlocked - p.isOnGem - p.isBlockedLeft - p.isBlockedRight.
+
+  val p = Player()
+  for (i in value .. value) {
+    for (i in value-i downTo value) {
+      if (p.) {
+        p.collectGem()
+      }
+      p.moveForward()
+    }
+    p.turnLeft()
+  }",
+  "maxGem": 7,
+  "maxSwitchOn": 0,
+  "maxMonster": 0,
+  "win": true
+}

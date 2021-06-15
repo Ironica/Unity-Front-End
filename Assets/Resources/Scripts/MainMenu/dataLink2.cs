@@ -21,6 +21,11 @@ using Debug = UnityEngine.Debug;
 public class dataLink2 : MonoBehaviour
 {
 
+  private Vector3 leftRotation = new Vector3(0f, 90f, 0f);
+  private Vector3 rightRotation = new Vector3(0f, 270f, 0f);
+  private Vector3 frontRotation = new Vector3(0f, 180, 0f);
+  private Vector3 backRotation = new Vector3(0f, 0f, 0f);
+
   //To connect to the server
   private const string url = "http://127.0.0.1";
   private const string api = "simulatte";
@@ -65,6 +70,7 @@ public class dataLink2 : MonoBehaviour
   private string hill                 = "Prefabs/3D/PLAIN/PLAIN_HILL_LEVEL";
 
   // Stairs
+  private string stairs               = "Prefabs/3D/PLAIN/PLAIN_STAIRS";
   private string  stairLeft           = "Prefabs/PLAIN_STAIRS_LEFT";
   private string  stairRight          = "Prefabs/PLAIN_STAIRS_RIGHT";
   private string  stairBack           = "Prefabs/PLAIN_STAIRS_BACK";
@@ -80,9 +86,14 @@ public class dataLink2 : MonoBehaviour
   private string playerRight          = "";
 
   //Prefabricated items
+  private string gem                  = "Prefabs/3D/GEM";
+  private string switchOn             = "Prefabs/3D/SWITCH_ON";
+  private string switchOff            = "Prefabs/3D/SWITCH_OFF";
+  /*
   private string gem                  = "Prefabs/ITEM/GEM";
   private string switchOn             = "Prefabs/ITEM/SWITCH_ON";
   private string switchOff            = "Prefabs/ITEM/SWITCH_OFF";
+  */
 
   //Maps folder
   private const string pathStarterMap = "Assets/Resources/MapJson/StarterMap/";
@@ -138,9 +149,9 @@ public class dataLink2 : MonoBehaviour
   private string getUserCode()
   {
     return gameObject.transform.Find("Input_Panel")
-      .gameObject.transform.Find("UserCode")
-      .GetComponent<TMP_InputField>()
-      .text;
+    .gameObject.transform.Find("UserCode")
+    .GetComponent<TMP_InputField>()
+    .text;
   }
 
   private TMP_Text consoleLog
@@ -176,10 +187,11 @@ public class dataLink2 : MonoBehaviour
   */
   public void OnResetClick()
   {
+
     payloads.Clear();
     this.dataSer.code = "";
-    GameObject.Find("UserCode").GetComponent<InputField>().text = "";
-    progression.value = 0;
+    GameObject.Find("UserCode/Text Area/Text").GetComponent<TextMeshProUGUI>().text = "";
+    // progression.value = 0;
     // Resetting the map means reinitialize it.
     converter.dataSer = dataSer;
     converter.serializedToObject();
@@ -189,7 +201,7 @@ public class dataLink2 : MonoBehaviour
       Destroy(child.gameObject); // Destroy last frame
     }
 
-    GameObject ScoreBoard = gameObject.transform.Find("ScoreBoard").gameObject as GameObject;
+    GameObject ScoreBoard = gameObject.transform.Find("Top_Panel").gameObject.transform.Find("ScoreBoard").gameObject as GameObject;
     ScoreBoard.transform.Find("GemScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = "0/" + dataObj.gems.Length;
     ScoreBoard.transform.Find("SwitchScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = dataObj.switches.Count(sw => sw.On == true) + "/" + dataObj.switches.Length;
     ScoreBoard.transform.Find("KillScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = "0/" + 0;
@@ -303,7 +315,7 @@ public class dataLink2 : MonoBehaviour
           string monsterScore = 0 + "/" + monsterNumber;
 
 
-          GameObject ScoreBoard = gameObject.transform.Find("ScoreBoard").gameObject as GameObject;
+          GameObject ScoreBoard = gameObject.transform.Find("Top_Panel").gameObject.transform.Find("ScoreBoard").gameObject as GameObject;
           ScoreBoard.transform.Find("GemScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = gemsScore;
           ScoreBoard.transform.Find("SwitchScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = switchesScore;
           ScoreBoard.transform.Find("KillScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = monsterScore;
@@ -354,15 +366,15 @@ public class dataLink2 : MonoBehaviour
   }
 
   /*private Vector2 setCoordinates(Vector2 vector){
-    Vector2 i = new Vector2(0f, 2f);
-    Vector2 j = new Vector2(-2f, 0f);
-    return vector.x*i + vector.y*j;
+  Vector2 i = new Vector2(0f, 2f);
+  Vector2 j = new Vector2(-2f, 0f);
+  return vector.x*i + vector.y*j;
   }*/
 
   private Vector3 setCoordinates(Vector3 vector){
     Vector3 i = new Vector3(0f, 0f, 2f);
     Vector3 j = new Vector3(-2f, 0f, 0f);
-    return vector.x*i + vector.z*j;
+    return vector.x*i + vector.z*j + new Vector3(3f, 0f, 0f);
   }
 
   private string stairDirection(Direction dir)
@@ -375,15 +387,21 @@ public class dataLink2 : MonoBehaviour
     _ => throw new Exception("This shouldn't be possible")
   };
 
-  private string playerDirection(Direction dir)
-  => dir switch
+  private void objectDirection(GameObject obj, Direction dir)
   {
-    Direction.UP => player+playerFront,
-    Direction.DOWN => player+playerBack,
-    Direction.LEFT => player+playerLeft,
-    Direction.RIGHT => player+playerRight,
-    _ => throw new Exception("This shouldn't be possible")
-  };
+    switch(dir){
+      case Direction.UP: obj.transform.eulerAngles = frontRotation;
+      break;
+      case Direction.DOWN: obj.transform.eulerAngles = backRotation;
+      break;
+      case Direction.LEFT: obj.transform.eulerAngles =  leftRotation;
+      break;
+      case Direction.RIGHT: obj.transform.eulerAngles = rightRotation;
+      break;
+      default: throw new Exception("This shouldn't be possible");
+      break;
+    }
+  }
 
   private string tileLevel(Block block, int i, int j)
   => block switch
@@ -395,7 +413,7 @@ public class dataLink2 : MonoBehaviour
     Block.TREE => tree + dataObj.grid[j][i].Level,
     Block.WATER => water + dataObj.grid[j][i].Level,
     Block.HILL => hill + dataObj.grid[j][i].Level,
-    Block.STAIR => stairDirection(dataObj.stairs.First(e => e.X == i && e.Y == j).Dir),
+    Block.STAIR => stairs,//stairDirection(dataObj.stairs.First(e => e.X == i && e.Y == j).Dir),
     Block.VOID => throw new NotImplementedException(),
     _ => throw new Exception("This shouldn't be possible")
   };
@@ -406,12 +424,25 @@ public class dataLink2 : MonoBehaviour
     Vector3 coo = setCoordinates(new Vector3(j-x,0f, i-y));
     obj  = Instantiate(UnityEngine.Resources.Load(tile), new Vector3(coo.x,coo.y, coo.z), Quaternion.identity) as GameObject;
     obj.transform.parent = tiles.transform;
+    if(block == Block.STAIR)
+    {
+      objectDirection(obj, dataObj.stairs.First(e => e.X == i && e.Y == j).Dir);
+    }
     return obj;
   }
 
   private void GemInstantiation(GameObject tile, Gem gemObj)
   {
-    var gemLevel = -0.35f;
+    var gemPrefab = gem;
+    var level = dataObj.grid[gemObj.Y][gemObj.X].Level;
+    var tilePos = tile.transform.position;
+    var coo = new Vector3(tilePos.x, tilePos.y-1.5f, tilePos.z);
+
+    var gemObject = Instantiate(UnityEngine.Resources.Load(gemPrefab), coo, Quaternion.identity) as GameObject;
+    gemObject.transform.parent = gameBoard.transform;
+    //gemObject.GetComponent<SpriteRenderer>().sortingOrder = level;
+    gemObjects.Add(gemObject);
+    /*var gemLevel = -0.35f;
     var gemPrefab = gem;
     var level = dataObj.grid[gemObj.Y][gemObj.X].Level;
     gemLevel += (level - 1) * 0.4f;
@@ -420,22 +451,22 @@ public class dataLink2 : MonoBehaviour
 
     var gemObject = Instantiate(UnityEngine.Resources.Load(gemPrefab), coo, Quaternion.identity) as GameObject;
     gemObject.transform.parent = gameBoard.transform;
-    gemObject.GetComponent<SpriteRenderer>().sortingOrder = level;
-    gemObjects.Add(gemObject);
+    //gemObject.GetComponent<SpriteRenderer>().sortingOrder = level;
+    gemObjects.Add(gemObject);*/
   }
 
   private void playerInstantiation(GameObject tile, Player player)
   {
     float playerLevel = 0;
-    string playerPrefab = playerDirection(player.Dir);
     int level = dataObj.grid[player.Y][player.X].Level;
     //playerLevel += (level-1)*0.4f;
-    Debug.Log(tile.name);
+    // Debug.Log(tile.name);
     var position = tile.transform.position;
-    Vector3 coo = new Vector3(position.x, -1, position.z   );
+    Vector3 coo = new Vector3(position.x, position.y-0.5f, position.z   );
 
-    playerObject = Instantiate(UnityEngine.Resources.Load(playerPrefab), coo, Quaternion.identity) as GameObject;
+    playerObject = Instantiate(UnityEngine.Resources.Load(frog), coo, Quaternion.identity) as GameObject;
     playerObject.transform.parent = gameBoard.transform;
+    objectDirection(playerObject, player.Dir);
     //playerObject.GetComponent<SpriteRenderer>().sortingOrder = level+1;
 
   }
@@ -446,14 +477,24 @@ public class dataLink2 : MonoBehaviour
     var switchLevel = 0.00f;
     string switchPrefab = switchObj.On ? switchOn : switchOff;
     var level = dataObj.grid[switchObj.Y][switchObj.X].Level;
+    var tilePos = tile.transform.position;
+    var coo = new Vector3(tilePos.x, tilePos.y-0.8f, tilePos.z);
+
+    var switchObject = Instantiate(UnityEngine.Resources.Load(switchPrefab), coo, Quaternion.identity) as GameObject;
+    switchObject.transform.parent = gameBoard.transform;
+    //switchObject.GetComponent<SpriteRenderer>().sortingOrder = level;
+    switchObjects.Add(switchObject);
+    /*var switchLevel = 0.00f;
+    string switchPrefab = switchObj.On ? switchOn : switchOff;
+    var level = dataObj.grid[switchObj.Y][switchObj.X].Level;
     switchLevel += (level-1) * 0.4f;
     var tilePos = tile.transform.position;
     var coo = new Vector3(tilePos.x, tilePos.y + switchLevel, 0);
 
     var switchObject = Instantiate(UnityEngine.Resources.Load(switchPrefab), coo, Quaternion.identity) as GameObject;
     switchObject.transform.parent = gameBoard.transform;
-    switchObject.GetComponent<SpriteRenderer>().sortingOrder = level;
-    switchObjects.Add(switchObject);
+    //switchObject.GetComponent<SpriteRenderer>().sortingOrder = level;
+    switchObjects.Add(switchObject);*/
   }
 
 
@@ -504,15 +545,6 @@ public class dataLink2 : MonoBehaviour
       playerInstantiation(gridObject[playerCoo.Y, playerCoo.X], playerCoo);
     }
 
-    foreach(Transform child in tiles.transform)
-    {
-      child.position = new Vector3(child.position.x+3f,child.position.y,child.position.z);
-    }
-    foreach(Transform child in gameBoard.transform)
-    {
-      child.position = new Vector3(child.position.x+3f,child.position.y,child.position.z);
-    }
-
   }
 
   private void Awake()
@@ -520,26 +552,17 @@ public class dataLink2 : MonoBehaviour
 
   }
 
-  public void saveMap()
-  {
-    if(dataMap == null){
-      dataMap = new DataMap(currentMap);
-    }
-    dataMap.code = gameObject.transform.Find("Input_Panel")
-      .gameObject.transform.Find("UserCode")
-    .GetComponent<TMP_InputField>()
-    .text;
-    SaveMapManager.saveData(dataMap);
-  }
 
-  public void loadMap()
-  {
+  public void loadMap(){
     var load = SaveMapManager.loadData(dataMap);
     if(load != null){
 
+      dataMap.storyTitle = load.storyTitle;
+      dataMap.story = load.story;
+
       dataMap.chapterFile = load.chapterFile;
 
-      dataMap.storyTilte = load.storyTilte;
+      dataMap.storyTitle = load.storyTitle;
       dataMap.story = load.story;
 
       dataMap.goalsTitle = load.goalsTitle;
@@ -557,13 +580,26 @@ public class dataLink2 : MonoBehaviour
       .GetComponent<TMP_InputField>()
       .text = dataMap.code;
     }
-
   }
+
+  public void saveMap()
+  {
+    if(dataMap == null){
+      dataMap = new DataMap(currentMap);
+    }
+    dataMap.code = gameObject.transform.Find("Input_Panel")
+    .gameObject.transform.Find("UserCode")
+    .GetComponent<TMP_InputField>()
+    .text;
+    SaveMapManager.saveData(dataMap);
+  }
+
 
 
   // Start is called before the first frame update
   private void Start()
   {
+
     gameBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Elements").gameObject as GameObject;
     tiles = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Tiles").gameObject as GameObject;
 
@@ -597,13 +633,14 @@ public class dataLink2 : MonoBehaviour
     //converter.stringToSerialized();
     converter.serializedToObject();
 
-    GameObject ScoreBoard = gameObject.transform.Find("ScoreBoard").gameObject as GameObject;
+    GameObject ScoreBoard = gameObject.transform.Find("Top_Panel").gameObject.transform.Find("ScoreBoard").gameObject as GameObject;
     ScoreBoard.transform.Find("GemScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = "0/" + dataObj.gems.Length;
     ScoreBoard.transform.Find("SwitchScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = dataObj.switches.Count(sw => sw.On == true) + "/" + dataObj.switches.Length;
     ScoreBoard.transform.Find("KillScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = "0/" + 0;
 
 
     instantiation(true);
+
 
   }
 
@@ -620,6 +657,32 @@ public class dataLink2 : MonoBehaviour
     foreach (Transform child in tiles.transform)
     {
       Destroy(child.gameObject); // Destroy last frame
+    }
+  }
+
+  private void objectTurnLeft(GameObject obj)
+  {
+    obj.transform.eulerAngles -= new Vector3(0f, 90f, 0f);
+    Debug.Log("x: " + obj.transform.eulerAngles.x);
+    Debug.Log("y: " + obj.transform.eulerAngles.y);
+    Debug.Log("z: " + obj.transform.eulerAngles.z);
+  }
+  private void objectTurnRigth(GameObject obj)
+  {
+    obj.transform.eulerAngles += new Vector3(0f, 90f, 0f);
+    Debug.Log("x: " + obj.transform.eulerAngles.x);
+    Debug.Log("y: " + obj.transform.eulerAngles.y);
+    Debug.Log("z: " + obj.transform.eulerAngles.z);
+  }
+
+  private void Update(){
+
+    foreach(GameObject gem in gemObjects)
+    {
+      if (gem != null)
+      {
+        gem.transform.Rotate(Vector3.down * 20f * Time.deltaTime);
+      }
     }
   }
 }

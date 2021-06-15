@@ -7,43 +7,38 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     //public string levelToLoad;
-    public GameObject settingsWindow;
     public void Continue()
     {
         ChangeSceneManagement.getCurrentScene();
-        SceneManager.LoadScene("Scenes/Interface");
+        SceneManager.LoadScene("Scenes/New_Interface");
         //StatData.setCurrent("map5");
     }
     public void Store()
     {
       ChangeSceneManagement.getCurrentScene();
-      SceneManager.LoadScene("Scenes/Store");
+      SceneManager.LoadScene("Scenes/New_Store");
     }
 
     public void MapMenu()
     {
         ChangeSceneManagement.getCurrentScene();
-        SceneManager.LoadScene("Scenes/Map_Menu");
+        SceneManager.LoadScene("Scenes/New_Map_Menu");
     }
     public void Settings()
     {
-        settingsWindow.SetActive(true);
+        SceneManager.LoadScene("Scenes/New_Settings");
     }
-
-    public void CloseSettings()
-    {
-        settingsWindow.SetActive(false);
-    }
+    
     public void Credits()
     {
       ChangeSceneManagement.getCurrentScene();
-      // TODO add credit scene
+      SceneManager.LoadScene("Scenes/New_Credit");
     }
 
     public void Help()
     {
         ChangeSceneManagement.getCurrentScene();
-        // TODO add help scene
+        SceneManager.LoadScene("Scenes/New_Help");
     }
 
     public void Exit()

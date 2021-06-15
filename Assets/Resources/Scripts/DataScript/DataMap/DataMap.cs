@@ -8,7 +8,7 @@ public class DataMap
     public string name {get; set;}
     public string chapterFile {get; set;}
 
-    public string storyTilte {get; set;}
+    public string storyTitle {get; set;}
     public string story {get; set;}
 
     public string goalsTitle {get; set;}
@@ -27,7 +27,7 @@ public class DataMap
       this.name = name;
       chapterFile = "";
 
-      storyTilte = "";
+      storyTitle = "";
       story = "";
 
       goalsTitle = "";

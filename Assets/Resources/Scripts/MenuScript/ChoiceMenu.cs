@@ -36,10 +36,10 @@ public class ChoiceMenu : MonoBehaviour
     }
     public void ChangeMap()
     {
-        SceneManager.LoadScene("MapMenu");
+        SceneManager.LoadScene("Map_Menu");
     }
-   
 
-   
+
+
 
 }
