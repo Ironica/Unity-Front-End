@@ -1697,7 +1697,7 @@ MonoBehaviour:
   selfRot: {x: 0, y: 0, z: 0, w: 0}
   maxScroll: 50
   minScroll: -10
-  maxPan: 25
+  maxPan: 20
   maxYRotateAngles: 70
   minYRotateAngles: 5
   rotateSpeed: 5
@@ -1792,6 +1792,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1451918862}
         m_TargetAssemblyTypeName: dataLink2, Assembly-CSharp
         m_MethodName: OnResetClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 819581750}
+        m_TargetAssemblyTypeName: MainCameraController, Assembly-CSharp
+        m_MethodName: OnClickReset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
