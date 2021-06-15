@@ -1,13 +1,13 @@
 {
   "name": "Chap1-3",
-  "chapterFile": "",
-  "storyTitle": "",
-  "story": "",
-  "goalsTitle": "",
-  "goal": 1,
+  "chapterFile": "Chapter 1",
+  "storyTitle": "Another switch",
+  "story": "Kindly notice: You don't need to toggle the opened switch",
+  "goalsTitle": "All switches must on, all gems must be collected, and arrive at the exit",
+  "goal": "SWITCHON",
   "code": "",
-  "maxGem": 0,
-  "maxSwitchOn": 0,
+  "maxGem": 1,
+  "maxSwitchOn": 2,
   "maxMonster": 0,
   "win": false
 }

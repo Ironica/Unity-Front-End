@@ -770,10 +770,10 @@ RectTransform:
   m_Father: {fileID: 2034246305}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.87879354}
+  m_AnchorMin: {x: 0, y: 0.88257915}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00091552734, y: 0.55597}
-  m_SizeDelta: {x: 342.9, y: 25.369}
+  m_AnchoredPosition: {x: -0.00079345703, y: 0.00013542}
+  m_SizeDelta: {x: 408.59, y: 31.251}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1180565447
 MonoBehaviour:
@@ -859,8 +859,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.038}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.19506836, y: -0.24951172}
-  m_SizeDelta: {x: -0.39, y: 0.499}
+  m_AnchoredPosition: {x: -0.1951294, y: -0.24951172}
+  m_SizeDelta: {x: -0.38989, y: 0.499}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1325757701
 MonoBehaviour:
@@ -1168,7 +1168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1252,10 +1252,10 @@ RectTransform:
   m_Father: {fileID: 842616642}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.19686528, y: 0.29930022}
-  m_AnchorMax: {x: 0.80313474, y: 0.70400006}
-  m_AnchoredPosition: {x: 0.00048828125, y: -0.00050354004}
-  m_SizeDelta: {x: -0.00097656, y: -0.001}
+  m_AnchorMin: {x: 0.06465444, y: 0.10440893}
+  m_AnchorMax: {x: 0.93700004, y: 0.883}
+  m_AnchoredPosition: {x: 0.000091552734, y: 0}
+  m_SizeDelta: {x: 0.00012207, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2139168558
 MonoBehaviour:
@@ -1277,7 +1277,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This section is under construction.
+  m_text: Special thanks to google and stackoverflow as each time we encountered
+    some problems we will search for solutions and other resources, especially in
+    these two sites.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8e3fd088078c50f48b88601af76bbb5d, type: 2}
   m_sharedMaterial: {fileID: 242777009659958489, guid: 8e3fd088078c50f48b88601af76bbb5d, type: 2}
@@ -1304,8 +1306,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

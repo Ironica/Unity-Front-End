@@ -42,7 +42,7 @@ public class MapMenuLink : MonoBehaviour
     }
   }
 
-  private void rigthSideBook(DataMap map)
+  private void rightSideBook(DataMap map)
   {
     GameObject Map_Description = transform.Find("Main_Panel").Find("Map_Description").gameObject as GameObject;
 
@@ -94,7 +94,7 @@ public class MapMenuLink : MonoBehaviour
       {
         if(ChapterManagement.chapters[currentChapter].maps[i].name.Equals(currentMap))
         {
-          rigthSideBook(ChapterManagement.chapters[currentChapter].maps[i]);
+          rightSideBook(ChapterManagement.chapters[currentChapter].maps[i]);
           found = true;
         }
         i++;
