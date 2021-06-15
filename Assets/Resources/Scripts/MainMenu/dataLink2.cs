@@ -460,7 +460,7 @@ public class dataLink2 : MonoBehaviour
     float playerLevel = 0;
     int level = dataObj.grid[player.Y][player.X].Level;
     //playerLevel += (level-1)*0.4f;
-    Debug.Log(tile.name);
+    // Debug.Log(tile.name);
     var position = tile.transform.position;
     Vector3 coo = new Vector3(position.x, position.y-0.5f, position.z   );
 

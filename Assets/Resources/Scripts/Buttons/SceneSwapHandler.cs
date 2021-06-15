@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PreviousScene : MonoBehaviour
+public class SceneSwapHandler : MonoBehaviour
 {
 
-  // Update is called once per frame
   public void goToPreviousScene(){
     int scene = ChangeSceneManagement.getPreviousScene();
     ChangeSceneManagement.getCurrentScene();
@@ -18,11 +17,17 @@ public class PreviousScene : MonoBehaviour
 
   public void goToStore(){
     ChangeSceneManagement.getCurrentScene();
-    SceneManager.LoadScene("Scenes/Store");
+    SceneManager.LoadScene("Scenes/New_Store");
   }
 
   public void goHome(){
     ChangeSceneManagement.getCurrentScene();
     SceneManager.LoadScene("Scenes/New_Menu");
+  }
+
+  public void goMapMenu()
+  {
+    ChangeSceneManagement.getCurrentScene();
+    SceneManager.LoadScene("Scenes/New_Map_Menu");
   }
 }
