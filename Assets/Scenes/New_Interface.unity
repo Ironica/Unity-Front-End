@@ -2816,7 +2816,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1157145494}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1451918863}
+        m_TargetAssemblyTypeName: SceneSwapHandler, Assembly-CSharp
+        m_MethodName: goMapMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1157145494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9052,7 +9064,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1629800399}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1451918862}
+        m_TargetAssemblyTypeName: dataLink2, Assembly-CSharp
+        m_MethodName: loadMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1629800399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10446,7 +10470,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2022488812}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1451918862}
+        m_TargetAssemblyTypeName: dataLink2, Assembly-CSharp
+        m_MethodName: saveMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2022488812
 MonoBehaviour:
   m_ObjectHideFlags: 0
