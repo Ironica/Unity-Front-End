@@ -563,7 +563,7 @@ public void loadMap()
 
     dataMap.chapterFile = load.chapterFile;
 
-    dataMap.storyTilte = load.storyTilte;
+    dataMap.storyTitle = load.storyTitle;
     dataMap.story = load.story;
 
     dataMap.goalsTitle = load.goalsTitle;
