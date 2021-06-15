@@ -46,7 +46,7 @@ public class MapMenuLink : MonoBehaviour
   {
     GameObject Map_Description = transform.Find("Main_Panel").Find("Map_Description").gameObject as GameObject;
 
-    Map_Description.transform.Find("Map_Title").GetComponent<TMP_Text>().text = "Story: " + map.storyTilte;
+    Map_Description.transform.Find("Map_Title").GetComponent<TMP_Text>().text = "Story: " + map.storyTitle;
     Map_Description.transform.Find("Map_Description").GetComponent<TMP_Text>().text = map.story;
     Map_Description.transform.Find("Goals_Title").GetComponent<TMP_Text>().text = "Goal: ";
     string goal;

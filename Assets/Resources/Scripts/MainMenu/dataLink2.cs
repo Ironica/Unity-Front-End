@@ -185,7 +185,7 @@ public class dataLink2 : MonoBehaviour
     payloads.Clear();
     this.dataSer.code = "";
     GameObject.Find("UserCode/Text Area/Text").GetComponent<TextMeshProUGUI>().text = "";
-    progression.value = 0;
+    // progression.value = 0;
     // Resetting the map means reinitialize it.
     converter.dataSer = dataSer;
     converter.serializedToObject();
@@ -195,7 +195,7 @@ public class dataLink2 : MonoBehaviour
       Destroy(child.gameObject); // Destroy last frame
     }
 
-    GameObject ScoreBoard = gameObject.transform.Find("ScoreBoard").gameObject as GameObject;
+    GameObject ScoreBoard = gameObject.transform.Find("Top_Panel").gameObject.transform.Find("ScoreBoard").gameObject as GameObject;
     ScoreBoard.transform.Find("GemScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = "0/" + dataObj.gems.Length;
     ScoreBoard.transform.Find("SwitchScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = dataObj.switches.Count(sw => sw.On == true) + "/" + dataObj.switches.Length;
     ScoreBoard.transform.Find("KillScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = "0/" + 0;
@@ -309,7 +309,7 @@ public class dataLink2 : MonoBehaviour
           string monsterScore = 0 + "/" + monsterNumber;
 
 
-          GameObject ScoreBoard = gameObject.transform.Find("ScoreBoard").gameObject as GameObject;
+          GameObject ScoreBoard = gameObject.transform.Find("Top_Panel").gameObject.transform.Find("ScoreBoard").gameObject as GameObject;
           ScoreBoard.transform.Find("GemScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = gemsScore;
           ScoreBoard.transform.Find("SwitchScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = switchesScore;
           ScoreBoard.transform.Find("KillScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = monsterScore;
@@ -528,7 +528,7 @@ public class dataLink2 : MonoBehaviour
     {
       playerInstantiation(gridObject[playerCoo.Y, playerCoo.X], playerCoo);
     }
-    
+
   }
 
   private void Awake()
@@ -547,10 +547,8 @@ public class dataLink2 : MonoBehaviour
     SaveMapManager.saveData(dataMap);
   }
 
-  public void loadMap()
-  {
-    var load = SaveMapManager.loadData(dataMap);
-    if(load != null){
+    dataMap.storyTitle = load.storyTitle;
+    dataMap.story = load.story;
 
       dataMap.chapterFile = load.chapterFile;
 
@@ -666,6 +664,15 @@ public class dataLink2 : MonoBehaviour
     {
       test();
 
+  foreach(GameObject gem in gemObjects)
+  {
+    if (gem != null)
+    {
+      gem.transform.Rotate(Vector3.down * 20f * Time.deltaTime);
     }
+  }
+  if (Input.GetKey("up"))
+  {
+    test();
   }
 }
