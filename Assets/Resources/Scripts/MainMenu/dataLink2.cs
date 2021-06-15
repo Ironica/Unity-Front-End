@@ -184,7 +184,7 @@ public class dataLink2 : MonoBehaviour
 
     payloads.Clear();
     this.dataSer.code = "";
-    GameObject.Find("UserCode").GetComponent<InputField>().text = "";
+    GameObject.Find("UserCode/Text Area/Text").GetComponent<TextMeshProUGUI>().text = "";
     progression.value = 0;
     // Resetting the map means reinitialize it.
     converter.dataSer = dataSer;

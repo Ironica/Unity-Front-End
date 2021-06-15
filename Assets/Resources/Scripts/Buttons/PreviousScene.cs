@@ -23,6 +23,6 @@ public class PreviousScene : MonoBehaviour
 
   public void goHome(){
     ChangeSceneManagement.getCurrentScene();
-    SceneManager.LoadScene("Scenes/Menu");
+    SceneManager.LoadScene("Scenes/New_Menu");
   }
 }
