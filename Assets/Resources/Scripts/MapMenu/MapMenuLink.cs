@@ -18,7 +18,7 @@ public class MapMenuLink : MonoBehaviour
 
   private void leftSideBook(DataChapter chapter)
   {
-    Debug.Log("leftSideBook");
+    // Debug.Log("leftSideBook");
     GameObject Map_Panel = transform.Find("Main_Panel").Find("Map_Panel").gameObject as GameObject;
 
     destroyLeftSideBook();

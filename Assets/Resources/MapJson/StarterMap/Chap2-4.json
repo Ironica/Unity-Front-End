@@ -1,6 +1,6 @@
 {
   "type": "default",
-  "code": "val totalGem = 0\nvar collected = 0\nval p = Player()\nfun Player.turnRight() {\n    p.turnLeft()\n    p.turnLeft()\n    p.turnLeft()\n}\n\nwhile (collected < totalGem) {\n    if (p.isOnGem) {\n        print(\"Collected gem!\")\n        p.collectGem()\n        collected += 1\n    }\n    if (p.isOnClosedSwitch) {\n        print(\"Toggled switch!\")\n        p.toggleSwitch()\n    }\n    if (!p.isBlockedRight) {\n        p.turnRight()\n        p.moveForward()\n    } else {\n        if (p.isBlocked) {\n            while (p.isBlocked) {\n                p.turnLeft()\n            }\n        }\n        p.moveForward()\n    }\n}",
+  "code": "val totalGem = 3\nvar collected = 0\nval p = Player()\nfun Player.turnRight() {\n    p.turnLeft()\n    p.turnLeft()\n    p.turnLeft()\n}\n\nwhile (collected < totalGem) {\n    if (p.isOnGem) {\n        print(\"Collected gem!\")\n        p.collectGem()\n        collected += 1\n    }\n    if (p.isOnClosedSwitch) {\n        print(\"Toggled switch!\")\n        p.toggleSwitch()\n    }\n    if (!p.isBlockedRight) {\n        p.turnRight()\n        p.moveForward()\n    } else {\n        if (p.isBlocked) {\n            while (p.isBlocked) {\n                p.turnLeft()\n            }\n        }\n        p.moveForward()\n    }\n}",
   "grid": [
     [{"block": "TREE", "level": 1, "biome": "PLAINS"},
       {"block": "TREE", "level": 1, "biome": "PLAINS"},
@@ -11,7 +11,7 @@
       {"block": "OPEN", "level": 1, "biome": "PLAINS"},
       {"block": "OPEN", "level": 1, "biome": "PLAINS"},
       {"block": "OPEN", "level": 1, "biome": "PLAINS"},
-      {"block": "OPEN", "level": 1, "biome": "PLAINS"}
+      {"block": "HOME", "level": 1, "biome": "PLAINS"}
     ],
 
     [{"block": "TREE", "level": 1, "biome": "PLAINS"},
@@ -112,10 +112,11 @@
       {"block": "OPEN", "level": 1, "biome": "PLAINS"},
       {"block": "OPEN", "level": 1, "biome": "PLAINS"},
       {"block": "OPEN", "level": 1, "biome": "PLAINS"},
-      {"block": "HOME", "level": 1, "biome": "PLAINS"}
+      {"block": "OPEN", "level": 1, "biome": "PLAINS"}
     ]
   ],
   "gems": [
+    {"x": 5, "y": 0}, {"x": 8, "y":0 }, {"x": 1, "y": 9}
   ],
   "beepers": [],
   "switches": [],
@@ -125,6 +126,6 @@
   "locks": [],
   "stairs": [],
   "players": [{
-    "id": 1, "x": 0, "y": 5, "dir": "RIGHT", "role": "PLAYER", "stamina": 500
+    "id": 1, "x": 0, "y": 4, "dir": "RIGHT", "role": "PLAYER", "stamina": 500
   }]
 }
