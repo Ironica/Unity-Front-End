@@ -11,19 +11,19 @@ public class MainMenu : MonoBehaviour
     public void Continue()
     {
         ChangeSceneManagement.getCurrentScene();
-        SceneManager.LoadScene("Scenes/Interface");
+        SceneManager.LoadScene("Scenes/New_Interface");
         //StatData.setCurrent("map5");
     }
     public void Store()
     {
       ChangeSceneManagement.getCurrentScene();
-      SceneManager.LoadScene("Scenes/Store");
+      SceneManager.LoadScene("Scenes/New_Store");
     }
 
     public void MapMenu()
     {
         ChangeSceneManagement.getCurrentScene();
-        SceneManager.LoadScene("Scenes/Map_Menu");
+        SceneManager.LoadScene("Scenes/New_Map_Menu");
     }
     public void Settings()
     {

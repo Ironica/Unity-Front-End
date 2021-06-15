@@ -10,8 +10,8 @@ public class MapChoice : MonoBehaviour
 {
     public void changeChapter()
     {
-      Debug.Log("I am in changeChapter function");
-      Debug.Log(transform.parent.GetSiblingIndex());
+      // Debug.Log("I am in changeChapter function");
+      // Debug.Log(transform.parent.GetSiblingIndex());
       ChapterManagement.currentChapter = transform.parent.GetSiblingIndex();
     }
 
