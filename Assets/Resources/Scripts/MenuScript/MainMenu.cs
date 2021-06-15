@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     //public string levelToLoad;
-    public GameObject settingsWindow;
     public void Continue()
     {
         ChangeSceneManagement.getCurrentScene();
@@ -27,23 +26,19 @@ public class MainMenu : MonoBehaviour
     }
     public void Settings()
     {
-        settingsWindow.SetActive(true);
+        SceneManager.LoadScene("Scenes/New_Settings");
     }
-
-    public void CloseSettings()
-    {
-        settingsWindow.SetActive(false);
-    }
+    
     public void Credits()
     {
       ChangeSceneManagement.getCurrentScene();
-      // TODO add credit scene
+      SceneManager.LoadScene("Scenes/New_Credit");
     }
 
     public void Help()
     {
         ChangeSceneManagement.getCurrentScene();
-        // TODO add help scene
+        SceneManager.LoadScene("Scenes/New_Help");
     }
 
     public void Exit()
