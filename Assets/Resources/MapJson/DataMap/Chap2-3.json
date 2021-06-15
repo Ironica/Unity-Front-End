@@ -1,12 +1,12 @@
 {
   "name": "Chap2-3",
   "chapterFile": "Chapter 2",
-  "storyTitle": "",
+  "storyTitle": "Let's train the while",
   "story": "",
-  "goalsTitle": "",
-  "goal": 1,
-  "code": "",
-  "maxGem": 0,
+  "goalsTitle": "Collect the Gem",
+  "goal": 0,
+  "code": "val p =Player() \n//While is an instruction that allow you to repeat things if the condition is true \n while( //Find it, you need to check if you're on gem's tile) { \n //action you want to repeat \n} \n // you should grab this gem ",
+  "maxGem": 1,
   "maxSwitchOn": 0,
   "maxMonster": 0,
   "win": false
