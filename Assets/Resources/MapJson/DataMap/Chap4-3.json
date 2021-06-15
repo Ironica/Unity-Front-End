@@ -1,13 +1,13 @@
 {
   "name": "Chap4-3",
   "chapterFile": "Chapitre 4",
-  "storyTitle": "A title again",
-  "story": "Dylan essaye encore de travailler. Va-t-il rester jusqu'à 18h ?",
-  "goalsTitle": "Titre des goals",
-  "goal": 1,
+  "storyTitle": "Lost in a faraway land",
+  "story": "The map is becoming so crazy that I cannot explain it.",
+  "goalsTitle": "Collect gems, toggle switches and arrive at the correct area",
+  "goal": "GEM",
   "code": "",
-  "maxGem": 0,
-  "maxSwitchOn": 0,
-  "maxMonster": 0,
+  "maxGem": 7,
+  "maxSwitchOn": 7,
+  "maxMonster": 2,
   "win": false
 }
