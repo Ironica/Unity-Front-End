@@ -16,7 +16,7 @@ public static class ChapterManagement
   {
     string[] files = Directory.GetFiles(path);
     foreach (string file in files){
-      if(!file.Contains(".meta")){
+      if(file.Contains("Chap") && !file.Contains(".meta")){
         addToAChapter(getDataMap(file));
       }
     }
