@@ -1,13 +1,13 @@
 {
   "name": "Chap4-2",
   "chapterFile": "Chapitre 4",
-  "storyTitle": "A title",
-  "story": "A story, and what a crazy story…",
-  "goalsTitle": "",
-  "goal": 1,
-  "code": "",
-  "maxGem": 0,
+  "storyTitle": "Turn around and back",
+  "story": "You thought it's the exit of the forest. But you came into a maze. At the center of the maze lay some treasures. However not so easy... Be careful of monsters!",
+  "goalsTitle": "Kill all monsters, arrive at the center and collect gems",
+  "goal": "MONSTER",
+  "code": "// Looks a bit easier\n// But can you figure it out?\n",
+  "maxGem": 4,
   "maxSwitchOn": 0,
-  "maxMonster": 0,
+  "maxMonster": 6,
   "win": false
 }

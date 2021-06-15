@@ -1,6 +1,7 @@
 using System;
 using Resources.Scripts;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 /**
  * Source: https://blog.csdn.net/amcp9/article/details/79576173
@@ -56,7 +57,7 @@ public class MainCameraController : MonoBehaviour
     }
     void RotateCamera()
     {
-        if (Input.GetMouseButton(0))
+        if (Global.mouseActivated && Input.GetMouseButton(0))
         {
  
             transform.RotateAround(playerTransform.position, playerTransform.up, Input.GetAxis("Mouse X") * rotateSpeed);
@@ -85,7 +86,7 @@ public class MainCameraController : MonoBehaviour
     void ScrollView()
     {
         
-        if (Input.GetAxis("Mouse ScrollWheel") < 0 && offsetPlayerPos.magnitude < maxScroll)
+        if (Global.mouseActivated && Input.GetAxis("Mouse ScrollWheel") < 0 && offsetPlayerPos.magnitude < maxScroll)
         {
             
             distance = offsetPlayerPos.magnitude;
@@ -94,7 +95,7 @@ public class MainCameraController : MonoBehaviour
             offsetPlayerPos = offsetPlayerPos.normalized * distance;
         }
         
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && offsetPlayerPos.magnitude > minScroll)
+        if (Global.mouseActivated && Input.GetAxis("Mouse ScrollWheel") > 0 && offsetPlayerPos.magnitude > minScroll)
         {
             
             distance = offsetPlayerPos.magnitude;
@@ -106,7 +107,7 @@ public class MainCameraController : MonoBehaviour
 
     void Pan()
     {
-        if (Input.GetKey("w") && offsetPlayerPos.magnitude < maxPan)
+        if (Global.mouseActivated && Input.GetKey("up") && offsetPlayerPos.magnitude < maxPan)
         {
             transform.Translate(0, panSpeed, 0);
             offsetPlayerPos = transform.position - playerTransform.position;
@@ -116,7 +117,7 @@ public class MainCameraController : MonoBehaviour
                 offsetPlayerPos = transform.position - playerTransform.position;
             }
         }
-        if (Input.GetKey("s") && offsetPlayerPos.magnitude < maxPan)
+        if (Global.mouseActivated && Input.GetKey("down") && offsetPlayerPos.magnitude < maxPan)
         {
             transform.Translate(0, -panSpeed, 0);
             offsetPlayerPos = transform.position - playerTransform.position;
@@ -126,7 +127,7 @@ public class MainCameraController : MonoBehaviour
                 offsetPlayerPos = transform.position - playerTransform.position;
             }
         }
-        if (Input.GetKey("a") && offsetPlayerPos.magnitude < maxPan)
+        if (Global.mouseActivated && Input.GetKey("left") && offsetPlayerPos.magnitude < maxPan)
         {
             transform.Translate(-panSpeed, 0, 0);
             offsetPlayerPos = transform.position - playerTransform.position;
@@ -136,7 +137,7 @@ public class MainCameraController : MonoBehaviour
                 offsetPlayerPos = transform.position - playerTransform.position;
             }
         }
-        if (Input.GetKey("d") && offsetPlayerPos.magnitude < maxPan)
+        if (Global.mouseActivated && Input.GetKey("right") && offsetPlayerPos.magnitude < maxPan)
         {
             transform.Translate(panSpeed, 0, 0);
             offsetPlayerPos = transform.position - playerTransform.position;
