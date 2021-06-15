@@ -20,7 +20,7 @@
       {"block": "TREE", "level": 1, "biome": "PLAINS"},
       {"block": "TREE", "level": 1, "biome": "PLAINS"}],
 
-    [{"block": "OPEN", "level": 1, "biome": "PLAINS"},
+    [{"block": "HOME", "level": 1, "biome": "PLAINS"},
       {"block": "OPEN", "level": 1, "biome": "PLAINS"},
       {"block": "OPEN", "level": 1, "biome": "PLAINS"},
       {"block": "OPEN", "level": 1, "biome": "PLAINS"},
