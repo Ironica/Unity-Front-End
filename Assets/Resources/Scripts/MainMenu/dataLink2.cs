@@ -21,7 +21,6 @@ using Debug = UnityEngine.Debug;
 public class dataLink2 : MonoBehaviour
 {
 
-  private bool yet =false;
   private Vector3 leftRotation = new Vector3(0f, 90f, 0f);
   private Vector3 rightRotation = new Vector3(0f, 270f, 0f);
   private Vector3 frontRotation = new Vector3(0f, 180, 0f);
@@ -684,18 +683,6 @@ public class dataLink2 : MonoBehaviour
       {
         gem.transform.Rotate(Vector3.down * 20f * Time.deltaTime);
       }
-    }
-
-    if (Input.GetKey("right") && !yet)
-    {
-      yet = true;
-      objectTurnLeft(playerObject);
-    }
-
-    if (Input.GetKey("left") && yet)
-    {
-      yet = false;
-      objectTurnLeft(playerObject);
     }
   }
 }
