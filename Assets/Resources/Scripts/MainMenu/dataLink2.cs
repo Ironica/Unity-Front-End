@@ -528,162 +528,144 @@ public class dataLink2 : MonoBehaviour
     {
       playerInstantiation(gridObject[playerCoo.Y, playerCoo.X], playerCoo);
     }
-
-    /*foreach(Transform child in tiles.transform)
-    {
-    child.position = new Vector3(child.position.x+3f,child.position.y,child.position.z);
+    
   }
-  foreach(Transform child in gameBoard.transform)
+
+  private void Awake()
   {
-  child.position = new Vector3(child.position.x+3f,child.position.y,child.position.z);
-  }*/
-
-}
-
-private void Awake()
-{
-}
-
-public void saveMap()
-{
-  if(dataMap == null){
-    dataMap = new DataMap(currentMap);
   }
-  dataMap.code = gameObject.transform.Find("Input_Panel")
-  .gameObject.transform.Find("UserCode")
-  .GetComponent<TMP_InputField>()
-  .text;
-  SaveMapManager.saveData(dataMap);
-}
 
-public void loadMap()
-{
-  var load = SaveMapManager.loadData(dataMap);
-  if(load != null){
-
-    dataMap.chapterFile = load.chapterFile;
-
-    dataMap.storyTilte = load.storyTilte;
-    dataMap.story = load.story;
-
-    dataMap.goalsTitle = load.goalsTitle;
-    dataMap.goal = load.goal;
-
-    dataMap.code = load.code;
-
-    dataMap.maxGem = load.maxGem;
-    dataMap.maxSwitchOn = load.maxSwitchOn;
-    dataMap.maxMonster = load.maxMonster;
-
-    dataMap.win = load.win;
-
-    GameObject.Find("UserCode")
+  public void saveMap()
+  {
+    if(dataMap == null){
+      dataMap = new DataMap(currentMap);
+    }
+    dataMap.code = gameObject.transform.Find("Input_Panel")
+    .gameObject.transform.Find("UserCode")
     .GetComponent<TMP_InputField>()
-    .text = dataMap.code;
+    .text;
+    SaveMapManager.saveData(dataMap);
   }
 
-}
-
-
-// Start is called before the first frame update
-private void Start()
-{
-
-  gameBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Elements").gameObject as GameObject;
-  tiles = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Tiles").gameObject as GameObject;
-
-  // Todo AMMAR
-  /*
-  progression = gameObject.transform.Find("Progress_Bar").gameObject.GetComponent<Slider>();
-  progression.value = 0;
-  */
-  //TODO Get the name of the map from the maps interface
-  currentMap = StatData.getCurrent();
-  dataMap = new DataMap(currentMap);
-  loadMap();
-  //currentMap = "map5.json";
-
-  gameObject.transform.Find("GameBoard").Find("Map_name").gameObject.GetComponent<Text>().text = currentMap;
-
-  player = frog;
-
-  // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
-  des = new JsonSerDes(url, Global.port, api);
-
-  //pocket = des.inventoryDeserialization();
-  //Debug.Log(pocket.gems);
-
-
-  dataSer = des.deserialization(pathStarterMap + currentMap + ".json");
-
-  dataObj = new Data();
-
-  converter = new JsonBridge.DataConvert(dataSer, dataObj);
-  //converter.stringToSerialized();
-  converter.serializedToObject();
-
-  GameObject ScoreBoard = gameObject.transform.Find("Top_Panel").gameObject.transform.Find("ScoreBoard").gameObject as GameObject;
-  ScoreBoard.transform.Find("GemScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = "0/" + dataObj.gems.Length;
-  ScoreBoard.transform.Find("SwitchScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = dataObj.switches.Count(sw => sw.On == true) + "/" + dataObj.switches.Length;
-  ScoreBoard.transform.Find("KillScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = "0/" + 0;
-
-
-  instantiation(true);
-
-}
-
-// TODO copy this method to each scene
-private void OnApplicationQuit()
-{
-  var shutdownApi = "simulatte/shutdown";
-  new ShutDown(shutdownApi, Global.port).ShutDownOldServer();
-
-  foreach (Transform child in gameBoard.transform)
+  public void loadMap()
   {
-    Destroy(child.gameObject); // Destroy last frame
+    var load = SaveMapManager.loadData(dataMap);
+    if(load != null){
+
+      dataMap.chapterFile = load.chapterFile;
+
+      dataMap.storyTilte = load.storyTilte;
+      dataMap.story = load.story;
+
+      dataMap.goalsTitle = load.goalsTitle;
+      dataMap.goal = load.goal;
+
+      dataMap.code = load.code;
+
+      dataMap.maxGem = load.maxGem;
+      dataMap.maxSwitchOn = load.maxSwitchOn;
+      dataMap.maxMonster = load.maxMonster;
+
+      dataMap.win = load.win;
+
+      GameObject.Find("UserCode")
+      .GetComponent<TMP_InputField>()
+      .text = dataMap.code;
+    }
+
   }
-  foreach (Transform child in tiles.transform)
+
+
+  // Start is called before the first frame update
+  private void Start()
   {
-    Destroy(child.gameObject); // Destroy last frame
+
+    gameBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Elements").gameObject as GameObject;
+    tiles = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Tiles").gameObject as GameObject;
+
+    // Todo AMMAR
+    /*
+    progression = gameObject.transform.Find("Progress_Bar").gameObject.GetComponent<Slider>();
+    progression.value = 0;
+    */
+    //TODO Get the name of the map from the maps interface
+    currentMap = StatData.getCurrent();
+    dataMap = new DataMap(currentMap);
+    loadMap();
+    //currentMap = "map5.json";
+
+    gameObject.transform.Find("GameBoard").Find("Map_name").gameObject.GetComponent<Text>().text = currentMap;
+
+    player = frog;
+
+    // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
+    des = new JsonSerDes(url, Global.port, api);
+
+    //pocket = des.inventoryDeserialization();
+    //Debug.Log(pocket.gems);
+
+
+    dataSer = des.deserialization(pathStarterMap + currentMap + ".json");
+
+    dataObj = new Data();
+
+    converter = new JsonBridge.DataConvert(dataSer, dataObj);
+    //converter.stringToSerialized();
+    converter.serializedToObject();
+
+    GameObject ScoreBoard = gameObject.transform.Find("Top_Panel").gameObject.transform.Find("ScoreBoard").gameObject as GameObject;
+    ScoreBoard.transform.Find("GemScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = "0/" + dataObj.gems.Length;
+    ScoreBoard.transform.Find("SwitchScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = dataObj.switches.Count(sw => sw.On == true) + "/" + dataObj.switches.Length;
+    ScoreBoard.transform.Find("KillScore").transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = "0/" + 0;
+
+
+    instantiation(true);
+
+
   }
-}
 
-private void test()
-{
-  //playerObject.transform.Rotate(new Vector3(0f,0f,10f));
-  //var target = gridObject[1,1];
-  //float targetRotation = 90f;
-  int i = 0;
-  while(i<100 ){
-    Debug.Log("x: " + playerObject.transform.eulerAngles.x);
-    Debug.Log("y: " + playerObject.transform.eulerAngles.y);
-    Debug.Log("z: " + playerObject.transform.eulerAngles.z);
-    playerObject.transform.Rotate (new Vector3 (0, 0, 1) * Time.deltaTime);
-    i++;
-  }
-  //playerObject.transform.SetPositionAndRotation(target.transform.position, Quaternion.identity);
-  //playerObject.transform.LookAt(target.transform.position);
-
-  /*int rotationDirection = -1;
-  int rotationStep = 10;
-  Vector3 currentRotation = playerObject.transform.eulerAngles;
-  Vector3 targetRotation;
-  targetRotation.z = (currentRotation.z + (90 * rotationDirection));
-
-  currentRotation.z += (rotationStep * rotationDirection);
-  playerObject.transform.eulerAngles = currentRotation;*/
-
-}
-
-private void Update(){
-
-  foreach(GameObject gem in gemObjects)
+  // TODO copy this method to each scene
+  private void OnApplicationQuit()
   {
-    gem.transform.Rotate(Vector3.down * 20f * Time.deltaTime);
+    var shutdownApi = "simulatte/shutdown";
+    new ShutDown(shutdownApi, Global.port).ShutDownOldServer();
+
+    foreach (Transform child in gameBoard.transform)
+    {
+      Destroy(child.gameObject); // Destroy last frame
+    }
+    foreach (Transform child in tiles.transform)
+    {
+      Destroy(child.gameObject); // Destroy last frame
+    }
   }
-  if (Input.GetKeyDown("up"))
+
+  private void test()
   {
-    test();
+
+    float playerY = playerObject.transform.rotation.y;
+    for(int i=0; i<90; i++)
+    {
+      Debug.Log("x: " + playerObject.transform.eulerAngles.x);
+      Debug.Log("y: " + playerObject.transform.eulerAngles.y);
+      Debug.Log("z: " + playerObject.transform.eulerAngles.z);
+      Vector3 v= new Vector3(0f,-1f, 0f);
+      //playerObject.transform.Rotate(0f, -1.0f, 0.0f, Space.World);
+      playerObject.transform.Rotate(v * Time.deltaTime);
+      //playerObject.transform.Rotate(v, 90f , Space.Self);
+    }
   }
-}
+
+  private void Update(){
+
+    foreach(GameObject gem in gemObjects)
+    {
+      gem.transform.Rotate(Vector3.down * 20f * Time.deltaTime);
+    }
+    if (Input.GetKey("up"))
+    {
+      test();
+
+    }
+  }
 }
