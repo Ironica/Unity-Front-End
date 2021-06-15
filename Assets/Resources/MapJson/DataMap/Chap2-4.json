@@ -1,12 +1,12 @@
 {
   "name": "Chap2-4",
-  "chapterFile": "",
-  "storyTitle": "",
-  "story": "",
-  "goalsTitle": "",
+  "chapterFile": "Chapter 2",
+  "storyTitle": "Exit the forest",
+  "story": "Aliens here, everyone died, you must survive.",
+  "goalsTitle": "Collect all Gems",
   "goal": 1,
-  "code": "",
-  "maxGem": 0,
+  "code": "val p = Player() \n // Now you're able to do this by yourself ! Good luck.",
+  "maxGem": 3,
   "maxSwitchOn": 0,
   "maxMonster": 0,
   "win": false

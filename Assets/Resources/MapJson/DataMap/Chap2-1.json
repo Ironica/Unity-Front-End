@@ -1,13 +1,13 @@
 {
   "name": "Chap2-1",
   "chapterFile": "Chapter 2",
-  "storyTitle": "Land analysis",
-  "story": "Going alone on an adventure confronts you with the dangers of these lands.\nNo risk should be taken to move forward ... so be careful where you step ... ",
-  "goalsTitle": "Activate the switch to move forward",
-  "goal": "SWITCHON",
-  "code": "/* HELPS\nYou only have to put the switch on to win but don't forget to look arround for gems to upgrade your inventory.\n*/\nval p = Player()\np.moveForward()\np.turnLeft()",
+  "storyTitle": "Fall into the loop",
+  "story": "",
+  "goalsTitle": "",
+  "goal": 1,
+  "code": "",
   "maxGem": 0,
   "maxSwitchOn": 0,
   "maxMonster": 0,
-  "win": true
+  "win": false
 }
