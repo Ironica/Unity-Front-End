@@ -8,7 +8,7 @@
       {"block": "TREE", "level": 1, "biome": "PLAINS"},
       {"block": "TREE", "level": 1, "biome": "PLAINS"},
       {"block": "OPEN", "level": 1, "biome": "PLAINS"},
-      {"block": "TREE", "level": 1, "biome": "PLAINS"}],
+      {"block": "STAIR", "level": 1, "biome": "PLAINS"}],
 
     [{"block": "TREE", "level": 1, "biome": "PLAINS"},
       {"block": "TREE", "level": 1, "biome": "PLAINS"},
@@ -69,7 +69,15 @@
   "portals": [],
   "monsters": [],
   "locks": [],
-  "stairs": [],
+  "stairs": [
+  {
+    "coo": {
+      "x": 6,
+      "y": 0
+    },
+    "dir": "RIGHT"
+  }
+  ],
   "players": [{
     "id": 1, "x": 3, "y": 6, "dir": "UP", "role": "PLAYER", "stamina": 500
   }],

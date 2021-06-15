@@ -21,6 +21,12 @@ using Debug = UnityEngine.Debug;
 public class dataLink2 : MonoBehaviour
 {
 
+  private bool yet =false;
+  private Vector3 leftRotation = new Vector3(0f, 90f, 0f);
+  private Vector3 rightRotation = new Vector3(0f, 270f, 0f);
+  private Vector3 frontRotation = new Vector3(0f, 180, 0f);
+  private Vector3 backRotation = new Vector3(0f, 0f, 0f);
+
   //To connect to the server
   private const string url = "http://127.0.0.1";
   private const string api = "simulatte";
@@ -65,6 +71,7 @@ public class dataLink2 : MonoBehaviour
   private string hill                 = "Prefabs/3D/PLAIN/PLAIN_HILL_LEVEL";
 
   // Stairs
+  private string stairs               = "Prefabs/3D/PLAIN/PLAIN_STAIRS";
   private string  stairLeft           = "Prefabs/PLAIN_STAIRS_LEFT";
   private string  stairRight          = "Prefabs/PLAIN_STAIRS_RIGHT";
   private string  stairBack           = "Prefabs/PLAIN_STAIRS_BACK";
@@ -381,15 +388,21 @@ public class dataLink2 : MonoBehaviour
     _ => throw new Exception("This shouldn't be possible")
   };
 
-  private string playerDirection(Direction dir)
-  => dir switch
+  private void objectDirection(GameObject obj, Direction dir)
   {
-    Direction.UP => player+playerFront,
-    Direction.DOWN => player+playerBack,
-    Direction.LEFT => player+playerLeft,
-    Direction.RIGHT => player+playerRight,
-    _ => throw new Exception("This shouldn't be possible")
-  };
+    switch(dir){
+      case Direction.UP: obj.transform.eulerAngles = frontRotation;
+      break;
+      case Direction.DOWN: obj.transform.eulerAngles = backRotation;
+      break;
+      case Direction.LEFT: obj.transform.eulerAngles =  leftRotation;
+      break;
+      case Direction.RIGHT: obj.transform.eulerAngles = rightRotation;
+      break;
+      default: throw new Exception("This shouldn't be possible");
+      break;
+    }
+  }
 
   private string tileLevel(Block block, int i, int j)
   => block switch
@@ -401,7 +414,7 @@ public class dataLink2 : MonoBehaviour
     Block.TREE => tree + dataObj.grid[j][i].Level,
     Block.WATER => water + dataObj.grid[j][i].Level,
     Block.HILL => hill + dataObj.grid[j][i].Level,
-    Block.STAIR => stairDirection(dataObj.stairs.First(e => e.X == i && e.Y == j).Dir),
+    Block.STAIR => stairs,//stairDirection(dataObj.stairs.First(e => e.X == i && e.Y == j).Dir),
     Block.VOID => throw new NotImplementedException(),
     _ => throw new Exception("This shouldn't be possible")
   };
@@ -412,6 +425,10 @@ public class dataLink2 : MonoBehaviour
     Vector3 coo = setCoordinates(new Vector3(j-x,0f, i-y));
     obj  = Instantiate(UnityEngine.Resources.Load(tile), new Vector3(coo.x,coo.y, coo.z), Quaternion.identity) as GameObject;
     obj.transform.parent = tiles.transform;
+    if(block == Block.STAIR)
+    {
+      objectDirection(obj, dataObj.stairs.First(e => e.X == i && e.Y == j).Dir);
+    }
     return obj;
   }
 
@@ -442,15 +459,15 @@ public class dataLink2 : MonoBehaviour
   private void playerInstantiation(GameObject tile, Player player)
   {
     float playerLevel = 0;
-    string playerPrefab = playerDirection(player.Dir);
     int level = dataObj.grid[player.Y][player.X].Level;
     //playerLevel += (level-1)*0.4f;
     Debug.Log(tile.name);
     var position = tile.transform.position;
     Vector3 coo = new Vector3(position.x, position.y-0.5f, position.z   );
 
-    playerObject = Instantiate(UnityEngine.Resources.Load(playerPrefab), coo, Quaternion.identity) as GameObject;
+    playerObject = Instantiate(UnityEngine.Resources.Load(frog), coo, Quaternion.identity) as GameObject;
     playerObject.transform.parent = gameBoard.transform;
+    objectDirection(playerObject, player.Dir);
     //playerObject.GetComponent<SpriteRenderer>().sortingOrder = level+1;
 
   }
@@ -533,26 +550,20 @@ public class dataLink2 : MonoBehaviour
 
   private void Awake()
   {
+
   }
 
-  public void saveMap()
-  {
-    if(dataMap == null){
-      dataMap = new DataMap(currentMap);
-    }
-    dataMap.code = gameObject.transform.Find("Input_Panel")
-    .gameObject.transform.Find("UserCode")
-    .GetComponent<TMP_InputField>()
-    .text;
-    SaveMapManager.saveData(dataMap);
-  }
 
-    dataMap.storyTitle = load.storyTitle;
-    dataMap.story = load.story;
+  public void loadMap(){
+    var load = SaveMapManager.loadData(dataMap);
+    if(load != null){
+
+      dataMap.storyTitle = load.storyTitle;
+      dataMap.story = load.story;
 
       dataMap.chapterFile = load.chapterFile;
 
-      dataMap.storyTilte = load.storyTilte;
+      dataMap.storyTitle = load.storyTitle;
       dataMap.story = load.story;
 
       dataMap.goalsTitle = load.goalsTitle;
@@ -570,8 +581,20 @@ public class dataLink2 : MonoBehaviour
       .GetComponent<TMP_InputField>()
       .text = dataMap.code;
     }
-
   }
+
+  public void saveMap()
+  {
+    if(dataMap == null){
+      dataMap = new DataMap(currentMap);
+    }
+    dataMap.code = gameObject.transform.Find("Input_Panel")
+    .gameObject.transform.Find("UserCode")
+    .GetComponent<TMP_InputField>()
+    .text;
+    SaveMapManager.saveData(dataMap);
+  }
+
 
 
   // Start is called before the first frame update
@@ -638,41 +661,41 @@ public class dataLink2 : MonoBehaviour
     }
   }
 
-  private void test()
+  private void objectTurnLeft(GameObject obj)
   {
-
-    float playerY = playerObject.transform.rotation.y;
-    for(int i=0; i<90; i++)
-    {
-      Debug.Log("x: " + playerObject.transform.eulerAngles.x);
-      Debug.Log("y: " + playerObject.transform.eulerAngles.y);
-      Debug.Log("z: " + playerObject.transform.eulerAngles.z);
-      Vector3 v= new Vector3(0f,-1f, 0f);
-      //playerObject.transform.Rotate(0f, -1.0f, 0.0f, Space.World);
-      playerObject.transform.Rotate(v * Time.deltaTime);
-      //playerObject.transform.Rotate(v, 90f , Space.Self);
-    }
+    obj.transform.eulerAngles -= new Vector3(0f, 90f, 0f);
+    Debug.Log("x: " + obj.transform.eulerAngles.x);
+    Debug.Log("y: " + obj.transform.eulerAngles.y);
+    Debug.Log("z: " + obj.transform.eulerAngles.z);
+  }
+  private void objectTurnRigth(GameObject obj)
+  {
+    obj.transform.eulerAngles += new Vector3(0f, 90f, 0f);
+    Debug.Log("x: " + obj.transform.eulerAngles.x);
+    Debug.Log("y: " + obj.transform.eulerAngles.y);
+    Debug.Log("z: " + obj.transform.eulerAngles.z);
   }
 
   private void Update(){
 
     foreach(GameObject gem in gemObjects)
     {
-      gem.transform.Rotate(Vector3.down * 20f * Time.deltaTime);
+      if (gem != null)
+      {
+        gem.transform.Rotate(Vector3.down * 20f * Time.deltaTime);
+      }
     }
-    if (Input.GetKey("up"))
-    {
-      test();
 
-  foreach(GameObject gem in gemObjects)
-  {
-    if (gem != null)
+    if (Input.GetKey("right") && !yet)
     {
-      gem.transform.Rotate(Vector3.down * 20f * Time.deltaTime);
+      yet = true;
+      objectTurnLeft(playerObject);
     }
-  }
-  if (Input.GetKey("up"))
-  {
-    test();
+
+    if (Input.GetKey("left") && yet)
+    {
+      yet = false;
+      objectTurnLeft(playerObject);
+    }
   }
 }
