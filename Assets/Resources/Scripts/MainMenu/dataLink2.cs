@@ -630,8 +630,6 @@ private void Start()
 
   instantiation(true);
 
-
-
 }
 
 // TODO copy this method to each scene
@@ -653,10 +651,28 @@ private void OnApplicationQuit()
 private void test()
 {
   //playerObject.transform.Rotate(new Vector3(0f,0f,10f));
-  var target = gridObject[1,1];
-  //playerObject.transform.RotateAround(target.transform.position, Vector3.up, 20 * Time.deltaTime);
+  //var target = gridObject[1,1];
+  //float targetRotation = 90f;
+  int i = 0;
+  while(i<100 ){
+    Debug.Log("x: " + playerObject.transform.eulerAngles.x);
+    Debug.Log("y: " + playerObject.transform.eulerAngles.y);
+    Debug.Log("z: " + playerObject.transform.eulerAngles.z);
+    playerObject.transform.Rotate (new Vector3 (0, 0, 1) * Time.deltaTime);
+    i++;
+  }
   //playerObject.transform.SetPositionAndRotation(target.transform.position, Quaternion.identity);
-  playerObject.transform.LookAt(target.transform.position);
+  //playerObject.transform.LookAt(target.transform.position);
+
+  /*int rotationDirection = -1;
+  int rotationStep = 10;
+  Vector3 currentRotation = playerObject.transform.eulerAngles;
+  Vector3 targetRotation;
+  targetRotation.z = (currentRotation.z + (90 * rotationDirection));
+
+  currentRotation.z += (rotationStep * rotationDirection);
+  playerObject.transform.eulerAngles = currentRotation;*/
+
 }
 
 private void Update(){
@@ -665,7 +681,7 @@ private void Update(){
   {
     gem.transform.Rotate(Vector3.down * 20f * Time.deltaTime);
   }
-  if (Input.GetKey("up"))
+  if (Input.GetKeyDown("up"))
   {
     test();
   }
