@@ -1,6 +1,6 @@
 {
   "type": "default",
-  "code": ,
+  "code": "",
   "grid": [
     [{"block": "TREE", "level": 1, "biome": "PLAINS"},
       {"block": "TREE", "level": 1, "biome": "PLAINS"},
@@ -53,23 +53,17 @@
       {"block": "TREE", "level": 1, "biome": "PLAINS"}],
 
     [{"block": "TREE", "level": 1, "biome": "PLAINS"},
-      {"block": "OPEN", "level": 1, "biome": "PLAINS"},
       {"block": "TREE", "level": 1, "biome": "PLAINS"},
+      {"block": "TREE", "level": 1, "biome": "PLAINS"},
+      {"block": "TREE", "level": 1, "biome": "PLAINS"},
+      {"block": "TREE", "level": 1, "biome": "PLAINS"},
+      {"block": "MOUNTAIN", "level": 1, "biome": "PLAINS"},
       {"block": "OPEN", "level": 1, "biome": "PLAINS"},
-      {"block": "OPEN", "level": 1, "biome": "PLAINS"},
-      {"block": "OPEN", "level": 1, "biome": "PLAINS"},
-      {"block": "OPEN", "level": 1, "biome": "PLAINS"},
-      {"block": "OPEN", "level": 1, "biome": "PLAINS"},
-      {"block": "OPEN", "level": 1, "biome": "PLAINS"}]
+      {"block": "MOUNTAIN", "level": 1, "biome": "PLAINS"},
+      {"block": "TREE", "level": 1, "biome": "PLAINS"}]
   ],
   "gems": [
-    {"x": 1, "y": 3},
-    {"x": 1, "y": 8},
-    {"x": 5, "y": 8},
-    {"x": 8, "y": 5},
-    {"x": 7, "y": 2},
-    {"x": 3, "y": 5},
-    {"x": 6, "y": 6}
+    {"x": 1, "y": 3}
   ],
   "beepers": [],
   "switches": [],

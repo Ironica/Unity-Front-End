@@ -13,7 +13,7 @@ public class StoreLink : MonoBehaviour
   private GameObject sounds;
 
   private GameObject top;
-  private GameObject pagePanel; 
+  private GameObject pagePanel;
 
   private string buttonSkin = "Prefabs/STORE/Character_Item1";
   private string buttonSound = "Prefabs/STORE/Music_Item1";
@@ -51,15 +51,15 @@ public class StoreLink : MonoBehaviour
       if(!storage.skins[i].sold){
         price.transform.Find("Price").GetComponent<TMP_Text>().text = "" + storage.skins[i].priceInGems;
       }
-      objX += 4f;
+      objX += 0.4f * Screen.height;
 
     }
 
-    float objY = 0f;
+    objX= 0f;
     for(int i = 0; i < storage.sounds.Count; i++)
     {
       GameObject soundObject = Instantiate(UnityEngine.Resources.Load(buttonSound), sounds.transform) as GameObject;
-      soundObject.transform.position = soundObject.transform.position - new Vector3(0,objY,0);
+      soundObject.transform.position = soundObject.transform.position + new Vector3(objX,0,0);
 
       soundObject.transform.Find("Name").GetComponent<TMP_Text>().text = "" + storage.sounds[i].itemName;
 
@@ -75,7 +75,7 @@ public class StoreLink : MonoBehaviour
         price.SetActive(false);
         use.SetActive(true);
       }
-      objY += 0.8f;
+      objX += 0.3f * Screen.height;
     }
     JsonObjConverter.toJson(storage);
   }
