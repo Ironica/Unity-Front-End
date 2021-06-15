@@ -619,7 +619,7 @@ public class dataLink2 : MonoBehaviour
     player = frog;
 
     // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
-    des = new JsonSerDes(url, 9370, api);
+    des = new JsonSerDes(url, Global.port, api);
 
     //pocket = des.inventoryDeserialization();
     //Debug.Log(pocket.gems);
