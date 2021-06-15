@@ -11,7 +11,7 @@ namespace Resources.Scripts
         
         // The port, which will be initialized in launching phase
         public static int port { get; set; }
-        
-        public static bool mouseActivated { get; set; }
+
+        public static bool mouseActivated { get; set; } = true;
     }
 }
