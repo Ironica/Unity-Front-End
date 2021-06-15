@@ -69,15 +69,7 @@
   "portals": [],
   "monsters": [],
   "locks": [],
-  "stairs": [
-  {
-    "coo": {
-      "x": 6,
-      "y": 0
-    },
-    "dir": "RIGHT"
-  }
-  ],
+  "stairs": [],
   "players": [{
     "id": 1, "x": 3, "y": 6, "dir": "UP", "role": "PLAYER", "stamina": 500
   }],

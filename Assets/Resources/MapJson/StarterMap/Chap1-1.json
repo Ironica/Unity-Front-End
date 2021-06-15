@@ -46,7 +46,7 @@
                 "biome": "PLAINS"
             },
             {
-                "block": "OPEN",
+                "block": "HOME",
                 "level": 1,
                 "biome": "PLAINS"
             },
@@ -68,12 +68,12 @@
                 "biome": "PLAINS"
             },
             {
-                "block": "STONE",
+                "block": "MOUNTAIN",
                 "level": 1,
                 "biome": "PLAINS"
             },
             {
-                "block": "OPEN",
+                "block": "HOME",
                 "level": 1,
                 "biome": "PLAINS"
             },
