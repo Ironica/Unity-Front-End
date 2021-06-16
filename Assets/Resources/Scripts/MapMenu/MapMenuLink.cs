@@ -92,7 +92,7 @@ public class MapMenuLink : MonoBehaviour
       currentMap = StatData.getCurrent();
       var ctx = ChapterManagement
         .chapters[currentChapter].maps.FirstOrDefault(e => e.name == currentMap)
-        .Apply(e => rightSideBook(e));
+        ?.Apply(e => rightSideBook(e));
       if (ctx == null)
       {
         Debug.Log("Map could not be load");
