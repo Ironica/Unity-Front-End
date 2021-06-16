@@ -1,12 +1,12 @@
 {
   "name": "Chap1-1",
-  "chapterFile": "",
-  "storyTitle": "",
-  "story": "",
-  "goalsTitle": "",
+  "chapterFile": "Chapter 1",
+  "storyTitle": "A newbee's path",
+  "story": "You ran into a forest, collect enough gems before you leave the forest",
+  "goalsTitle": "Collect 2 gems and arrive at the end of the forest",
   "goal": 1,
   "code": "",
-  "maxGem": 0,
+  "maxGem": 2,
   "maxSwitchOn": 0,
   "maxMonster": 0,
   "win": false

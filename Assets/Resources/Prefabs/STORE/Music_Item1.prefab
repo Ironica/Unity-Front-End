@@ -254,7 +254,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1735756782050121403}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2440535307288915825}
+        m_TargetAssemblyTypeName: MusicScript, Assembly-CSharp
+        m_MethodName: useMusic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &448776937127885872
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +301,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.67600006}
   m_AnchorMax: {x: 1, y: 0.82900006}
-  m_AnchoredPosition: {x: -0.26581955, y: 0}
+  m_AnchoredPosition: {x: -0.26581573, y: 0}
   m_SizeDelta: {x: -0.04, y: 0.000030518}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3773862430435892709
@@ -510,7 +522,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3726513360362146635}
+      - m_Target: {fileID: 2440535307288915825}
         m_TargetAssemblyTypeName: MusicScript, Assembly-CSharp
         m_MethodName: getMusicIndex
         m_Mode: 1
@@ -643,7 +655,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3822070247515974488}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2440535307288915825}
+        m_TargetAssemblyTypeName: MusicScript, Assembly-CSharp
+        m_MethodName: buyTheMusic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5597869890556795372
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,7 +986,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.4376363}
   m_AnchorMax: {x: 1, y: 0.5966819}
-  m_AnchoredPosition: {x: -0.020000458, y: -0.0000104904175}
+  m_AnchoredPosition: {x: -0.019996643, y: -0.000011444092}
   m_SizeDelta: {x: -0.04, y: -0.000005722}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2261709773537018697
@@ -1152,7 +1176,7 @@ GameObject:
   - component: {fileID: 7433058881550763578}
   - component: {fileID: 4543480211468377597}
   - component: {fileID: 5428837130260234589}
-  - component: {fileID: 3726513360362146635}
+  - component: {fileID: 2440535307288915825}
   m_Layer: 5
   m_Name: Music_Item1
   m_TagString: Untagged
@@ -1240,7 +1264,7 @@ MonoBehaviour:
   m_UseGraphicAlpha: 1
   iterations: 10
   shadowSpread: {x: 1, y: 1}
---- !u!114 &3726513360362146635
+--- !u!114 &2440535307288915825
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

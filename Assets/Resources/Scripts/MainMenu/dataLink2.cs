@@ -48,7 +48,7 @@ public class dataLink2 : MonoBehaviour
   private string currentMap;
 
   //The progress bar component
-  private Slider progression;
+  private ProgressBar progression;
 
   //Empty parent objects of gameObject
   private GameObject gameBoard;
@@ -191,7 +191,8 @@ public class dataLink2 : MonoBehaviour
     payloads.Clear();
     this.dataSer.code = "";
     GameObject.Find("UserCode/Text Area/Text").GetComponent<TextMeshProUGUI>().text = "";
-    // progression.value = 0;
+    progression.current = 0;
+    progression.maximum = 1;
     // Resetting the map means reinitialize it.
     converter.dataSer = dataSer;
     converter.serializedToObject();
@@ -271,7 +272,7 @@ public class dataLink2 : MonoBehaviour
         payloads = rspAns.payload.Select(e => AppendPayloadInfoToDataOutLayout(dataSer, e)).ToList();
         Debug.Log("Number frame " + payloads.Count);
 
-        // progression.maxValue = payloads.Count;
+        progression.maximum = payloads.Count;
 
         int gemsNumber = payloads.FirstOrDefault()?.gems?.Length ?? 0;
         int switchesNumber = payloads.FirstOrDefault()?.switches?.Length ?? 0;
@@ -308,7 +309,7 @@ public class dataLink2 : MonoBehaviour
 
           instantiation(false); // call method on dataObj to update it
 
-          //progression.value += 1;
+          progression.current += 1;
 
           string gemsScore = gems + "/" + gemsNumber;
           string switchesScore = switchOn + "/" + switchesNumber;
@@ -602,12 +603,13 @@ public class dataLink2 : MonoBehaviour
 
     gameBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Elements").gameObject as GameObject;
     tiles = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Tiles").gameObject as GameObject;
-
-    // Todo AMMAR
-    /*
-    progression = gameObject.transform.Find("Progress_Bar").gameObject.GetComponent<Slider>();
-    progression.value = 0;
-    */
+    
+    // Initialization of progress bar
+    progression = gameObject.transform.Find("Buttons").gameObject.transform.Find("LinearProgressBar").GetComponent<ProgressBar>();
+    progression.current = 0;
+    progression.minimum = 0;
+    progression.maximum = 1;
+    
     //TODO Get the name of the map from the maps interface
     currentMap = StatData.getCurrent();
     dataMap = new DataMap(currentMap);
