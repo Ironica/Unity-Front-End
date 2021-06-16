@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Linq;
+using Resources.Scripts.Utils;
 using TMPro;
 
 
@@ -85,25 +87,16 @@ public class MapMenuLink : MonoBehaviour
 
   void Update()
   {
-    if(!StatData.getCurrent().Equals(currentMap))
+    if (StatData.getCurrent() != currentMap)
     {
       currentMap = StatData.getCurrent();
-      int i = 0;
-      bool found = false;
-      while(i<ChapterManagement.chapters[currentChapter].maps.Count && !found)
-      {
-        if(ChapterManagement.chapters[currentChapter].maps[i].name.Equals(currentMap))
-        {
-          rightSideBook(ChapterManagement.chapters[currentChapter].maps[i]);
-          found = true;
-        }
-        i++;
-      }
-      if(!found)
+      var ctx = ChapterManagement
+        .chapters[currentChapter].maps.FirstOrDefault(e => e.name == currentMap)
+        .Apply(e => rightSideBook(e));
+      if (ctx == null)
       {
         Debug.Log("Map could not be load");
       }
-
     }
 
     if(ChapterManagement.currentChapter != currentChapter){

@@ -605,7 +605,7 @@ public class dataLink2 : MonoBehaviour
     tiles = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Tiles").gameObject as GameObject;
     
     // Initialization of progress bar
-    progression = gameObject.transform.Find("LinearProgressBar").gameObject.GetComponent<ProgressBar>();
+    progression = gameObject.transform.Find("Buttons").gameObject.transform.Find("LinearProgressBar").GetComponent<ProgressBar>();
     progression.current = 0;
     progression.minimum = 0;
     progression.maximum = 1;
