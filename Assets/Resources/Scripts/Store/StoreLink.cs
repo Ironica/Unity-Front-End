@@ -47,9 +47,14 @@ public class StoreLink : MonoBehaviour
       skinObject.transform.Find("Name").GetComponent<TMP_Text>().text = "" + storage.skins[i].itemName;
 
       GameObject price = skinObject.transform.Find("Price_Button").gameObject as GameObject;
+      GameObject use = skinObject.transform.Find("Use_Button").gameObject as GameObject;
 
       if(!storage.skins[i].sold){
         price.transform.Find("Price").GetComponent<TMP_Text>().text = "" + storage.skins[i].priceInGems;
+      }
+      else{
+        price.SetActive(false);
+        use.SetActive(true);
       }
       objX += 0.4f * Screen.height;
 

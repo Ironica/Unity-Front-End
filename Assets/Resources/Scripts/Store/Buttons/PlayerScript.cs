@@ -5,31 +5,15 @@ using UnityEngine.UI;
 using System.Linq;
 using TMPro;
 
-public class MusicScript : MonoBehaviour
+public class PlayerScript : MonoBehaviour
 {
-  private int musicIndex;
-  public void getMusicIndex()
+
+  public void usePlayer()
   {
-     musicIndex = this.transform.GetSiblingIndex();
-
-     if (StatData.indexStoreMusic == musicIndex)
-     {
-       StatData.isPlayable = !StatData.isPlayable;
-     }
-     else
-     {
-       StatData.indexStoreMusic = musicIndex;
-       StatData.isPlayable = true;
-     }
+    StatData.playerUsed = this.transform.Find("Name").GetComponent<TextMeshProUGUI>().text;
+    Debug.Log(StatData.playerUsed);
   }
-
-  public void useMusic()
-  {
-    StatData.musicUsed = this.transform.GetSiblingIndex();
-    Debug.Log(StatData.musicUsed);
-  }
-
-  public void buyTheMusic()
+  public void buyThePlayer()
   {
     ItemsInStore storage = JsonObjConverter.toObj();
 
@@ -40,7 +24,7 @@ public class MusicScript : MonoBehaviour
       storage.gems -= price;
       var itemName = this.transform.Find("Name").GetComponent<TextMeshProUGUI>().text;
 
-      storage.sounds = storage.sounds.Select(e => (e.itemName == itemName) switch {
+      storage.skins = storage.skins.Select(e => (e.itemName == itemName) switch {
         true => new ItemForSale(e.itemName, e.priceInGems, true),
         _ => e
       }).ToList();
@@ -56,5 +40,6 @@ public class MusicScript : MonoBehaviour
     }
     JsonObjConverter.toJson(storage);
   }
+
 
 }

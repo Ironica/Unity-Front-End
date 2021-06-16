@@ -6,6 +6,9 @@ public static class StatData
     public static bool isPlayable { get; set; }
     public static int indexStoreMusic { get; set; }
 
+    public static string playerUsed = "frog";
+    public static int musicUsed = 0;
+
     public static string getCurrent()
     {
         return currentMap;
