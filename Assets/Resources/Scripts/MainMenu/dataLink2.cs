@@ -17,6 +17,7 @@ using Resources.Scripts.DataScript;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
+
 // Test
 public class dataLink2 : MonoBehaviour
 {
@@ -471,7 +472,7 @@ public class dataLink2 : MonoBehaviour
   {
     GameObject tile  = gridObject[monsters.y,monsters.x];
     var position = tile.transform.position;
-    Vector3 coo = new Vector3(position.x, position.y-0.5f, position.z   );
+    Vector3 coo = new Vector3(position.x, position.y-0.8f, position.z   );
 
     GameObject monsterObject = Instantiate(UnityEngine.Resources.Load(monster), coo, Quaternion.identity) as GameObject;
     monsterObjects.Add(monsterObject);
@@ -696,6 +697,13 @@ public class dataLink2 : MonoBehaviour
       if (gem != null)
       {
         gem.transform.Rotate(Vector3.down * 20f * Time.deltaTime);
+      }
+    }
+    foreach(GameObject monstObj in monsterObjects)
+    {
+      if (monstObj != null)
+      {
+        monstObj.transform.Rotate(Vector3.down * 80f * Time.deltaTime);
       }
     }
   }
