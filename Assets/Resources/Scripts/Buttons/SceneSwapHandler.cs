@@ -7,6 +7,8 @@ public class SceneSwapHandler : MonoBehaviour
 {
 
   public void goToPreviousScene(){
+    StatData.storeListening = false;
+    StatData.isPlayable = false;
     int scene = ChangeSceneManagement.getPreviousScene();
     ChangeSceneManagement.getCurrentScene();
     if(scene != SceneManager.GetActiveScene().buildIndex)
@@ -23,6 +25,8 @@ public class SceneSwapHandler : MonoBehaviour
   public void goHome(){
     ChangeSceneManagement.getCurrentScene();
     SceneManager.LoadScene("Scenes/New_Menu");
+    StatData.storeListening = false;
+    StatData.isPlayable = false;
   }
 
   public void goMapMenu()

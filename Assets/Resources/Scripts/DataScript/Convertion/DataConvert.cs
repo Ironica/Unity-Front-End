@@ -44,6 +44,8 @@ namespace JsonBridge {
 
       dataObj.gems = dataSer.gems.Select(e => e).ToArray();
 
+      dataObj.monsters = dataSer.monsters.Select(e => e).ToArray();
+
       dataObj.beepers = dataSer.beepers.Select(e => e).ToArray();
 
       dataObj.switches = dataSer.switches.Select(e => new Switch(e.coo.x, e.coo.y, e.on)).ToArray();
