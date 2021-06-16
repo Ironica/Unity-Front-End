@@ -34,7 +34,7 @@ namespace JsonBridge{
     public string status { get; }
     public string game { get; }
     public DataPayloadSerialized[] payload { get; }
-    
+
     public int gained { get; }
   }
 
@@ -81,7 +81,7 @@ namespace JsonBridge{
 
     public string consoleLog;
     public string special;
-    
+
     public GamingCondition gamingCondition;
     public bool userCollision;
 
@@ -109,7 +109,7 @@ namespace JsonBridge{
     public PortalSerialized[] portals;
 
     public Coordinates[] monsters;
-    
+
     public LockSerialized[] locks;
     public StairSerialized[] stairs;
     public PlatformSerialized[] platforms;
