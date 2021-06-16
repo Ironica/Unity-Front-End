@@ -57,6 +57,7 @@ public class dataLink2 : MonoBehaviour
   //All GameObject on the screen
   GameObject[,] gridObject;
   GameObject playerObject;
+  List<GameObject> monsterObjects     = new List<GameObject>();
   List<GameObject> gemObjects         = new List<GameObject>();
   List<GameObject> switchObjects      = new List<GameObject>();
 
@@ -80,10 +81,9 @@ public class dataLink2 : MonoBehaviour
   private string player;
   //private string police               = "Prefabs/ITEM/CHARACTER";
   private string frog                 = "Prefabs/3D/FROG";
-  private string playerFront          = "";
-  private string playerBack           = "";
-  private string playerLeft           = "";
-  private string playerRight          = "";
+
+  //Prefabricated monsters
+  private string monster              = "Prefabs/3D/MONSTER";
 
   //Prefabricated items
   private string gem                  = "Prefabs/3D/GEM";
@@ -458,17 +458,24 @@ public class dataLink2 : MonoBehaviour
 
   private void playerInstantiation(GameObject tile, Player player)
   {
-    float playerLevel = 0;
-    int level = dataObj.grid[player.Y][player.X].Level;
-    //playerLevel += (level-1)*0.4f;
-    // Debug.Log(tile.name);
     var position = tile.transform.position;
     Vector3 coo = new Vector3(position.x, position.y-0.5f, position.z   );
 
     playerObject = Instantiate(UnityEngine.Resources.Load(frog), coo, Quaternion.identity) as GameObject;
     playerObject.transform.parent = gameBoard.transform;
     objectDirection(playerObject, player.Dir);
-    //playerObject.GetComponent<SpriteRenderer>().sortingOrder = level+1;
+
+  }
+
+  private void monsterInstantiation(Coordinates monsters)
+  {
+    GameObject tile  = gridObject[monsters.y,monsters.x];
+    var position = tile.transform.position;
+    Vector3 coo = new Vector3(position.x, position.y-0.5f, position.z   );
+
+    GameObject monsterObject = Instantiate(UnityEngine.Resources.Load(monster), coo, Quaternion.identity) as GameObject;
+    monsterObjects.Add(monsterObject);
+    monsterObject.transform.parent = gameBoard.transform;
 
   }
 
@@ -546,6 +553,11 @@ public class dataLink2 : MonoBehaviour
       playerInstantiation(gridObject[playerCoo.Y, playerCoo.X], playerCoo);
     }
 
+    foreach(var monsterCoo in dataObj.monsters)
+    {
+      monsterInstantiation(monsterCoo);
+    }
+
   }
 
   private void Awake()
@@ -603,13 +615,13 @@ public class dataLink2 : MonoBehaviour
 
     gameBoard = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Elements").gameObject as GameObject;
     tiles = gameObject.transform.Find("GameBoard").gameObject.transform.Find("Tiles").gameObject as GameObject;
-    
+
     // Initialization of progress bar
     progression = gameObject.transform.Find("Buttons").gameObject.transform.Find("LinearProgressBar").GetComponent<ProgressBar>();
     progression.current = 0;
     progression.minimum = 0;
     progression.maximum = 1;
-    
+
     //TODO Get the name of the map from the maps interface
     currentMap = StatData.getCurrent();
     dataMap = new DataMap(currentMap);

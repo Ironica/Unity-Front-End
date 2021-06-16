@@ -32,6 +32,7 @@ public class Data{
   public Stair[] stairs;
   public Platform[] platforms;
   public Player[] players;
+  public Coordinates[] monsters;
 
   public string type;
   public string code;

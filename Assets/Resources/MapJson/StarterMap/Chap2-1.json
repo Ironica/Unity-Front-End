@@ -69,7 +69,9 @@
   "switches": [],
   "platforms": [],
   "portals": [],
-  "monsters": [],
+  "monsters": [
+    {"x": 1, "y": 1}
+  ],
   "locks": [],
   "stairs": [],
   "players": [{
