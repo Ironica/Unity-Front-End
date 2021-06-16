@@ -1,0 +1,13 @@
+{
+  "name": "Chap3-1",
+  "chapterFile": "Chapter 3",
+  "storyTitle": "A small labyrinth",
+  "story": "Looking for some fresh apples, you entered a forest, luckily it's calm and it looks safe, but can you get out of it?",
+  "goalsTitle": "Collect gems and toggle all switches on",
+  "goal": "GEM",
+  "code": "// Try to apply what you have learned\n// You might need to write some own functions\n",
+  "maxGem": 7,
+  "maxSwitchOn": 6,
+  "maxMonster": 0,
+  "win": false
+}
