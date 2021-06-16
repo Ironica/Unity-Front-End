@@ -1871,7 +1871,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 18.45
   m_fontSizeBase: 0
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3793,7 +3793,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1349700541}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1625916455}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: SetVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1349700541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9042,6 +9054,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 22f5328aba3577441b4af4c49c2e47a0, type: 3}
   - {fileID: 8300000, guid: 49cf63c5357d49e4b962f4fccd64d763, type: 3}
   - {fileID: 8300000, guid: 46cab242027ea2f4c840f3ac0592a361, type: 3}
+  - {fileID: 8300000, guid: f736078404b96464dae08a0f426b6ca9, type: 3}
   audio: {fileID: 1625916456}
 --- !u!82 &1625916456
 AudioSource:
