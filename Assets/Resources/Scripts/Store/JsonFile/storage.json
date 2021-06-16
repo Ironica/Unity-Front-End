@@ -3,12 +3,12 @@
     {
       "itemName": "Frog",
       "priceInGems": 5,
-      "sold": false
+      "sold": true
     },
     {
       "itemName": "police",
       "priceInGems": 5,
-      "sold": false
+      "sold": true
     }
   ],
   "sounds": [
@@ -20,7 +20,7 @@
     {
       "itemName": "Winds of stories",
       "priceInGems": 5,
-      "sold": false
+      "sold": true
     },
     {
       "itemName": "Woodland fantasy",
@@ -32,13 +32,13 @@
     {
       "itemName": "darkModo",
       "priceInGems": 8,
-      "sold": true
+      "sold": false
     },
     {
       "itemName": "whiteModo",
       "priceInGems": 12,
-      "sold": true
+      "sold": false
     }
   ],
-  "gems": 1
+  "gems": 73
 }
