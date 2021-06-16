@@ -82,6 +82,7 @@ public class dataLink2 : MonoBehaviour
   private string player;
   //private string police               = "Prefabs/ITEM/CHARACTER";
   private string frog                 = "Prefabs/3D/FROG";
+  private string robot                = "Prefabs/3D/ROBOT";
 
   //Prefabricated monsters
   private string monster              = "Prefabs/3D/MONSTER";
@@ -462,7 +463,7 @@ public class dataLink2 : MonoBehaviour
     var position = tile.transform.position;
     Vector3 coo = new Vector3(position.x, position.y-0.5f, position.z   );
 
-    playerObject = Instantiate(UnityEngine.Resources.Load(frog), coo, Quaternion.identity) as GameObject;
+    playerObject = Instantiate(UnityEngine.Resources.Load(robot), coo, Quaternion.identity) as GameObject;
     playerObject.transform.parent = gameBoard.transform;
     objectDirection(playerObject, player.Dir);
 
@@ -631,7 +632,7 @@ public class dataLink2 : MonoBehaviour
 
     gameObject.transform.Find("GameBoard").Find("Map_name").gameObject.GetComponent<Text>().text = currentMap;
 
-    player = frog;
+    player = robot;
 
     // Awake() will be called before Start() therefore we can use `port` initialized in Awake()
     des = new JsonSerDes(url, Global.port, api);
