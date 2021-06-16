@@ -11,7 +11,7 @@ public  class MusicStore : MonoBehaviour
     {
         if (StatData.isPlayable)
         {
-            audio.clip = playlist[StatData.indexStoreMusic];
+            audio.clip = playlist[StatData.musicTest];
             if (!audio.isPlaying)
             {
                 audio.Play();

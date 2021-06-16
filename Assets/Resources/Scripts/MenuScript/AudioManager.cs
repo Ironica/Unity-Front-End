@@ -4,15 +4,11 @@ using Random = System.Random;
 public class AudioManager : MonoBehaviour
 {
     public AudioClip[] playlist;
-    public new AudioSource audio; 
-    private Random rand = new Random();
-    private int musicIndex;
-    
+    public new AudioSource audio;
+
     void Start()
     {
-        
-        musicIndex = rand.Next(playlist.Length);
-        audio.clip = playlist[musicIndex];
+        audio.clip = playlist[StatData.musicUsed];
         audio.Play();
     }
     
@@ -20,9 +16,23 @@ public class AudioManager : MonoBehaviour
     {
         if (!audio.isPlaying && audio.volume != 0f)
         {
-            musicIndex = rand.Next(playlist.Length);
-            audio.clip = playlist[musicIndex];
+            audio.clip = playlist[StatData.musicUsed];
             audio.Play();
         }
+    }
+    
+    public void SetVolume()
+    {
+        if (audio.volume != 0f)
+        {
+            audio.volume = 0f;
+            audio.Pause();
+        }
+        else
+        {
+            audio.volume = 0.5f;
+            audio.Play();
+        }
+          
     }
 }

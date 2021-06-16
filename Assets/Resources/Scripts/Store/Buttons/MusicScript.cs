@@ -12,21 +12,22 @@ public class MusicScript : MonoBehaviour
   {
      musicIndex = this.transform.GetSiblingIndex();
 
-     if (StatData.indexStoreMusic == musicIndex)
+     if (StatData.musicTest== musicIndex)
      {
        StatData.isPlayable = !StatData.isPlayable;
+       StatData.storeListening = !StatData.storeListening;
      }
      else
      {
-       StatData.indexStoreMusic = musicIndex;
+       StatData.musicTest = musicIndex;
        StatData.isPlayable = true;
+       StatData.storeListening = true;
      }
   }
 
   public void useMusic()
   {
     StatData.musicUsed = this.transform.GetSiblingIndex();
-    Debug.Log(StatData.musicUsed);
   }
 
   public void buyTheMusic()
