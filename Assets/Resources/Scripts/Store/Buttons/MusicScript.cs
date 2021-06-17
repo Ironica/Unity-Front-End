@@ -11,7 +11,7 @@ public class MusicScript : MonoBehaviour
   public void getMusicIndex()
   {
      musicIndex = this.transform.GetSiblingIndex();
-
+     //GameObject.Find("Play_Button").GetComponent<Image>().color = new Color(192, 57, 43);
      if (StatData.musicTest== musicIndex)
      {
        StatData.isPlayable = !StatData.isPlayable;
