@@ -431,6 +431,19 @@ public class dataLink2 : MonoBehaviour
     {
       objectDirection(obj, dataObj.stairs.First(e => e.X == i && e.Y == j).Dir);
     }
+    else {
+      int dir = UnityEngine.Random.Range(0, 4);
+      switch(dir){
+        case 0: objectDirection(obj, Direction.UP);
+        break;
+        case 1: objectDirection(obj, Direction.DOWN);
+        break;
+        case 2: objectDirection(obj, Direction.LEFT);
+        break;
+        default: objectDirection(obj, Direction.RIGHT);
+        break;
+      }
+    }
     return obj;
   }
 
@@ -624,13 +637,11 @@ public class dataLink2 : MonoBehaviour
     progression.minimum = 0;
     progression.maximum = 1;
 
-    //TODO Get the name of the map from the maps interface
     currentMap = StatData.getCurrent();
+
     dataMap = new DataMap(currentMap);
     loadMap();
     //currentMap = "map5.json";
-
-    gameObject.transform.Find("GameBoard").Find("Map_name").gameObject.GetComponent<Text>().text = currentMap;
 
     player = robot;
 
