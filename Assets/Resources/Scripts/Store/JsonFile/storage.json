@@ -26,6 +26,11 @@
       "itemName": "Woodland fantasy",
       "priceInGems": 10,
       "sold": true
+    },
+    {
+      "itemName": "Supamaket",
+      "priceInGems": 10,
+      "sold": true
     }
   ],
   "themes": [
