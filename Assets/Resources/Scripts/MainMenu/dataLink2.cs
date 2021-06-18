@@ -325,7 +325,7 @@ public class dataLink2 : MonoBehaviour
 
 
           //Sleep for 1 seconds
-          await Task.Delay(250);
+          await Task.Delay(750);
           //Debug.Log("Frame " + i);
 
         }
