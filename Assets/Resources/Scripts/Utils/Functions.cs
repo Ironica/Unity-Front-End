@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Resources.Scripts.Utils
 {
@@ -26,5 +27,8 @@ namespace Resources.Scripts.Utils
             }
             return obj;
         }
+
+        public static V GetOrDefault<K, V>(this Dictionary<K, V> dict, K key)
+            => dict.TryGetValue(key, out var result) ? result : default;
     }
 }

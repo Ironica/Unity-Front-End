@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 52983451}
   - component: {fileID: 52983453}
   - component: {fileID: 52983452}
+  - component: {fileID: 52983454}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -257,6 +258,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52983450}
   m_CullTransparentMesh: 1
+--- !u!114 &52983454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52983450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccffda6cdd3cb49f6b084d54a566ea3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localizedString:
+    key: characters_store
 --- !u!1 &122758149
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,6 +570,7 @@ GameObject:
   - component: {fileID: 492162960}
   - component: {fileID: 492162962}
   - component: {fileID: 492162961}
+  - component: {fileID: 492162963}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -678,6 +694,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 492162959}
   m_CullTransparentMesh: 1
+--- !u!114 &492162963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492162959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccffda6cdd3cb49f6b084d54a566ea3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localizedString:
+    key: store
 --- !u!1 &513670583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,6 +1466,7 @@ GameObject:
   - component: {fileID: 1376867302}
   - component: {fileID: 1376867304}
   - component: {fileID: 1376867303}
+  - component: {fileID: 1376867305}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1561,6 +1592,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1376867301}
   m_CullTransparentMesh: 1
+--- !u!114 &1376867305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376867301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccffda6cdd3cb49f6b084d54a566ea3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localizedString:
+    key: music_store
 --- !u!1 &1502687845
 GameObject:
   m_ObjectHideFlags: 0
