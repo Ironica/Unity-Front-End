@@ -21,7 +21,12 @@ namespace Resources.Scripts
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void OnBeforeSceneLoadRuntimeMethod()
         {
+            LaunchServer();
+            SetLanguageToLocale();
+        }
 
+        private static void LaunchServer()
+        {
             var lis = new TcpListener(IPAddress.Loopback, 0);
             lis.Start();
             Global.port = ((IPEndPoint) lis.LocalEndpoint).Port;
@@ -43,6 +48,18 @@ namespace Resources.Scripts
             };
 
             pros.Start();
+        }
+
+        private static void SetLanguageToLocale()
+        {
+            var localLangId = System.Globalization.CultureInfo.InstalledUICulture.Name;
+            LocalizationSystem.language = localLangId switch
+            {
+                "ja-JP" => LocalizationSystem.Language.Japanese,
+                { } st when st.Contains("zh") => LocalizationSystem.Language.Chinese,
+                { } st when st.Contains("fr") => LocalizationSystem.Language.French,
+                _ => LocalizationSystem.Language.English,
+            };
         }
     }
 }
