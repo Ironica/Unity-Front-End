@@ -61,6 +61,7 @@ public class LocalizationSystem
         };
     }
 
+#if UNITY_EDITOR
     public static void Add(string key, string value)
     {
         if (value.Contains("\""))
@@ -106,4 +107,5 @@ public class LocalizationSystem
         csvLoader.LoadCSV();
         UpdateDictionaries();
     }
+#endif
 }
