@@ -11,7 +11,7 @@ public class LocalizationSystem
         English, French, Chinese, Japanese
     }
 
-    public static Language language = Language.French;
+    public static Language language = Language.Chinese;
 
     private static Dictionary<string, string> localizedEN;
     private static Dictionary<string, string> localizedFR;

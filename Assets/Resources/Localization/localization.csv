@@ -30,3 +30,7 @@
 "placeholder","Enter code...","Entrez votre code...","在此输入代码…","コードを入力してください。。。"
 "compile_UI","Compile","Compiler","运行","コンパイル"
 "reset_UI","Reset","ReInit","重置","リセット"
+"languages","Languages","Langues","语言","言語"
+"save_file","Save File","Enregistrer","保存代码","セーブ"
+"load_file","Load File","Charger","加载代码","ロード"
+"change_map","Change Map","Changer de map","切换地图","マップを切り替える"

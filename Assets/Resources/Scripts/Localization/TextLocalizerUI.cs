@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,6 +13,12 @@ public class TextLocalizerUI : MonoBehaviour
     
     // Start is called before the first frame update
     void Start()
+    {
+        textField = GetComponent<TextMeshProUGUI>();
+        textField.text = localizedString.value;
+    }
+
+    private void Update()
     {
         textField = GetComponent<TextMeshProUGUI>();
         textField.text = localizedString.value;
